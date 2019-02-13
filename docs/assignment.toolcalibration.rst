@@ -36,6 +36,7 @@ the file directly in PyCharm or from the console using ```python pivotcalibratio
 
         return p_t, T
 
+
 Report
 ------
 
