@@ -40,13 +40,12 @@ the file directly in PyCharm or from the console using ```python pivotcalibratio
 Report
 ------
 
-Write a short report (max 1 page) with the structure of (Introduction, Materials & Methods, Results, Discussion).
-
-Try to answer following questions
+Write a short report (max 1 page) where you address the following questions:
 
 #. In which coordinate system is the vector :math:`p_t`
 #. How many degrees of freedeom can you calibrate with pivoting
 #. Write down the formula to get the tip of the pointer in the camera coordinate system
+#. two more challenging questions
 
 Submission
 ----------
