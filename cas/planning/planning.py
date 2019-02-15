@@ -4,7 +4,7 @@ import SimpleITK as sitk
 import matplotlib.pyplot as plt
 import sys, os
 import numpy as np
-
+from cas.planning import segmentation
 
 class ImageViewer:
     def __init__(self):
@@ -50,7 +50,7 @@ class ImageViewer:
         print(self.image_slice_number)
         self.image_slice = self.image[self.image_slice_number, :, :]
         self.segmentation = self.segmenter.get_segmentation_mask()
-        self.segmentation_slice = self.segmentation[self.image_slice_number, : , :]
+        self.segmentation_slice = self.segmentation[self.image_slice_number, :, :]
         print('nonzero: ', np.count_nonzero(self.segmentation_slice))
         self.__update()
 
@@ -93,9 +93,9 @@ class ImageViewer:
         cid3 = fig.canvas.mpl_connect('key_press_event', self.keypress)
         ax = fig.add_axes([margin, margin, 1 - 2 * margin, 1 - 2 * margin])
         # extent = (0, self.image_xsize * self.image_spacing[1], self.image_ysize * self.image_spacing[0], 0)
-        #plt.subplot(121)
+        # plt.subplot(121)
         self.t = plt.imshow(self.image_slice, cmap='gray', interpolation=None)
-        #plt.subplot(122)
+        # plt.subplot(122)
         self.t2 = plt.imshow(self.segmentation_slice, cmap='jet', alpha=self.overlay_alpha, interpolation=None)
         plt.title("Image")
         plt.show()
@@ -105,6 +105,7 @@ class ImageViewer:
             self.overlay_alpha = 0.75
         else:
             self.overlay_alpha = 0
+
 
 class Segmenter:
     def __init__(self):
@@ -128,6 +129,9 @@ class Segmenter:
         print('data at ({0}, {1}, {2}) is {3}'.format(x, y, z, self.data[z, y, x]))
         print(self.segmentation_mask.shape)
         print(self.data.shape)
+        current_mask = segmentation.region_grow(self.data, (z, y, x))
+        self.segmentation_mask[current_mask] = self.__active_label
+        self.segmentation_mask = self.segmentation_mask.astype(np.uint8)
 
         np.save('segmentation.npy', self.segmentation_mask)
 
