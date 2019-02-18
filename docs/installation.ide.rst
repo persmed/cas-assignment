@@ -29,4 +29,6 @@ To open the CAS Assignment as a project and to configure the Python interpreter 
     #. Runs the test_installation and adds a configuration (see top right corner) to the project
     #. You can add configurations manually under Run > Edit Configurations...
 
+#. For each assignment, make sure your working directory is set to ``</path/to/where/you/have/the/code>/cas-assignment``
+
 You can watch the `getting started <https://www.jetbrains.com/pycharm/documentation/>`_ videos to get accustomed with the interface.

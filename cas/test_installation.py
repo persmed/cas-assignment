@@ -11,7 +11,7 @@ import matplotlib
 print('Matplotlib version:\t\t', matplotlib.__version__)
 
 import transformations
-print('Transformation version:\t', transformations.__version__)
+print('Transformations version:\t', transformations.__version__)
 
 import pydicom
 print('PyDICOM version:\t\t', pydicom.__version__)

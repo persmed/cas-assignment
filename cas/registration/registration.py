@@ -12,10 +12,10 @@ from assignments.registration import registration
 
 
 def test_icp():
-    target_points = util.read_data('../../data/registration/TargetPoints.csv')
+    target_points = util.read_data('data/registration/TargetPoints.csv')
     print(target_points)
 
-    template_points = util.read_data('../../data/registration/TemplatePoints.csv')
+    template_points = util.read_data('data/registration/TemplatePoints.csv')
     print(template_points)
 
     T_rot_x = registration.get_initial_pose(template_points, target_points)

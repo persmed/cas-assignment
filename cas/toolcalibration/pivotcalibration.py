@@ -14,7 +14,7 @@ if __name__ == "__main__":
 
     transforms = list()
 
-    with open('../../data/pivot_calibration/Tpointer2Cam.csv', 'r') as csvfile:
+    with open('data/pivot_calibration/Tpointer2Cam.csv', 'r') as csvfile:
         datareader = csv.reader(csvfile)
         for row in datareader:
             T = np.eye(4)
