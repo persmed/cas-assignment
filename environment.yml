@@ -1,0 +1,18 @@
+name: cas
+channels:
+  - conda-forge
+  - defaults
+  - SimpleITK
+  - anaconda
+dependencies:
+  - python=3.6
+  - numpy=1.15.4
+  - kdtree=0.16
+  - matplotlib=3.0.2
+  - pydicom=1.2.1
+  - scikit-learn=0.20.2
+  - scipy=1.2.0
+  - SimpleITK=1.2.0
+  - vtk=8.1.2
+  - pip:
+      - transformations=2018.10.18

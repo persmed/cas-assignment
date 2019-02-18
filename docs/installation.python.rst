@@ -35,28 +35,13 @@ The installation has been tested on Windows 10.
    - Open "Anaconda Prompt"
    - :bash:`conda list`, which should list all installed Anaconda packages
 
-#. Create a new Python 3.7 environment with the name cas
+#. Create a new Python with all dependencies
 
-   - :bash:`conda create -n cas python=3.7`
+   - :bash:`conda env create --file environment.yml`
 
 #. Activate the environment by
 
    - :bash:`activate cas`
-
-#. Install some prerequisites first (apparently there are problems with numpy ans scipy on Windows)
-
-   - Download the following packages from https://www.lfd.uci.edu/~gohlke/pythonlibs
-      - numpy‑1.15.4+mkl‑cp37‑cp37m‑win_amd64.whl
-      - scipy‑1.2.1‑cp37‑cp37m‑win_amd64.whl
-   - :bash:`cd /path/to/cas-assignment/repository`
-   - :bash:`pip install mkl`
-   - :bash:`pip install /path/to/numpy‑1.15.4+mkl‑cp37‑cp37m‑win_amd64.whl`
-   - :bash:`pip install /path/to/scipy‑1.2.1‑cp37‑cp37m‑win_amd64.whl`
-
-#. Install all required packages for the CAS Assignments
-
-   - :bash:`cd /path/to/cas-assignment/repository`
-   - :bash:`pip install -r requirements.txt` will install all required packages.
 
 #. Execute the installation test script to verify the installation
 
@@ -88,18 +73,13 @@ Run the following commands in the terminal (tested on ubuntu 16.04 LTS).
 
    - :bash:`conda list`, which should list all installed Anaconda packages
 
-#. Create a new Python 3.7 environment with the name cas (confirm with y when promted during creation)
+#. Create a new Python environment all dependencies
 
-   - :bash:`conda create -n cas python=3.7`
+   - :bash:`conda env create --file environment.yml`
 
 #. Activate the environment by
 
    - :bash:`source activate cas`
-
-#. Install all required packages for the CAS assignments
-
-   - :bash:`cd /path/to/cas-assignment/repository`
-   - :bash:`pip install -r requirements.txt` will install all required packages (if the ``pydensecrf`` installation fails, install g++ by executing ``sudo apt-get install g++`` and ``sudo apt-get install python3.7-dev``)
 
 #. Execute the hello world to verify the installation
 
@@ -130,18 +110,13 @@ The installation has not been tested.
 
    - :bash:`conda list`, which should list all installed Anaconda packages
 
-#. Create a new Python 3.7 environment with the name cas
+#. Create a new Python environment with all dependencies
 
-   - :bash:`conda create -n cas python=3.7`
+   - :bash:`conda env create --file environment.yml`
 
 #. Activate the environment by
 
    - :bash:`source activate cas`
-
-#. Install all required packages for the CAS Assignments
-
-   - :bash:`cd /path/to/cas-assignment/repository`
-   - :bash:`pip install -r requirements.txt` will install all required packages
 
 #. Execute the hello world to verify the installation
 
