@@ -43,14 +43,9 @@ The installation has been tested on Windows 10.
 
 #. Install all required packages for the CAS Assignments
 
-   - :bash:`cd /d /path/to/cas-assignment/repository`
-   - :bash:`pip install .` will install all required packages.
+   - :bash:`cd /path/to/cas-assignment/repository`
+   - :bash:`pip install -r requirements.txt` will install all required packages.
 
 #. Execute the installation test script to verify the installation
 
-   - :bash:`python .\bin\test-install.py`
-
-#. (Optional) Run Sphinx to create the documentation
-
-   - :bash:`sphinx-build -b html .\docs .\docs\_build`
-   - The documentation is now available under ``.\docs\_build\index.html``
+   - :bash:`python cas\test-installation.py`
