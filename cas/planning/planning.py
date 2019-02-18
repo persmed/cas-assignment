@@ -1,10 +1,15 @@
-from __future__ import print_function
+import os
+import sys
 
+sys.path.insert(0, os.path.join(os.path.dirname(sys.argv[0]), '../..'))
+
+import numpy as np
 import SimpleITK as sitk
 import matplotlib.pyplot as plt
-import sys, os
-import numpy as np
-from cas.planning import segmentation
+import scipy.ndimage
+
+from assignments.planning import segmentation
+
 
 class ImageViewer:
     def __init__(self):
@@ -41,17 +46,17 @@ class ImageViewer:
 
     def onscroll(self, event):
         if event.button == 'up' and self.image_slice_number < self.image_zsize - 1:
-            print('up')
+            # print('up')
             self.image_slice_number += 1
         elif event.button == 'down' and self.image_slice_number > 0:
-            print('down')
+            # print('down')
             self.image_slice_number -= 1
 
-        print(self.image_slice_number)
+        # print(self.image_slice_number)
         self.image_slice = self.image[self.image_slice_number, :, :]
         self.segmentation = self.segmenter.get_segmentation_mask()
         self.segmentation_slice = self.segmentation[self.image_slice_number, :, :]
-        print('nonzero: ', np.count_nonzero(self.segmentation_slice))
+        # print('nonzero: ', np.count_nonzero(self.segmentation_slice))
         self.__update()
 
     def onclick(self, event):
@@ -67,11 +72,19 @@ class ImageViewer:
         try:
             if event.key == ' ':
                 self.toggle_overlay()
+            elif event.key == 'x':
+                print('Histogram')
+                segmentation_hist = scipy.ndimage.histogram(self.segmentation, 0, 4, 5)
+                print(segmentation_hist)
+            elif event.key == 's':
+                print('Saving')
+                np.save('segmentation.npy', self.segmentation)
             else:
                 key_pressed = int(event.key)
                 self.segmenter.activate_label(key_pressed)
         except TypeError:
             print('was not a number between 0 and 4')
+        print('current active label is ', self.segmenter.get_active_label_name())
         self.__update()
 
     def __update(self):
@@ -111,12 +124,12 @@ class Segmenter:
     def __init__(self):
         self.labels = {
             0: 'None',
-            1: 'L1',
-            2: 'L2',
+            1: 'Spinal Cord',
+            2: 'Vertebraes',
             3: 'Pelvis',
             4: 'Discs'
         }
-        self.__active_label = 3
+        self.__active_label = 0
         self.data = None
         self.segmentation_mask = None
 
@@ -133,8 +146,6 @@ class Segmenter:
         self.segmentation_mask[current_mask] = self.__active_label
         self.segmentation_mask = self.segmentation_mask.astype(np.uint8)
 
-        np.save('segmentation.npy', self.segmentation_mask)
-
     def activate_label(self, label):
         if 0 <= label <= 4:
             self.__active_label = label
@@ -146,28 +157,24 @@ class Segmenter:
         return self.segmentation_mask
 
 
-filepath = "C:\Develop\cas-assignment\data\pelvis\Pelvis_CT"
-
-print("Reading Dicom directory:", filepath)
-reader = sitk.ImageSeriesReader()
-
-dicom_names = reader.GetGDCMSeriesFileNames(filepath)
-reader.SetFileNames(dicom_names)
-
-image = reader.Execute()
+image = sitk.ReadImage("C:\Develop\cas-assignment\data\pelvis\Pelvis_CT.nii")
 
 size = image.GetSize()
-print("Image size:", size[0], size[1], size[2])
+spacing = image.GetSpacing()
+reference_image = sitk.Image(int(size[0] / 2), int(size[1] / 2), int(size[2] / 2), sitk.sitkUInt32)
 
-# print( "Writing image:", sys.argv[2] )
-#
-sitk.WriteImage(image, "C:\Develop\cas-assignment\data\pelvis\Pelvis_CT.nii")
-
-# if ( not "SITK_NOSHOW" in os.environ ):
-# sitk.Show( image, "Dicom Series" )
+resampler = sitk.ResampleImageFilter()
+resampler.SetReferenceImage(reference_image)
+resampler.SetOutputOrigin(image.GetOrigin())
+resampler.SetOutputSpacing([spacing[0] * 2, spacing[1] * 2, spacing[2] * 2])
+resampler.SetInterpolator(sitk.sitkNearestNeighbor)
+resampled = resampler.Execute(image)
+print(resampled.GetSpacing())
+print(resampled.GetSize())
+image = resampled
 
 nda = sitk.GetArrayFromImage(image)
-print(nda)
+
 segmenter = Segmenter()
 segmenter.set_data(nda)
 

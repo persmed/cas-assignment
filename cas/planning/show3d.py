@@ -2,12 +2,7 @@
 
 import vtk
 import numpy as np
-from numpy import *
 
-# We begin by creating the data we want to render.
-# For this tutorial, we create a 3D-image containing three overlaping cubes.
-# This data can of course easily be replaced by data from a medical CT-scan or anything else three dimensional.
-# The only limit is that the data must be reduced to unsigned 8 bit or 16 bit integers.
 data_matrix = np.load('segmentation.npy')
 data_matrix = data_matrix.astype(np.uint8)
 print(np.min(np.min(data_matrix)))
@@ -21,50 +16,30 @@ dataImporter.SetNumberOfScalarComponents(1)
 [h, w, z] = data_matrix.shape
 dataImporter.SetDataExtent(0, z - 1, 0, w - 1, 0, h - 1)
 dataImporter.SetWholeExtent(0, z - 1, 0, w - 1, 0, h - 1)
-dataImporter.SetDataSpacing(1.0, 0.5, 0.5)
-
-# contour = vtk.vtkContourFilter()
-# #contour = vtk.vtkMarchingCubes()
-# contour = vtk.vtkDiscreteMarchingCubes()
-# contour.SetInputConnection(dataImporter.GetOutputPort())
-# contour.ComputeNormalsOn()
-# # contour.GenerateValues(4, 1, 4)
-# # contour.Update()
-#
-# # n = 4
-# # lut = vtk.vtkLookupTable()
-# # lut.SetNumberOfColors(n)
-# # lut.SetTableRange(0, n - 1)
-# # lut.SetScaleToLinear()
-# # lut.Build()
-# # lut.SetTableValue(1, 0, 0, 0, 1)
-# # lut.SetTableValue(2, 1, 1, 0, 1)
-# # lut.SetTableValue(3, 1, 0, 1, 1)
-# # lut.SetTableValue(4, 1, 0, 0, 1)
-#
-# mapper = vtk.vtkPolyDataMapper()
-# mapper.SetInputConnection(contour.GetOutputPort())
-# # mapper.SetLookupTable(lut)
-# # mapper.SetScalarRange(0, lut.GetNumberOfColors())
-#
-# actor = vtk.vtkActor()
-# actor.SetMapper(mapper)
-# # actor.GetProperty().SetColor(0.0, 1.0, 0.0)
+dataImporter.SetDataSpacing(1.6445319652557373, 1.6445319652557373, 1.25)
 
 colors = vtk.vtkNamedColors()
 colors.SetColor("Pelvis", [255, 255, 255, 255])
-colors.SetColor("L4", [0, 255, 0, 255])
-colors.SetColor("L5", [0, 128, 128, 255])
-colors.SetColor("Discs", [0, 0, 255, 255])
+colors.SetColor("Vertebraes", [0, 255, 0, 255])
+colors.SetColor("Spinal cord", [255, 255, 0, 255])
+colors.SetColor("Discs", [255, 0, 0, 255])
 
 
 def extract(color, isovalue):
     skinExtractor = vtk.vtkDiscreteMarchingCubes()
     skinExtractor.SetInputConnection(dataImporter.GetOutputPort())
-    skinExtractor.SetValue(isovalue, isovalue)
+    skinExtractor.SetValue(0, isovalue)
+
+    smooth = vtk.vtkSmoothPolyDataFilter()
+    smooth.SetInputConnection(skinExtractor.GetOutputPort())
+    smooth.SetNumberOfIterations(15)
+    smooth.SetRelaxationFactor(0.2)
+    smooth.FeatureEdgeSmoothingOff()
+    smooth.BoundarySmoothingOn()
+    smooth.Update()
 
     skinStripper = vtk.vtkStripper()
-    skinStripper.SetInputConnection(skinExtractor.GetOutputPort())
+    skinStripper.SetInputConnection(smooth.GetOutputPort())
 
     skinMapper = vtk.vtkOpenGLPolyDataMapper()
     skinMapper.SetInputConnection(skinStripper.GetOutputPort())
@@ -79,18 +54,17 @@ def extract(color, isovalue):
 
 
 renderer = vtk.vtkOpenGLRenderer()
-renderer.AddActor(extract("L4", 1))
-renderer.AddActor(extract("L5", 2))
+# renderer.AddActor(extract("Vertebraes", 1))
 renderer.AddActor(extract("Pelvis", 3))
+renderer.AddActor(extract("Spinal cord", 1))
 renderer.AddActor(extract("Discs", 4))
-# renderer.AddActor(actor)
 renderer.SetBackground(0, 0, 0)
 
 renderWin = vtk.vtkRenderWindow()
 renderWin.AddRenderer(renderer)
 renderInteractor = vtk.vtkRenderWindowInteractor()
-style = vtk.vtkInteractorStyleTrackballActor()
-# renderInteractor.SetInteractorStyle(style)
+style = vtk.vtkInteractorStyleMultiTouchCamera()
+renderInteractor.SetInteractorStyle(style)
 renderInteractor.SetRenderWindow(renderWin)
 
 renderWin.SetSize(400, 400)

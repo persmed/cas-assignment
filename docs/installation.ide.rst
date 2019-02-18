@@ -23,7 +23,7 @@ To open the CAS Assignment as a project and to configure the Python interpreter 
 
     #. Confirm by clicking OK
 
-#. Open the ``test_installation.py`` (``bin`` directory) in the navigator
+#. Open the ``test_installation.py`` (``cas`` directory) in the navigator
 
     #. Right click in the editor > Run 'test_installation'
     #. Runs the test_installation and adds a configuration (see top right corner) to the project

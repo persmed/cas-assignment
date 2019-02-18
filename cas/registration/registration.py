@@ -1,7 +1,11 @@
-import cas.registration.util as util
-import numpy as np
+import os
+import sys
+sys.path.insert(0, os.path.join(os.path.dirname(sys.argv[0]), '../..'))
 
+import numpy as np
 np.set_printoptions(suppress=True)
+
+import cas.registration.util as util
 
 
 def paired_points_matching(source, target):
@@ -68,7 +72,6 @@ def get_initial_pose(template_points, target_points):
 
 
 if __name__ == "__main__":
-    from mpl_toolkits.mplot3d import Axes3D
     import matplotlib.pyplot as plt
 
     target_points = util.read_data('../../data/registration/TargetPoints.csv')

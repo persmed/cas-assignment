@@ -1,17 +1,20 @@
 Surgical Planning
 =================
 
-Implement a segmentation algorithm to segment the pelvis, lumbar vertebrae and intervertebral discs.
+Implement a segmentation algorithm to segment the pelvis, lumbar vertebrae, intervertebral discs and the spinal cord.
 
 Theory
 -------
+
+.. image:: img/result-assignment1.png
+   :scale: 50%
+   :align: center
 
 
 Programming assignment
 ----------------------
 
-In this assignment you have to implement a region growing algorithms in the file ``cas/planning/segmentation.py``.
-
+In this assignment you have to implement a region growing algorithm, as discussed in the lecture, in the file ``assignments/planning/segmentation.py``.
 
 .. code-block:: python
     :linenos:
@@ -40,13 +43,16 @@ The scripts opens a window with a CT scan of a pelvis and spine model. You can u
 overlay. Using the keys 0 - 4, you can change the active label:
 
 0. None
-1. Sacrum
-2. Pelvis
-3. L4
-4. L5
+1. Spinal Cord
+2. Vertebraes
+3. Pelvis
+4. Discs
 
 By clicking on the image, you start the segmentation with the location as the seed point. The segmented region (output
 of your algorithm) will then be labelled with the active label.
+
+Once you have your segmentation, you can save it using the key 's'. Then use the script show3d.py to visualize your segmentation in a 3D viewer.
+``python cas/planning/show3d.py``.
 
 Report
 ------
@@ -59,7 +65,7 @@ Write a short report (max 1 page) where you address the following questions:
 
 Submission
 ----------
-Send a ZIP file with the follwing files:
+Upload a ZIP file with the following files to ILIAS:
 
 #. Your report as PDF with filename [firstname lastname]_assignment1_report.pdf
 #. Your code with filename [firstname lastname]_assignment1_code.py
@@ -68,5 +74,6 @@ Send a ZIP file with the follwing files:
 
 Name your ZIP file as ``firstname_lastname_assignment1.zip``
 
-References
-----------
+Materials
+---------
+* https://docs.scipy.org/doc/scipy/reference/ndimage.html
