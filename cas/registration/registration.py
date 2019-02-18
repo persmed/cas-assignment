@@ -4,84 +4,22 @@ sys.path.insert(0, os.path.join(os.path.dirname(sys.argv[0]), '../..'))
 
 import numpy as np
 np.set_printoptions(suppress=True)
+from mpl_toolkits.mplot3d import Axes3D
+import matplotlib.pyplot as plt
 
 import cas.registration.util as util
+from assignments.registration import registration
 
 
-def paired_points_matching(source, target):
-    """
-    Calculates the transformation T that maps the source to the target
-    :param source: A N x 3 matrix with N 3D points
-    :param target: A N x 3 matrix with N 3D points
-    :return:
-        T: 4x4 transformation matrix mapping source onto target
-        R: 3x3 rotation matrix part of T
-        t: 1x3 translation vector part of T
-    """
-    assert source.shape == target.shape
-    T = np.eye(4)
-    R = np.eye(3)
-    t = np.zeros((1, 3))
-
-    return T, R, t
-
-
-def find_nearest_neighbor(src, dst):
-    """
-    Finds the nearest neighbor of every point in src in dst
-    :param src: A N x 3 point cloud
-    :param dst: A N x 3 point cloud
-    :return: the
-    """
-    pass
-
-
-def icp(source, target, init_pose=None, max_iterations=10, tolerance=0.0001):
-    """
-    Iteratively finds the best transformation that mapps the source points onto the target
-    :param source: A N x 3 point cloud
-    :param target: A N x 3 point cloud
-    :param init_pose: A 4 x 4 transformation matrix for the initial pose
-    :param max_iterations: default 10
-    :param tolerance: maximum allowed error
-    :return: A 4 x 4 rigid transformation matrix mapping source to target
-            the distances and the error
-    """
-    T = np.eye(4)
-    distances = 0
-    error = 0
-
-    # Your code goes here
-
-    return T, distances, error
-
-
-def get_initial_pose(template_points, target_points):
-    """
-    Calculates an initial rough registration
-    (Optionally you can also return a hand picked initial pose)
-    :param source:
-    :param target:
-    :return: A transformation matrix
-    """
-    T = np.eye(4)
-
-    # Your code goes here
-
-    return T
-
-
-if __name__ == "__main__":
-    import matplotlib.pyplot as plt
-
+def test_icp():
     target_points = util.read_data('../../data/registration/TargetPoints.csv')
     print(target_points)
 
     template_points = util.read_data('../../data/registration/TemplatePoints.csv')
     print(template_points)
 
-    T_rot_x = get_initial_pose(template_points, target_points)
-    T, d, error = icp(template_points, target_points, init_pose=T_rot_x)
+    T_rot_x = registration.get_initial_pose(template_points, target_points)
+    T, d, error = registration.icp(template_points, target_points, init_pose=T_rot_x)
 
     template_points_T = util.make_homogenous(template_points)
     template_points_T = np.dot(T, template_points_T.T).T[:, :3]
@@ -109,3 +47,34 @@ if __name__ == "__main__":
     # plt.axis([-3, 3, -3, 3])
     plt.axis('equal')
     plt.show()
+
+
+def test_paired_points_matching():
+    N = 5
+    T_random = util.get_random_transformation_matrix()
+    target, source = util.get_random_point_clouds(N, T_random)
+
+    print('Target point cloud\n', target, '\n')
+
+    T, R, t = registration.paired_points_matching(source, target)
+
+    source_H = util.make_homogenous(source)
+    source_T = np.dot(T, source_H.T).T[:, :3]
+    print('Source point cloud\n', source_T, '\n')
+    error = np.linalg.norm(source_T - target)
+
+    print('Transformation\n', T, '\n')
+
+    print('Error\n', error, '\n')
+
+    if error < 0.1:
+        print("Successful")
+    else:
+        print("Check again")
+
+    return
+
+
+if __name__ == "__main__":
+    test_paired_points_matching()
+    test_icp()

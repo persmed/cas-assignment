@@ -15,7 +15,7 @@ Programming assignment
 ----------------------
 
 In this assignment you have to implement a region growing algorithm, as discussed in the lecture, in the file ``assignments/planning/segmentation.py``.
-
+Before you implement the code, you have to unzip the data. Therefore unzip ``data/planning/Pelvis_CT.zip`` into ``data/planning/Pelvis_DT.nii``.
 .. code-block:: python
     :linenos:
 

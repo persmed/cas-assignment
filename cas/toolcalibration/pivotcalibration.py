@@ -1,17 +1,9 @@
-import numpy as np
+import os
+import sys
 
+sys.path.insert(0, os.path.join(os.path.dirname(sys.argv[0]), '../..'))
 
-def pivot_calibration(transforms):
-    """ Pivot calibration
-    Keyword arguments:
-    transforms -- A list with 4x4 transformation matrices
-    returns -- A vector p_t, which is the offset from any T to the pivot point
-    """
-
-    p_t = np.zeros((3, 1))
-    T = np.eye(4)
-
-    return p_t, T
+from assignments.toolcalibration import calibration
 
 
 if __name__ == "__main__":
@@ -29,12 +21,10 @@ if __name__ == "__main__":
             data = np.loadtxt(row, delimiter=',')
             data = data.reshape((3, 4))
             T[:3, :4] = data
-            # print(T)
             transforms.append(T)
 
-    p_t, T = pivot_calibration(transforms)
-    # p_t = np.round(p_t, decimals=3)
-    # T = np.round(T, de)
+    p_t, T = calibration.pivot_calibration(transforms)
+
     print('Calibtration matrix T')
     print(T)
     print('Offset vector p_t: ')

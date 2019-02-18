@@ -18,8 +18,8 @@ Theory
 Programming assignment
 ----------------------
 
-You have to implement this algorithm in the file ``pivotcalibration.py``. You can test your implementation by running
-the file directly in PyCharm or from the console using ```python pivotcalibration.py``.
+You have to implement this algorithm in the file ``assignments/toolcalibration/calibration.py``. You can test your implementation by running
+the file directly in PyCharm or from the console using ```python cas/toolcalibration/pivotcalibration.py``.
 
 .. code-block:: python
     :linenos:
@@ -32,6 +32,7 @@ the file directly in PyCharm or from the console using ```python pivotcalibratio
         """
         p_t = np.zeros((3, 1))
         T = np.eye(4)
+
         # your code goes here
 
         return p_t, T

@@ -2,6 +2,7 @@ cycler==0.10.0
 kdtree==0.16
 kiwisolver==1.0.1
 matplotlib==3.0.2
+mkl==2019.0
 numpy==1.15.4
 pydicom==1.2.1
 pyparsing==2.3.0
