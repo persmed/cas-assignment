@@ -36,6 +36,7 @@ the file directly in PyCharm or from the console using ```python pivotcalibratio
 
         return p_t, T
 
+
 Report
 ------
 
@@ -50,11 +51,11 @@ Submission
 ----------
 Send a ZIP file with the follwing files:
 
-#. Your report as PDF with filename [firstname lastname]_assignment1_report.pdf
-#. Your code with filename [firstname lastname]_assignment1_code.py
-#. A textfile with the console output when you ran the code with filename [firstname lastname]_assignment1_output.txt
+#. Your report as PDF with filename [firstname lastname]_assignment2_report.pdf
+#. Your code with filename [firstname lastname]_assignment2_code.py
+#. A textfile with the console output when you ran the code with filename [firstname lastname]_assignment2_output.txt
 
-Name your ZIP file as ``firstname_lastname_assignment1.zip``
+Name your ZIP file as ``firstname_lastname_assignment2.zip``
 
 Materials
 ----------

@@ -19,33 +19,44 @@ From Wikipedia_ the four steps in ICP are:
 * Iterate (re-associate the points, and so on).
 
 Paried points matching
-----------------------
+-----------------------
 As discussed in the lecture, ICP is basically an iteratively applied paired points matching algorithm. Therefore, you
-will first implement the Paired points matching algorithm.
+will first implement the Paired points matching algorithm. The inputs are point clouds of corresponding points. You're
+task is to calculate the transformation matrix that maps the source to the target point cloud.
 
 .. code-block:: python
     :linenos:
 
     def paired_points_matching(source, target):
     """
-
-    :param source:
-    :param target:
+    Calculates the transformation T that maps the source to the target
+    :param source: A N x 3 matrix with N 3D points
+    :param target: A N x 3 matrix with N 3D points
     :return:
         T: 4x4 transformation matrix mapping source onto target
         R: 3x3 rotation matrix part of T
         t: 1x3 translation vector part of T
     """
 
+    T = np.eye(4)
+    R = np.eye(3)
+    t = np.zeros((1, 3))
+
+    # Your code goes here
+
+    return T, R, t
+
+
 Iterative closest point
 -----------------------
+
 Now you have the basic building block of ICP so it's time to implement the iteration part. Remember, that
 initialization is crucial for ICP to work.
 
 Initial pose
 ____________
 First, you have to give an initial pose. For that it's easiest to just look at the data and give a rough estimate.
-You can also calculate one based from the data automatically, but this is optional.
+
 
 .. code-block:: python
     :linenos:
