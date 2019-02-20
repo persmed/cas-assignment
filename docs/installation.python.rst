@@ -22,6 +22,7 @@ The installation has been tested on Windows 10.
    - open "Git Bash"
    - :bash:`cd \path\to\where\you\want\the\code`
    - :bash:`git clone https://github.com/artorg-igt/cas-assignment.git`
+   - :bash:`cd cas-assignment`
 
 #. Anaconda installation (`official website <https://docs.anaconda.com/anaconda/install/windows.html>`__)
 
@@ -59,6 +60,7 @@ Run the following commands in the terminal (tested on ubuntu 16.04 LTS).
 
    - :bash:`cd /path/to/where/you/want/the/code`
    - :bash:`git clone https://github.com/artorg-igt/cas-assignment.git`
+   - :bash:`cd cas-assignment`
 
 #. Run Anaconda installation script (`official website <https://docs.anaconda.com/anaconda/install/linux>`__)
 
@@ -98,6 +100,7 @@ The installation has not been tested.
 
    - :bash:`cd /path/to/where/you/want/the/code`
    - :bash:`git clone https://github.com/artorg-igt/cas-assignment.git`
+   - :bash:`cd cas-assignment`
 
 #. Anaconda installation (`official website <https://docs.anaconda.com/anaconda/install/mac-os>`__)
 
