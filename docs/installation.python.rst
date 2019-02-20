@@ -45,7 +45,7 @@ The installation has been tested on Windows 10.
 
 #. Execute the installation test script to verify the installation
 
-   - :bash:`python cas\test-installation.py`
+   - :bash:`python cas\test_installation.py`
 
 Linux
 ------
