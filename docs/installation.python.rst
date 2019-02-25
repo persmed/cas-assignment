@@ -90,7 +90,7 @@ Run the following commands in the terminal (tested on ubuntu 16.04 LTS).
 
 macOS
 ------
-The installation has not been tested.
+The installation has been tested on macOS High Sierra (10.13.6).
 
 #. git installation
 
