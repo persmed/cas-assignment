@@ -44,9 +44,10 @@ Report
 Write a short report (max 1 page) where you address the following questions:
 
 #. In which coordinate system is the vector :math:`p_t`
-#. How many degrees of freedeom can you calibrate with pivoting
 #. Write down the formula to get the tip of the pointer in the camera coordinate system
-#. two more challenging questions
+#. Where does the error in your result come from (what you get is not the exact solution which is provided)?
+#. How many degrees of freedeom can you calibrate with pivoting? Which ones are missing?
+#. If your instrument is non-rigid (e.g. a needle) your :math:`p_t` is off if your instrument is bent. How can you overcome this issue?
 
 Submission
 ----------
