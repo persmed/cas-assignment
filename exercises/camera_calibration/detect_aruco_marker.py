@@ -3,6 +3,9 @@ import numpy as np
 import cv2
 from cv2 import aruco
 
+cv2.namedWindow('Image', cv2.WINDOW_NORMAL)
+cv2.resizeWindow('Image', 1920, 1080)
+
 # load the calibration parameters
 cv_file = cv2.FileStorage("calibration.yaml", cv2.FILE_STORAGE_READ)
 mtx = cv_file.getNode("camera_matrix").mat()
@@ -12,6 +15,8 @@ cv_file.release()
 aruco_dict = aruco.Dictionary_get(aruco.DICT_ARUCO_ORIGINAL)
 
 cap = cv2.VideoCapture(0)
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
 
 while cap.isOpened():
     ret, frame = cap.read()
@@ -41,7 +46,7 @@ while cap.isOpened():
         cv2.putText(frame, "Id: " + str(ids), (0, 64), font, 1, (0, 255, 0), 2, cv2.LINE_AA)
 
         # Display the resulting frame
-    cv2.imshow('frame', frame)
+    cv2.imshow('Image', frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 

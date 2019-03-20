@@ -4,6 +4,9 @@ import cv2
 board_w = 11
 board_h = 8
 
+cv2.namedWindow('Image', cv2.WINDOW_NORMAL)
+cv2.resizeWindow('Image', 1920, 1080)
+
 # termination criteria
 criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
 # prepare object points, like (0,0,0), (1,0,0), (2,0,0) ....,(6,5,0)
@@ -15,6 +18,8 @@ objpoints = []  # 3d point in real world space
 imgpoints = []  # 2d points in image plane.
 img_shape = None
 cap = cv2.VideoCapture(0)
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
 save_next = False
 
 while cap.isOpened():
