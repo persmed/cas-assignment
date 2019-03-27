@@ -144,4 +144,14 @@ You can get 10 Points in this assignment:
 
 Materials
 ----------
+KD-Trees
+________
+You don't neccessarily need to use them, but it will make the search for the closest point easier.
 * https://en.wikipedia.org/wiki/K-d_tree
+* https://scikit-learn.org/stable/modules/neighbors.html
+* https://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.spatial.KDTree.query.html#scipy.spatial.KDTree.query
+
+Solving systems of equations
+____________________________
+* https://docs.scipy.org/doc/numpy/reference/routines.linalg.html#solving-equations-and-inverting-matrices
+* https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.svd.html#numpy.linalg.svd
