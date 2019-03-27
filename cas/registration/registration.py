@@ -4,8 +4,13 @@ sys.path.insert(0, os.path.join(os.path.dirname(sys.argv[0]), '../..'))
 
 import numpy as np
 np.set_printoptions(suppress=True)
+
+import matplotlib
+matplotlib.use("TkAgg")
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
+
+
 
 import cas.registration.util as util
 from assignments.registration import registration

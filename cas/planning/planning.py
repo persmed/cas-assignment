@@ -5,6 +5,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(sys.argv[0]), '../..'))
 
 import numpy as np
 import SimpleITK as sitk
+import matplotlib
+matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
 import scipy.ndimage
 
