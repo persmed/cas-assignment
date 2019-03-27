@@ -59,6 +59,18 @@ Send a ZIP file with the follwing files:
 
 Name your ZIP file as ``firstname_lastname_assignment2.zip``
 
+Grading
+-------
+
+The assignment accounts for 33% of the grade for the assignments.
+
+You can get 10 Points in this assignment:
+
+* Working code and a correct result gives you 5 pts
+   * Important: We don't grade the code quality, but it would be nice if we don't have to spend hours to understand it
+* If the code does not work, but you gave it at least a decent try you get 2.5 pts
+* For each correctly answered question you get 1 pt
+
 Materials
 ----------
 
