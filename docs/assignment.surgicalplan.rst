@@ -15,7 +15,8 @@ Programming assignment
 ----------------------
 
 In this assignment you have to implement a region growing algorithm, as discussed in the lecture, in the file ``assignments/planning/segmentation.py``.
-Before you implement the code, you have to unzip the data. Therefore unzip ``data/planning/Pelvis_CT.zip`` into ``data/planning/Pelvis_DT.nii``.
+Before you implement the code,e you have to unzip the data. Therefore unzip ``data/planning/Pelvis_CT.zip`` into ``data/planning/Pelvis_DT.nii``.
+You are already provided with a rough implementation of the algorithm. You mainly have to complete the places with a TODO tag.
 
 .. code-block:: python
     :linenos:
@@ -30,7 +31,7 @@ Before you implement the code, you have to unzip the data. Therefore unzip ``dat
         """
         segmentation_mask = np.zeros(image.shape, np.bool)
 
-        # Your code goes here
+        # Your code goes here. Fill the places with a TODO tag
 
         return segmentation_mask
 

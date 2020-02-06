@@ -18,6 +18,7 @@ Welcome to CAS Assignment's documentation!
     :maxdepth: 1
     :caption: Assignments
 
+    assignment.setup
     assignment.surgicalplan
     assignment.toolcalibration
     assignment.registration
