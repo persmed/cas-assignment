@@ -1,7 +1,8 @@
 Surgical Planning
 =================
 
-Implement a segmentation algorithm to segment the pelvis, lumbar vertebrae, intervertebral discs and the spinal cord.
+In the first part you will implement a segmentation algorithm to segment the pelvis, lumbar vertebrae, intervertebral discs and the spinal cord.
+In the second part you'll use an AI based algorithm to segment the liver and then calculate the volume.
 
 Theory
 -------
@@ -11,8 +12,8 @@ Theory
    :align: center
 
 
-Programming assignment
-----------------------
+Programming assignment with region growing
+------------------------------------------
 
 In this assignment you have to implement a region growing algorithm, as discussed in the lecture, in the file ``assignments/planning/segmentation.py``.
 Before you implement the code,e you have to unzip the data. Therefore unzip ``data/planning/Pelvis_CT.zip`` into ``data/planning/Pelvis_DT.nii``.
@@ -61,6 +62,58 @@ of your algorithm) will then be labelled with the active label.
 Once you have your segmentation, you can save it using the key 's'. Then use the script show3d.py to visualize your segmentation in a 3D viewer.
 ``python cas/planning/show3d.py``.
 
+Planning assignment with deep learning
+--------------------------------------
+
+In the second part of the assignment, you will use a deep learning based algorithm to segment a liver and calculate the liver volume.
+Training and finetuning such an algorithm is ways beyond the scope of this course. However, it is important that you understand the difference
+between AI based algorithms and traditional algorithms and how such algorithms can be used.
+
+.. code-block:: python
+    :linenos:
+
+
+    def calc_volume(image, label, spacing):
+        """
+        Calculates the volume of an object with the label
+        :param image: A 3D segmented volume
+        :param label: The label for which the volume shall be computed
+        :param spacing: The voxel spacing of the image
+        :return: The volume of the object in mL
+        """
+        volume = 0
+
+        return volume
+
+
+Now you can run the segmentation and volumetry command. The segmentation command might take a while, depending
+on your computer and whether you have a compatible GPU. The segmentation is stored in the file segmented.npy,
+so you only have to run it once.
+
+.. code-block:: bash
+    :linenos:
+
+
+    python cas\planning\dl\segment_liver.py --dataset-path=data\lits\ --case-id=0
+
+This script will report you the accuracy of the segmantation in terms of the DICE coefficient. However, in
+real-life you don't know how well your algorithm worked until you evaluate the results yourself.
+
+Next you can run your volumetry program, which takes the image as input and outputs the volume of the liver
+and the tumors in milliliters.
+
+.. code-block:: bash
+    :linenos:
+
+
+    python assignments/planning/volumetry.py --dataset-path=data\lits\ --case-id=0
+
+
+If you're interested in the details of deep learning and AI we highly recommend taking one of these courses
+*. Machine learning
+*. Computer Vision
+*. Advanced topics in machine learning
+
 Report
 ------
 Write a short report (max 1 page) where you address the following questions:
@@ -69,7 +122,7 @@ Write a short report (max 1 page) where you address the following questions:
 #. Your CT image has salt & pepper noise. How would you preprocess the image to improve your segmentation?
 #. You want to plan a trajectory for a pedicle screw placement on your 3D model. What information do you need to define this trajectory?
 #. Which algorithm can you use to get a surface model from your segmentation?
-#. If you downsample your 3D CT image by a factor of 2 in all dimensions, how much faster or slower will your algorithm get?
+#. 
 
 Submission
 ----------
