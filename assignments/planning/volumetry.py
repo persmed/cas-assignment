@@ -1,3 +1,4 @@
+import os
 import argparse
 import numpy as np
 import nibabel as nib
@@ -24,18 +25,17 @@ def calc_volume(image, label, spacing):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Calculate volume')
-    parser.add_argument('--case-id', type=str, help='...')
+    parser.add_argument('--case-id', type=int, help='...')
     parser.add_argument('--dataset-path', type=str, help='...')
     args = parser.parse_args()
     print(args)
 
-    filename = 'predictions_{0}.nii'.format(case_id)
-    input_image = os.path.join(agrs.dataset_path, filename)
-
-    input_image = nib.load(input_image)
+    filename = 'prediction.nii'
+    input_image_file = os.path.join(args.dataset_path, "case_{:05d}".format(args.case_id), filename)
+    input_image = nib.load(input_image_file)
+    spacing = [input_image.affine[0][0], input_image.affine[1][1], input_image.affine[2][2]]
     input_image = input_image.get_fdata().astype(np.float32)
 
-    spacing = [volume.affine[0][0], volume.affine[1][1], volume.affine[2][2]]
     volume_liver = calc_volume(input_image, LABELS["Liver"], spacing)
     volume_tumors = calc_volume(input_image, LABELS["Tumor"], spacing)
 

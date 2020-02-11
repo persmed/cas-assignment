@@ -231,8 +231,8 @@ def segment_case(case_loader, case_id):
     tk_dice, tu_dice = evaluate(predictions, segmentation)
     print(case_id, tk_dice, tu_dice)
 
-    predictions_tumor = tumor_segmenter.segment(volume, predictions)
-    predictions[predictions_tumor == 1] = 2
+    #predictions_tumor = tumor_segmenter.segment(volume, predictions)
+    #predictions[predictions_tumor == 1] = 2
 
     tk_dice, tu_dice = evaluate(predictions, segmentation)
     print(case_id, tk_dice, tu_dice)
@@ -256,6 +256,4 @@ if __name__ == "__main__":
 
     case_loader = dataset.CaseLoader(args.dataset_path)
     predictions, tk_dice, tu_dice = segment_case(case_loader, args.case_id)
-
-    filename = 'predictions_{0}.nii'.format(args.case_id)
-    nib.save(predictions, os.path.join(agrs.dataset_path, filename))
+    nib.save(predictions, os.path.join(args.dataset_path, "case_{:05d}".format(args.case_id), 'prediction.nii'))
