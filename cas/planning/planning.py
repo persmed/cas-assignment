@@ -159,7 +159,7 @@ class Segmenter:
         return self.segmentation_mask
 
 
-image = sitk.ReadImage("data\planning\Pelvis_CT.nii")
+image = sitk.ReadImage("data/planning/Pelvis_CT.nii")
 
 size = image.GetSize()
 spacing = image.GetSpacing()

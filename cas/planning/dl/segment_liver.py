@@ -256,4 +256,4 @@ if __name__ == "__main__":
 
     case_loader = dataset.CaseLoader(args.dataset_path)
     predictions, tk_dice, tu_dice = segment_case(case_loader, args.case_id)
-    nib.save(predictions, os.path.join(args.dataset_path, "case_{:05d}".format(args.case_id), 'prediction.nii'))
+    nib.save(predictions, os.path.join(args.dataset_path, "case_{:05d}".format(int(args.case_id)), 'prediction.nii'))
