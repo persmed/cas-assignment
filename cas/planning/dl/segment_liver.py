@@ -52,33 +52,11 @@ def keep_largest(predictions):
         predictions[predictions_labels == lbl] = 0
     return predictions
 
-class SkinSegmenter:
-    def __init__(self, threshold):
-        self.threshold = threshold
-
-    def segment(self, volume):
-        predictions = volume.get_fdata().astype(np.float32)
-        predictions[predictions > self.threshold] = 1
-        predictions[predictions <= self.threshold] = 0
-        sx = ndimage.sobel(predictions)
-        predictions[sx != 0] = 4
-        return predictions
-
-class BoneSegmenter:
-    def __init__(self, threshold):
-        self.threshold = threshold
-
-    def segment(self, volume):
-        predictions = volume.get_fdata().astype(np.float32)
-        predictions[predictions <= self.threshold] = 0
-        predictions[predictions > 0] = 1
-        return predictions
-
 class TumorSegmenter:
     def __init__(self, device, weights, show_plots=False):
         num_class = 1
         self.model = unet.UNet(num_class, num_class).to(device)
-        self.model.load_state_dict(torch.load(weights))
+        self.model.load_state_dict(torch.load(weights, map_location=torch.device(device)))
         self.model.eval()
         self.show_plots = show_plots
 
@@ -161,7 +139,7 @@ class LiverSegmenter:
     def __init__(self, device, weights, show_plots=False):
         num_class = 1
         self.model = unet.UNet(num_class, num_class).to(device)
-        self.model.load_state_dict(torch.load(weights))
+        self.model.load_state_dict(torch.load(weights, map_location=torch.device(device)))
         self.model.eval()
         self.show_plots = show_plots
 
@@ -253,21 +231,14 @@ def segment_case(case_loader, case_id):
     tk_dice, tu_dice = evaluate(predictions, segmentation)
     print(case_id, tk_dice, tu_dice)
 
-    predictions_tumor = tumor_segmenter.segment(volume, predictions)
-    predictions[predictions_tumor == 1] = 2
-    # print(np.min(predictions), np.max(predictions))
+    #predictions_tumor = tumor_segmenter.segment(volume, predictions)
+    #predictions[predictions_tumor == 1] = 2
 
     tk_dice, tu_dice = evaluate(predictions, segmentation)
     print(case_id, tk_dice, tu_dice)
+    predictions_nii = nib.Nifti1Image(predictions, volume.affine)
 
-    # predictions_bone = bone_segmenter.segment(volume).astype(np.uint8)
-    # predictions[predictions_bone == 1] = 3
-
-    # predictions_skin = skin_segmenter.segment(volume).astype(np.uint8)
-    # predictions[predictions_skin == 4] = 4
-
-    save(predictions, volume, case_id)
-    return tk_dice, tu_dice
+    return predictions_nii, tk_dice, tu_dice
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Segment image')
@@ -280,24 +251,9 @@ if __name__ == "__main__":
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     print(device)
 
-    liver_segmenter = LiverSegmenter(device, 'weights/liver_weights.pth', args.show_plots)
-    tumor_segmenter = TumorSegmenter(device, 'weights/tumor_weights.pth', args.show_plots)
-    bone_segmenter = BoneSegmenter(225)
-    skin_segmenter = SkinSegmenter(-500)
+    liver_segmenter = LiverSegmenter(device, 'cas/planning/dl/weights/liver_weights.pth', args.show_plots)
+    tumor_segmenter = TumorSegmenter(device, 'cas/planning/dl/weights/tumor_weights.pth', args.show_plots)
 
     case_loader = dataset.CaseLoader(args.dataset_path)
-
-    if args.case_id is None:
-        cases = case_loader.get_all_cases()
-        results = []
-        for idx, case_id in enumerate(cases):
-            print('Segmenting {0}'.format(case_id))
-            tk_dice, tu_dice = segment_case(case_loader, case_id)
-            results.append([case_id, tk_dice, tu_dice])
-            with open('results.csv', 'w', newline='') as myfile:
-                 wr = csv.writer(myfile)
-                 wr.writerow(['id', 'tk_dice', 'tu_dice'])
-                 for r in results:
-                     wr.writerow(r)
-    else:
-        segment_case(case_loader, args.case_id)
+    predictions, tk_dice, tu_dice = segment_case(case_loader, args.case_id)
+    nib.save(predictions, os.path.join(args.dataset_path, "case_{:05d}".format(int(args.case_id)), 'prediction.nii'))
