@@ -1,9 +1,9 @@
 name: cas
 channels:
+  - anaconda
   - conda-forge
   - defaults
   - SimpleITK
-  - anaconda
 dependencies:
   - python=3.6
   - numpy=1.15.4
@@ -13,6 +13,6 @@ dependencies:
   - scikit-learn=0.20.2
   - scipy=1.2.0
   - SimpleITK=1.2.0
-  - vtk=8.1.2
+  - vtk=8.2.0
   - pip:
       - transformations==2018.10.18
