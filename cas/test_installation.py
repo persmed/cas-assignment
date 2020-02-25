@@ -19,6 +19,13 @@ print('PyDICOM version:\t\t', pydicom.__version__)
 import scipy
 print('SciPy version:\t\t\t', scipy.__version__)
 
+import torch
+print('PyTorch version:\t\t\t', torch.__version__)
+
+import torchvision
+print('Torchvision version:\t\t\t', torchvision.__version__)
+
+
 import matplotlib
 matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt

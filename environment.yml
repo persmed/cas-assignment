@@ -20,5 +20,6 @@ dependencies:
   - scipy=1.2.0
   - SimpleITK=1.2.0
   - vtk=8.2.0
+  - pip=20.0.2
   - pip:
       - transformations==2018.10.18
