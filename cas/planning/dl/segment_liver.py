@@ -62,13 +62,10 @@ class TumorSegmenter:
 
     def segment(self, volume, liver_mask):
         trans = transforms.Compose([
-                    # transforms.Resize((256, 256), interpolation=Image.LINEAR),
                     transforms.ToTensor()])
         trans2 = transforms.Compose([
                     transforms.ToPILImage()]),
-                    # transforms.Resize((512, 512), interpolation=Image.NEAREST)])
         input = volume.get_fdata().astype(np.float32)
-        # liver_mask = liver_segmentation.get_fdata().astype(np.uint8)
 
         liver_mask_cp = ndimage.binary_dilation(liver_mask).astype(np.uint8)
 
@@ -106,7 +103,6 @@ class TumorSegmenter:
             output[output > 0] = 1
 
             output = ndimage.binary_fill_holes(output).astype(np.uint8)
-            # output = ndimage.binary_dilation(output).astype(np.uint8)
 
             output = Image.fromarray(output)
             output = output.resize((predictions.shape[1], predictions.shape[2]), resample=Image.LINEAR)
@@ -199,7 +195,7 @@ class LiverSegmenter:
 
         predictions = predictions.astype(np.uint8)
         predictions = np.transpose(predictions, (1, 2, 0))
-        # for i in range(3):
+
         predictions = ndimage.binary_opening(predictions).astype(np.uint8)
 
         predictions = keep_largest(predictions)
@@ -208,18 +204,14 @@ class LiverSegmenter:
         for i in range(5):
             ndimage.binary_fill_holes(predictions).astype(np.uint8) #, structure=np.ones((5,5))
 
-        # predictions = ndimage.binary_dilation(predictions).astype(np.uint8)
-
         for i in range(3):
             predictions = np.rot90(predictions).copy()
 
         return predictions
 
 def save(predictions, volume, case_id):
-    # np.save(os.path.join('results', 'predictions.npy'), predictions)
     image_nii = nib.Nifti1Image(predictions, volume.affine)
     filename = 'predictions_{0}.nii'.format(case_id)
-    # print(image_nii)
     nib.save(image_nii, os.path.join('results', filename))
     print('saved to ', filename)
 
@@ -231,8 +223,8 @@ def segment_case(case_loader, case_id):
     tk_dice, tu_dice = evaluate(predictions, segmentation)
     print(case_id, tk_dice, tu_dice)
 
-    #predictions_tumor = tumor_segmenter.segment(volume, predictions)
-    #predictions[predictions_tumor == 1] = 2
+    predictions_tumor = tumor_segmenter.segment(volume, predictions)
+    predictions[predictions_tumor == 1] = 2
 
     tk_dice, tu_dice = evaluate(predictions, segmentation)
     print(case_id, tk_dice, tu_dice)

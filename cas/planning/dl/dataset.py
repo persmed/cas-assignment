@@ -47,7 +47,7 @@ class CaseLoader:
         # Resolve location where data should be living
         if not os.path.isdir(self.case_folder):
             raise IOError(
-                "Data path, {}, could not be resolved".format(str(data_path))
+                "Data path, {}, could not be resolved".format(str(self.case_folder))
             )
 
         # Get case_id from provided cid
