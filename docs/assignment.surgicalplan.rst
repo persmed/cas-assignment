@@ -122,7 +122,7 @@ Write a short report (max 1 page) where you address the following questions:
 #. Your CT image has salt & pepper noise. How would you preprocess the image to improve your segmentation?
 #. You want to plan a trajectory for a pedicle screw placement on your 3D model. What information do you need to define this trajectory?
 #. Which algorithm can you use to get a surface model from your segmentation?
-#. 
+
 
 Submission
 ----------

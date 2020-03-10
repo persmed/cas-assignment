@@ -1,10 +1,13 @@
 Tool Calibration
-================
+################
+
+Pivot calibration
+*****************
 
 Implement the pivot calibration algorithm as discussed in Lecture 4.
 
 Theory
--------
+======
 
 .. image:: img/pivot_calibration.png
 
@@ -16,7 +19,7 @@ Theory
 * Unknowns: :math:`p_t` and :math:`p_p`
 
 Programming assignment
-----------------------
+======================
 
 You have to implement this algorithm in the file ``assignments/toolcalibration/calibration.py``. You can test your implementation by running
 the file directly in PyCharm or from the console using ```python cas/toolcalibration/pivotcalibration.py``.
@@ -37,9 +40,57 @@ the file directly in PyCharm or from the console using ```python cas/toolcalibra
 
         return p_t, T
 
+Calibration device
+******************
+
+Implement the code to calibrate an instrument using a calibration device.
+
+Theory
+======
+
+.. image:: img/calibdevice.png
+
+* The following transformations are given
+
+  * :math:`^{Camera}T_{Tracker}` : This is the transformation from the tracker to the camera (given by tracking system)
+  * :math:`^{Camera}T_{Reference}` : This is the transformation from the reference to the camera (given by tracking system)
+  * :math:`^{Reference}T_{Pivot}` : This is the transformation from the pivot hole to the reference (given by CAD model)
+* The following transformation is missing
+
+  * :math:`^{Tracker}T_{Pivot}` : This is the calibration transformation from the tool tip to the tracker
+
+To implement these calculations you can use the following definition.
+
+.. math::
+
+    I = ^{Camera}T_{Tracker} \cdot ^{Tracker}T_{Pivot} \cdot ^{Pivot}T_{Reference} \cdot ^{Reference}T_{Camera}
+
+Thus, if you multiply all transformations in the same direction you get an identity.
+
+Note: If you use the * operator Python will perform a element-wise matrix multiplication!
+
+Programming assignment
+======================
+You have to implement this algorithm in the file ``assignments/toolcalibration/calibration.py``. You can test your implementation by running
+the file directly in PyCharm or from the console using ```python cas\toolcalibration\calibrationdevice.py``.
+
+.. code-block:: python
+    :linenos:
+
+    def calibration_device_calibration(camera_T_reference, camera_T_tracker, reference_P_pivot):
+        """ Calibratio device calibration
+        Keyword arguments:
+        camera_T_reference -- Transformation from the reference to the camera
+        camera_T_tracker -- Transformation from the tracker to the camera
+        reference_P_pivot -- A pivot on the reference (rigid body) where the tip of
+                             the instrument is located for calibration
+        """
+        ## TODO: Implement a calibration method for a calibration device
+        tracker_T_pivot = np.eye(4)
+        return tracker_T_pivot
 
 Report
-------
+******
 
 Write a short report (max 1 page) where you address the following questions:
 
@@ -50,7 +101,7 @@ Write a short report (max 1 page) where you address the following questions:
 #. If your instrument is non-rigid (e.g. a needle) your :math:`p_t` is off if your instrument is bent. How can you overcome this issue?
 
 Submission
-----------
+**********
 Send a ZIP file with the follwing files:
 
 #. Your report as PDF with filename [firstname lastname]_assignment2_report.pdf
@@ -60,18 +111,23 @@ Send a ZIP file with the follwing files:
 Name your ZIP file as ``firstname_lastname_assignment2.zip``
 
 Grading
--------
+*******
 
 The assignment accounts for 33% of the grade for the assignments.
 
 You can get 10 Points in this assignment:
 
-* Working code and a correct result gives you 5 pts
-   * Important: We don't grade the code quality, but it would be nice if we don't have to spend hours to understand it
-* If the code does not work, but you gave it at least a decent try you get 2.5 pts
-* For each correctly answered question you get 1 pt
+
+- Working code and a correct result gives you 5 pts
+
+  * Important: We don't grade the code quality, but it would be nice if we don't have to spend hours to understand it
+- If the code does not work, but you gave it at least a decent try you get 2.5 pts
+- For each correctly answered question you get 1 pt
+
 
 Materials
-----------
+*********
 
-* https://docs.scipy.org/doc/numpy/reference/routines.linalg.html#solving-equations-and-inverting-matrices
+- https://docs.scipy.org/doc/numpy/reference/routines.linalg.html#solving-equations-and-inverting-matrices
+- https://docs.python.org/3/whatsnew/3.5.html#whatsnew-pep-465
+- https://docs.scipy.org/doc/numpy/reference/generated/numpy.matmul.html
