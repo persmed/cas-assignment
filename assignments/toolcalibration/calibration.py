@@ -22,5 +22,5 @@ def calibration_device_calibration(camera_T_reference, camera_T_tracker, referen
                          the instrument is located for calibration
     """
     ## TODO: Implement a calibration method for a calibration device
-    tracker_T_pivot = np.linalg.pinv(camera_T_tracker) @ camera_T_reference @ reference_P_pivot
+    
     return tracker_T_pivot
