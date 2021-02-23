@@ -1,1 +1,1 @@
-unzip Pelvis_CT.zip to Pelvis_CT.nii
+copy `pelvis_ct.nii.gz` here

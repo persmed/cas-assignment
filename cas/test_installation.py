@@ -31,7 +31,7 @@ matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
 
 print("Testing matplotlib...")
-image = sitk.ReadImage("data/planning/Pelvis_CT.nii")
+image = sitk.ReadImage("data/planning/pelvis_ct.nii.gz")
 size = image.GetSize()
 spacing = image.GetSpacing()
 reference_image = sitk.Image(int(size[0] / 2), int(size[1] / 2), int(size[2] / 2), sitk.sitkUInt32)

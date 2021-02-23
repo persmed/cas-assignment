@@ -4,10 +4,10 @@ Python Installation
 .. role:: bash(code)
    :language: bash
 
-The installation instructions here are based on those for MIA-Lab, so you can use it next semester as well.
+The installation instructions here are based on those for MIALab, so you can use it next semester as well.
 https://mialab.readthedocs.io
 
-To start with the installation, download the `Anaconda installer <https://www.anaconda.com/download/>`_ for your operating system and Python 3.6.
+To start with the installation, download the `Anaconda installer <https://www.anaconda.com/download/>`_ for your operating system and Python 3.8.
 
 Windows
 -------
@@ -21,7 +21,7 @@ The installation has been tested on Windows 10.
 
    - open "Git Bash"
    - :bash:`cd \path\to\where\you\want\the\code`
-   - :bash:`git clone https://github.com/artorg-igt/cas-assignment.git`
+   - :bash:`git clone https://github.com/sitem-Center/cas-assignment.git`
    - :bash:`cd cas-assignment`
 
 #. Anaconda installation (`official website <https://docs.anaconda.com/anaconda/install/windows.html>`__)
@@ -29,20 +29,24 @@ The installation has been tested on Windows 10.
    - Launch the installer
    - Select an install for "Just Me" unless you’re installing for all users (which requires Windows administrator privileges)
    - Choose whether to add Anaconda to your PATH environment variable. We recommend not adding Anaconda to the PATH environment variable, since this can interfere with other software.
-   - Choose whether to register Anaconda as your default Python 3.6. Unless you plan on installing and running multiple versions of Anaconda, or multiple versions of Python, you should accept the default and leave this box checked.
+   - Choose whether to register Anaconda as your default Python 3.8. Unless you plan on installing and running multiple versions of Anaconda, or multiple versions of Python, you should accept the default and leave this box checked.
 
 #. Verify the installation
 
    - Open "Anaconda Prompt"
    - :bash:`conda list`, which should list all installed Anaconda packages
 
-#. Create a new Python with all dependencies
+#. Create a new Python environment with all dependencies
 
    - :bash:`conda env create --file environment.yml`
 
+#. (Optional) If you are using PowerShell instead of the command prompt run
+
+   - :bash:`conda init powershell`
+
 #. Activate the environment by
 
-   - :bash:`activate cas`
+   - :bash:`conda activate cas`
 
 #. Execute the installation test script to verify the installation
 
