@@ -20,13 +20,13 @@
 # -- Project information -----------------------------------------------------
 
 project = 'CAS Assignment'
-copyright = '2018, Iwan Paolucci'
-author = 'Iwan Paolucci'
+copyright = '2018-2021, University of Bern'
+author = 'University of Bern'
 
 # The short X.Y version
 version = ''
 # The full version, including alpha/beta/rc tags
-release = '0.1'
+release = '0.2'
 
 
 # -- General configuration ---------------------------------------------------
@@ -133,7 +133,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'CASAssignment.tex', 'CAS Assignment Documentation',
-     'Iwan Paolucci', 'manual'),
+     'University of Bern', 'manual'),
 ]
 
 
