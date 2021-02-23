@@ -4,9 +4,6 @@ Surgical Planning
 In the first part you will implement a segmentation algorithm to segment the pelvis, lumbar vertebrae, intervertebral discs and the spinal cord.
 In the second part you'll use an AI based algorithm to segment the liver and then calculate the volume.
 
-Theory
--------
-
 .. image:: img/result-assignment1.png
    :scale: 50%
    :align: center
@@ -109,10 +106,11 @@ and the tumors in milliliters.
     python assignments/planning/volumetry.py --dataset-path=data\lits\ --case-id=0
 
 
-If you're interested in the details of deep learning and AI we highly recommend taking one of these courses
-*. Machine learning
-*. Computer Vision
-*. Advanced topics in machine learning
+If you're interested in the details of deep learning and AI we highly recommend taking one of these courses:
+
+- Machine learning
+- Computer vision
+- Advanced topics in machine learning
 
 Report
 ------
@@ -138,7 +136,7 @@ Name your ZIP file as ``firstname_lastname_assignment1.zip``
 Grading
 -------
 
-The assignment accounts for 33% of the grade for the assignments.
+The assignment accounts for 25% of the grade for the assignments.
 
 You can get 10 Points in this assignment:
 

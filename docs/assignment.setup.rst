@@ -1,7 +1,7 @@
 Environment Setup
 =================
 
-Follow the setup instructions and install the environment.
+Follow the setup instructions and install the environment (see :doc:`installation.python` and :doc:`installation.ide`).
 
 Once your environment is installed, run the following command.
 

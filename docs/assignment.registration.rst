@@ -133,7 +133,7 @@ Name your ZIP file as ``firstname_lastname_assignment3.zip`` and upload it to IL
 Grading
 -------
 
-The assignment accounts for 33% of the grade for the assignments.
+The assignment accounts for 25% of the grade for the assignments.
 
 You can get 10 Points in this assignment:
 

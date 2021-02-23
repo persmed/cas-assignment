@@ -3,31 +3,43 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to CAS Assignment's documentation!
-==========================================
+Computer Assisted Surgery Course Assignments
+============================================
+
+Welcome to the computer assisted surgery (CAS) course assignments. This documentation contains all code you will need to get started with the different assignments.
+
+The assignments will help you understand the theory of computer assisted surgery. You will work on:
+
+- Surgical planning
+- Artificial intelligence (AI)
+- Tool calibration
+- Patient to image registration
+
+Enjoy!
 
 .. toctree::
    :maxdepth: 2
    :caption: Getting started
 
-   overview
+   pythonbasics
    installation.python
    installation.ide
 
 .. toctree::
-    :maxdepth: 1
-    :caption: Assignments
+   :maxdepth: 1
+   :caption: Assignments
 
-    assignment.setup
-    assignment.surgicalplan
-    assignment.toolcalibration
-    assignment.registration
+   assignment.setup
+   assignment.surgicalplan
+   assignment.ai
+   assignment.toolcalibration
+   assignment.registration
 
-.. toctree::
-    :maxdepth: 1
-    :caption: Exercises
+.. .. toctree::
+..     :maxdepth: 1
+..     :caption: Exercises
 
-    exercise.cameracalibration
+..     exercise.cameracalibration
 
 
 Indices and tables

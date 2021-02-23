@@ -12,16 +12,17 @@ To open the CAS Assignment as a project and to configure the Python interpreter 
 
     #. In the dialog navigate to ``</path/to/where/you/have/the/code>/cas-assignment``
     #. Click OK
-    #. CAS Assignment is now open as PyCharm project (PyCharm created the ``.idea`` directory)
 
 #. Click File > Settings... to open the settings dialog
 
-    #. Navigate to Project: CAS Assignment > Project Interpreter
+    #. Navigate to Project: CAS Assignment > Python Interpreter
     #. Select the Python interpreter ``</path/to/your/anaconda/installation>/envs/cas/bin/python`` (on Linux and macOS) or ``<\path\to\your\anaconda\installation>\envs\mialab\python.exe`` (on Windows)
 
         - If the interpreter is not available in the combo box, click the gear icon and choose Add Local and navigate the the files above
 
     #. Confirm by clicking OK
+
+#. CAS Assignment is now open as PyCharm project (PyCharm created the ``.idea`` directory)
 
 #. Open the ``test_installation.py`` (``cas`` directory) in the navigator
 
