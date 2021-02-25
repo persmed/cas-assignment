@@ -3,6 +3,8 @@ Environment Setup
 
 Follow the setup instructions and install the environment (see :doc:`installation.python` and :doc:`installation.ide`).
 
+Download the file ``pelvis_ct.nii.gz`` from the assignment on ilias and copy it to ``data/planning``.
+
 Once your environment is installed, run the following command.
 
 .. code-block:: bash
