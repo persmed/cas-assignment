@@ -7,7 +7,7 @@ Python Installation
 The installation instructions here are based on those for MIALab, so you can use it next semester as well.
 https://mialab.readthedocs.io
 
-To start with the installation, download the `Anaconda installer <https://www.anaconda.com/download/>`_ for your operating system and Python 3.8.
+To start with the installation, download the `Anaconda installer <https://www.anaconda.com/download/>`_ for your operating system.
 
 Windows
 -------
