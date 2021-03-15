@@ -4,7 +4,7 @@ Artificial Intelligence
 .. role:: bash(code)
    :language: bash
 
-In this assignment you will run a deep learning-based algorithm with GPU to segment the proximal femur and acetabulum from hip joint CT images. 
+In this assignment you will run a deep learning-based algorithm with GPU to segment the proximal femur and the acetabulum from hip joint CT images. 
 
 .. image:: img/HipJointCTSegmentation.png
    :scale: 40%
@@ -17,7 +17,8 @@ GPU by UBELIX
 -------------------
 `UBELIX <https://ubelix.unibe.ch>`_ is an acronym and stands for University of Bern Linux Cluster, which is aimed for High Performance Computing (HPC). All staff and students of the University of Bern must have their Campus Account (CA) registered, before you can start working on the UBELIX. 
 
-To request the `activation <https://hpc-unibe-ch.github.io/getting-Started/account.html>`_ of your Campus Account, please send an email to ``hpc@id.unibe.ch`` including a brief description of what you want to use the cluster for your Campus Account username. Students must additionally provide the name of the institute (e.g. Mathematical Institute) and the name of the research group (e.g. Numerical Analysis) if available. While the 'gpu' partition is open for everybody automatically,  regular users must `request access to the GPU <https://hpc-unibe-ch.github.io/slurm/gpus.html>`_ partition explicitly before they can submit jobs running with GPU. You have to request access only once. To do so, simply write an email to ``hpc@id.unibe.ch`` and describe in a few words your application. 
+To request the `activation <https://hpc-unibe-ch.github.io/getting-Started/account.html>`_ of your Campus Account, please send an email to ``hpc@id.unibe.ch`` including a brief description of what you want to use the cluster for your Campus Account username. Students must additionally provide the name of the institute (e.g. Mathematical Institute) and the name of the research group (e.g. Numerical Analysis) if available. While the 'gpu' partition is not open for everybody automatically,  regular users must `request access to the GPU <https://hpc-unibe-ch.github.io/slurm/gpus.html>`_ partition explicitly before they can submit jobs running with GPU. You have to request access only once. To do so, simply write an email to ``hpc@id.unibe.ch`` and describe in a few words your application.  In this case, you can mention that you will  use deep learning for medical image analysis. 
+
 
 
 File Transfer to/from UBELIX
@@ -40,7 +41,7 @@ More information about file transfer can be found at `File Transfer <https://hpc
 Training U-Net for Semantic Segmentation
 -------
 
-The pacakage file 'hip_ct_unet_CAS_code.zip' includes the code and data for hip joint ct segementation based on U-Net.  As the package is quite large, so we put it on ilias instead of on github. Your task is to train it on UBELIX and report your running results. 
+The package file 'hip_ct_unet_CAS_code.zip' includes the code and data for hip joint ct segmentation based on U-Net.  As the package is quite large, so we put it on ilias instead of on github. Your task is to train it on UBELIX and report your running results. 
 
 
 .. image:: img/ITKSNAP.png
@@ -50,11 +51,11 @@ The pacakage file 'hip_ct_unet_CAS_code.zip' includes the code and data for hip 
 #. Install 'ITK-SNAP' and view the CT data and segmentation 
 	- Install `ITK-SNAP <http://www.itksnap.org/pmwiki/pmwiki.php?n=Downloads.SNAP3>`_  
 	- unzip the file 'hip_ct_unet_CAS_code.zip' on your local machine. 
-	- Inside the unziped folder, you can find a test hip CT image and its segmentation ground truth at ``Test/21_data.nii.gz`` and ``Test/21_mask.nii.gz``, respectively. 
-	- Drag the data file into ITK-SNAP and then load the mask data as segmentation, the visulisation should be like the figure above
+	- Inside the unzipped folder, you can find a test hip CT image and its segmentation ground truth at ``Test/21_data.nii.gz`` and ``Test/21_mask.nii.gz``, respectively. 
+	- Drag the data file into ITK-SNAP and then load the mask data as segmentation, the visualization should be like the figure above
 
 #. Change to your own email
-	- Change <username>@students.unibe.ch to your email in the file of 'job_run_gpu.sh' under the unziped folder
+	- Change <username>@students.unibe.ch to your email in the file of 'job_run_gpu.sh' under the unzipped folder
 	- delete the original 'hip_ct_unet_CAS_code.zip'
 	- zip the folder 'hip_ct_unet_CAS_code' to 'hip_ct_unet_CAS_code.zip'
 
@@ -86,13 +87,13 @@ The pacakage file 'hip_ct_unet_CAS_code.zip' includes the code and data for hip 
 
 Report
 ------
-Run the code of deep learning for hip ct image segmentation, and write a short report (1-2 pages) where to address the following questions. 
+Run the code of deep learning for hip ct image segmentation, and write a short report  where to address the following questions. 
 
 #. Experiment Running (5 points)
-	- Show the 3D models of automatic segmentation and manual segmentation in individual ITK-SNAP applications, and then compare them qualitatively.  (2 points)
+	- Show the 3D models of automatic segmentation and ground truth segmentation in individual ITK-SNAP applications, and then compare them qualitatively.  (2 points)
 	- Show the training loss curve (1 point)
 	- What is your evaluation result of Dice, ASD, and HD ?  Do a screenshot of the result text file.  (1 point)
-	- Do a screenshot of the training logging file, which is slurm-xxxxxxxx.out methioned before. (1 point)
+	- Do a screenshot of the training logging file, which is slurm-xxxxxxxx.out mentioned before. (1 point)
 
 #. Questions (5 points)
 	- What is semantic segmentation in a hip CT image? (1 point)
