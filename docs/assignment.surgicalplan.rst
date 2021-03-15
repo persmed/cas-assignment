@@ -89,7 +89,7 @@ You can get 10 points in this assignment:
 * Working code and a correct result gives you 5 pts
    * Important: We don't grade the code quality, but it would be nice if we don't have to spend hours to understand it
 * If the code does not work, but you gave it at least a decent try you get 2.5 pts
-* For each correctly answered question you get 1 pt
+* For each correctly answered question you get 1.25 pt
 
 
 Materials
