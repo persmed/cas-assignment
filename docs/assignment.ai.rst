@@ -37,12 +37,36 @@ To copy a file from the cluster to your local computer running a UNIX-like OS al
     
 More information about file transfer can be found at `File Transfer <https://hpc-unibe-ch.github.io/file-system/file-transfer.html>`_
 
+Code Explanation 
+-------
+The package file :bash:`hip_ct_unet_CAS_code.zip` includes the code and data for hip joint CT segmentation based on U-Net.  As the package is quite large, so we put it on ilias instead of on github. Your task is to train it on UBELIX and report your running results. 
+
+#. Image Dataset
+	- :bash:`data_loader.py` functions as data provider for training 
+	- The :bash:`dataset` folder contains all of the training and validation images in 2D format, which are extracted from 3D volume CT images
+	- 10 3D CT hip images were used for training, and each of them consists of roughly 240 slices. Therefore, we have in total around 2400 slice images for training. 
+	  
+
+#. U-Net Implementation 
+	- :bash:`model.py` implements the U-Net, whichi is a fully convolutional neural network that was developed for biomedical image segmentation.
+	- The network consists of a contracting path and an expansive path, which gives it the u-shaped architecture. The contracting path is a typical convolutional network that consists of repeated application of convolutions, each followed by a rectified linear unit (ReLU) and a max pooling operation. During the contraction, the spatial information is reduced while feature information is increased. The expansive pathway combines the feature and spatial information through a sequence of up-convolutions and concatenations with high-resolution features from the contracting path.
+	
+#. Model Training 
+	- The training will be conducted in :bash:`train.py`. All models after each epoch training will saved under the foder :bash:`./checkpoint`.
+	- By default, the batch size is 8, so there are 2400/8=300 iterations in each epoch. And the default number of training epochs is 10, so the model will be trained by 3000 iterations in default. After the training, you can find the training loss at :bash:`./log/training_loss.png`.
+	  
+#. Test on Unseen data 
+	- A new and unseen hip CT image for testing is prepared at :bash:`./Test/21_data.nii.gz`.
+	- :bash:`python test.py` will do the automatic segmentation for the test data, and the prediction will be saved under the same foder at :bash:`./Test/21_pred_segmentation.nii.gz`. 
+	- The segmentation nifti file will be post-processed by removing isolated regions and saved at :bash:`./Test/21_post_segmentation.nii.gz`.
+	  
+#. Evaluation
+	- :bash:`evaluate.py` will comapre the automatic segmentation result :bash:`./Test/21_post_segmentation.nii.gz` with the ground truth manual segmentation :bash:`./Test/21_mask.nii.gz`. The results of Dice, ASD, and HD will be saved at './Test/results.txt'.
+
+
 
 Training U-Net for Semantic Segmentation
 -------
-
-The package file 'hip_ct_unet_CAS_code.zip' includes the code and data for hip joint ct segmentation based on U-Net.  As the package is quite large, so we put it on ilias instead of on github. Your task is to train it on UBELIX and report your running results. 
-
 
 .. image:: img/ITKSNAP.png
    :scale: 30%
