@@ -7,6 +7,7 @@ def pivot_calibration(transforms):
     transforms -- A list with 4x4 transformation matrices
     returns -- A vector p_t, which is the offset from any T to the pivot point
     """
+
     ## TODO: Implement pivot calibration as discussed in the lecture
     p_t = np.zeros((3, 1))
     T = np.eye(4)
@@ -21,6 +22,8 @@ def calibration_device_calibration(camera_T_reference, camera_T_tracker, referen
     reference_P_pivot -- A pivot on the reference (rigid body) where the tip of
                          the instrument is located for calibration
     """
-    ## TODO: Implement a calibration method for a calibration device
+    
+    ## TODO: Implement a calibration method which uses a calibration device
+    tracker_T_pivot = np.eye(4)
     
     return tracker_T_pivot

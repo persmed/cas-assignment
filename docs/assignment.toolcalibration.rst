@@ -1,10 +1,12 @@
 Tool Calibration
 ################
 
+This assignment is based on the lecture "Postional Tracking", where you will implement two different ways to calibrate a tool.
+
 Pivot calibration
 *****************
 
-Implement the pivot calibration algorithm as discussed in Lecture 4.
+Implement the pivot calibration algorithm as discussed in the "Positional Tracking" lecture.
 
 Theory
 ======
@@ -13,30 +15,30 @@ Theory
 
 * :math:`p_t` is constant if looking from tool local COS
 * Pivot point (tool tip) :math:`p_p` is constant if looking from the tracking COS
-* At any moment, :math:`F_i(R_i, p_i)` can be retrieved from tracker API
+* At any moment, :math:`F_i(R_i, p_i)` can be retrieved from the tracker API
 * :math:`F_i(R_i, p_i)` takes :math:`p_t` to :math:`p_p`
-* :math:`R_i*p_t+p_i=p_p`
+* :math:`R_i \cdot p_t + p_i = p_p`
 * Unknowns: :math:`p_t` and :math:`p_p`
 
 Programming assignment
 ======================
 
-You have to implement this algorithm in the file ``assignments/toolcalibration/calibration.py``. You can test your implementation by running
+Implement the pivot calibration algorithm in the file ``assignments/toolcalibration/calibration.py``. You can test your implementation by running
 the file directly in PyCharm or from the console using ```python cas/toolcalibration/pivotcalibration.py``.
 
 .. code-block:: python
     :linenos:
 
-    def pivot_calibration(recorded_points):
-        """ pivot calibration
+    def pivot_calibration(transforms):
+        """ Pivot calibration
         Keyword arguments:
-        recorded_points --  ...
-        returns -- transformation T, residual error
+        transforms -- A list with 4x4 transformation matrices
+        returns -- A vector p_t, which is the offset from any T to the pivot point
         """
+
+        ## TODO: Implement pivot calibration as discussed in the lecture
         p_t = np.zeros((3, 1))
         T = np.eye(4)
-
-        # your code goes here
 
         return p_t, T
 
@@ -50,16 +52,17 @@ Theory
 
 .. image:: img/calibdevice.png
 
-* The following transformations are given
+The following transformations are given:
 
-  * :math:`^{Camera}T_{Tracker}` : This is the transformation from the tracker to the camera (given by tracking system)
-  * :math:`^{Camera}T_{Reference}` : This is the transformation from the reference to the camera (given by tracking system)
-  * :math:`^{Reference}T_{Pivot}` : This is the transformation from the pivot hole to the reference (given by CAD model)
-* The following transformation is missing
+* :math:`^{Camera}T_{Tracker}` : transformation from the tracker to the camera (given by the tracking system)
+* :math:`^{Camera}T_{Reference}` : transformation from the reference to the camera (given by the tracking system)
+* :math:`^{Reference}T_{Pivot}` : transformation from the pivot hole to the reference (given by the CAD model)
 
-  * :math:`^{Tracker}T_{Pivot}` : This is the calibration transformation from the tool tip to the tracker
+The following transformation is missing:
 
-To implement these calculations you can use the following definition.
+* :math:`^{Tracker}T_{Pivot}` : calibration transformation from the tool tip to the tracker
+
+To implement these calculations you can use the following definition:
 
 .. math::
 
@@ -85,14 +88,16 @@ the file directly in PyCharm or from the console using ```python cas\toolcalibra
         reference_P_pivot -- A pivot on the reference (rigid body) where the tip of
                              the instrument is located for calibration
         """
-        ## TODO: Implement a calibration method for a calibration device
+        
+        ## TODO: Implement a calibration method which uses a calibration device
         tracker_T_pivot = np.eye(4)
+        
         return tracker_T_pivot
 
-Report
-******
+Questions
+*********
 
-Write a short report (max 1 page) where you address the following questions:
+Write a short document (max 1 page) where you address the following questions:
 
 #. In which coordinate system is the vector :math:`p_t`
 #. Write down the formula to get the tip of the pointer in the camera coordinate system
@@ -104,11 +109,11 @@ Submission
 **********
 Send a ZIP file with the follwing files:
 
-#. Your report as PDF with filename [firstname lastname]_assignment2_report.pdf
-#. Your code with filename [firstname lastname]_assignment2_code.py
-#. A textfile with the console output when you ran the code with filename [firstname lastname]_assignment2_output.txt
+#. Your document as PDF with filename ``lastname_firstname_assignment3_report.pdf``
+#. Your code with filename ``lastname_firstname_assignment3_code.py``
+#. A text file with the console output when you ran the code with filename ``lastname_firstname_assignment3_output.txt``
 
-Name your ZIP file as ``firstname_lastname_assignment2.zip``
+Name your ZIP file as ``lastname_firstname_assignment3.zip``
 
 Grading
 *******
