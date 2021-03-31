@@ -14,7 +14,7 @@ In this assignment you will run a deep learning-based algorithm with GPU to segm
 
 
 GPU by UBELIX
--------------------
+-------------
 `UBELIX <https://ubelix.unibe.ch>`_ is an acronym and stands for University of Bern Linux Cluster, which is aimed for High Performance Computing (HPC). All staff and students of the University of Bern must have their Campus Account (CA) registered, before you can start working on the UBELIX. 
 
 To request the `activation <https://hpc-unibe-ch.github.io/getting-Started/account.html>`_ of your Campus Account, please send an email to ``hpc@id.unibe.ch`` including a brief description of what you want to use the cluster for your Campus Account username. Students must additionally provide the name of the institute (e.g. Mathematical Institute) and the name of the research group (e.g. Numerical Analysis) if available. While the 'gpu' partition is not open for everybody automatically,  regular users must `request access to the GPU <https://hpc-unibe-ch.github.io/slurm/gpus.html>`_ partition explicitly before they can submit jobs running with GPU. You have to request access only once. To do so, simply write an email to ``hpc@id.unibe.ch`` and describe in a few words your application.  In this case, you can mention that you will  use deep learning for medical image analysis. 
@@ -22,7 +22,7 @@ To request the `activation <https://hpc-unibe-ch.github.io/getting-Started/accou
 
 
 File Transfer to/from UBELIX
--------------------
+----------------------------
 At some point, you will probably need to copy files between your local computer and the cluster. There are different ways to achieve this, depending on your local operating system (OS). To copy a file from your local computer running a UNIX-like OS use the secure copy command scp on your local workstation:
 
 .. code-block:: bash
@@ -38,7 +38,7 @@ To copy a file from the cluster to your local computer running a UNIX-like OS al
 More information about file transfer can be found at `File Transfer <https://hpc-unibe-ch.github.io/file-system/file-transfer.html>`_
 
 Code Explanation 
--------
+----------------
 The package file :bash:`hip_ct_unet_CAS_code.zip` includes the code and data for hip joint CT segmentation based on U-Net.  As the package is quite large, so we put it on ilias instead of on github. Your task is to train it on UBELIX and report your running results. 
 
 #. Image Dataset
@@ -66,7 +66,7 @@ The package file :bash:`hip_ct_unet_CAS_code.zip` includes the code and data for
 
 
 Training U-Net for Semantic Segmentation
--------
+----------------------------------------
 
 .. image:: img/ITKSNAP.png
    :scale: 30%
