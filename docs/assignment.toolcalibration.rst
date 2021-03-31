@@ -20,6 +20,33 @@ Theory
 * :math:`R_i \cdot p_t + p_i = p_p`
 * Unknowns: :math:`p_t` and :math:`p_p`
 
+To solve for :math:`p_t` and :math:`p_p` we need to construct a linear equation system of the form :math:`Ax = b`:
+
+* :math:`R_i \cdot p_t - p_p = -p_i`
+* and in matrix form
+
+.. math::
+
+    \begin{bmatrix}
+    R_1 & -I \\
+    R_2 & -I \\
+    \vdots & \vdots \\
+    R_n & -I
+    \end{bmatrix}
+    \begin{bmatrix}
+    p_t \\
+    p_p
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    -p_1 \\
+    -p_2 \\
+    \vdots \\
+    -p_n
+    \end{bmatrix}
+
+* which can be solved using a least squares method such as SVD.
+
 Programming assignment
 ======================
 
