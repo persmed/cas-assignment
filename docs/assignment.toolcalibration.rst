@@ -60,7 +60,8 @@ the file directly in PyCharm or from the console using ```python cas/toolcalibra
         """ Pivot calibration
         Keyword arguments:
         transforms -- A list with 4x4 transformation matrices
-        returns -- A vector p_t, which is the offset from any T to the pivot point
+        returns -- A vector p_t, which is the offset from any transforms to the pivot point
+                -- The calibration matrix T
         """
 
         ## TODO: Implement pivot calibration as discussed in the lecture
