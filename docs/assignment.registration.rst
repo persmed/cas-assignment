@@ -1,7 +1,7 @@
 Registration
 ============
-Implement the paired points matching and iterative closest points (ICP) algorithms for patient to image
-registration as discussed in lecture 6.
+In this assignment, you will implement the paired point matching (PPM) and iterative closest point (ICP) algorithms for patient to image
+registration as discussed in lecture "Registration".
 
 Theory
 -------
@@ -13,67 +13,73 @@ Theory
 
 From Wikipedia_ the four steps in ICP are:
 
-* For each point in the source point cloud, match the closest point in the reference point cloud (or a selected set).
-* Estimate the combination of rotation and translation using a root mean square point to point distance metric minimization technique which will best align each source point to its match found in the previous step. This step may also involve weighting points and rejecting outliers prior to alignment.
-* Transform the source points using the obtained transformation.
-* Iterate (re-associate the points, and so on).
+#. For each point in the source point cloud, match the closest point in the reference point cloud (or a selected set).
+#. Estimate the combination of rotation and translation using a root mean square point to point distance metric minimization technique which will best align each source point to its match found in the previous step. This step may also involve weighting points and rejecting outliers prior to alignment.
+#. Transform the source points using the obtained transformation.
+#. Iterate (re-associate the points, and so on).
 
-Paried points matching
------------------------
-As discussed in the lecture, ICP is basically an iteratively applied paired points matching algorithm. Therefore, you
-will first implement the Paired points matching algorithm. The inputs are point clouds of corresponding points. You're
-task is to calculate the transformation matrix that maps the source to the target point cloud.
+Paired point matching
+---------------------
+As discussed in the lecture, ICP is basically an iteratively applied paired point matching algorithm in the file ``assignments/registration/registration.py``. Therefore, you
+will first implement the paired point matching algorithm. The inputs are point clouds of corresponding points. Your
+task is to calculate the transformation matrix that maps the source to the target point clouds.
 
 .. code-block:: python
     :linenos:
 
-    def paired_points_matching(source, target):
-    """
-    Calculates the transformation T that maps the source to the target
-    :param source: A N x 3 matrix with N 3D points
-    :param target: A N x 3 matrix with N 3D points
-    :return:
-        T: 4x4 transformation matrix mapping source onto target
-        R: 3x3 rotation matrix part of T
-        t: 1x3 translation vector part of T
-    """
+    def paired_point_matching(source, target):
+        """
+        Calculates the transformation T that maps the source to the target point clouds
+        :param source: A N x 3 matrix with N 3D points
+        :param target: A N x 3 matrix with N 3D points
+        :return:
+            T: 4x4 transformation matrix mapping source to target
+            R: 3x3 rotation matrix part of T
+            t: 1x3 translation vector part of T
+        """
+        assert source.shape == target.shape
+        T = np.eye(4)
+        R = np.eye(3)
+        t = np.zeros((1, 3))
 
-    T = np.eye(4)
-    R = np.eye(3)
-    t = np.zeros((1, 3))
+        return T, R, t
 
-    # Your code goes here
-
-    return T, R, t
-
+You can test your implementation by running the file directly in PyCharm or from the console using ``python cas/registration/registration.py``.
 
 Iterative closest point
 -----------------------
 
-Now you have the basic building block of ICP so it's time to implement the iteration part. Remember, that
-initialization is crucial for ICP to work.
+You now have the basic building block of ICP, so it is time to implement the iteration part in the file ``assignments/registration/registration.py``. 
+Remember that initialisation is crucial for ICP to work. You can test your implementation by running the file directly in PyCharm or from the console using ``python cas/registration/registration.py``.
 
 Initial pose
 ____________
-First, you have to give an initial pose. For that it's easiest to just look at the data and give a rough estimate.
+
+First, you have to give an initial pose. For that it is easiest to just look at the data and give a rough estimate.
 
 
 .. code-block:: python
     :linenos:
 
-    def get_initial_pose(template_points, target_points):
+    def get_initial_pose(source, target):
         """
         Calculates an initial rough registration
         (Optionally you can also return a hand picked initial pose)
-        :param source:
-        :param target:
-        :return: A transformation matrix
+        :param source: A N x 3 point cloud
+        :param target: A N x 3 point cloud
+        :return: An initial 4 x 4 rigid transformation matrix mapping source to target
         """
+        T = np.eye(4)
+
+        ## TODO: Your code goes here
+
+        return T
 
 Find the closest point
 ______________________
-Second, you need to fine the closest point of each point in the source data to the target data. It is recommendet to
-use a KD-tree for that, as it is easier to implement (you can use a library) and faster.
+
+Second, you need to fine the closest point of each point in the source data to the target data. It is recommended to
+use a KD-tree for that, as it is easier to implement (you can use a library, see links below) and faster.
 
 .. code-block:: python
     :linenos:
@@ -86,49 +92,58 @@ use a KD-tree for that, as it is easier to implement (you can use a library) and
         :return: the
         """
 
+        ## TODO: replace this by your code
+        pass
+
 Iterative matching
 __________________
 
-Lastly, you actually have to implement the iteration itself. Do the last two steps and apply paired points matching
-your errorfunction converges.
+Lastly, you actually have to implement the iteration itself. Do the last two steps and apply paired point matching
+until your error function converges.
 
 .. code-block:: python
     :linenos:
 
-    def icp(source_points, target_points):
+    def icp(source, target, init_pose=None, max_iterations=10, tolerance=0.0001):
         """
         Iteratively finds the best transformation that mapps the source points onto the target
         :param source: A N x 3 point cloud
         :param target: A N x 3 point cloud
         :param init_pose: A 4 x 4 transformation matrix for the initial pose
-        :param max_iterations: default 10
-        :param tolerance: maximum allowed error
-        :return: A 4 x 4 rigid transformation matrix mapping source to target
-                the distances and the error
+        :param max_iterations: maximum number of iterations to perform, default is 10
+        :param tolerance: maximum allowed error, default is 0.0001
+        :return: A 4 x 4 rigid transformation matrix mapping source to target,
+                the distances between each paired point, and the registration error
         """
-        # your code goes here
+        T = np.eye(4)
+        distances = 0
+        error = 0
 
-Report
-------
+        ## TODO: Your code goes here
 
-Write a short report (max 1 page) where you address the following questions:
+        return T, distances, error
+
+Questions
+---------
+
+Write a short document (max 1 page) where you address the following questions:
 
 #. What happens if you use an identity as initial pose?
-#. Describe two methods, how you can acquire the target data in the OR.
-#. What is the minimum number of points you need for paired points matching?
-#. If the patient moves, your calculated transformation is not accurate anymore. How can you prevent this?
-#. We are in ENT surgery now. Which anatomical landmarks do you take for paired points matching and which surface for ICP. Explain why?
+#. Name two methods you could use to initialise ICP?
+#. Describe two methods allowing you to acquire the target point cloud (on the therapeutic object) in the OR.
+#. What is the minimum number of points you need for paired point matching?
+#. If the patient moves, the calculated transformation is not accurate anymore. How can you prevent this from happenning?
 
 Submission
 ----------
 Send a ZIP file with the follwing files:
 
-#. Your report as PDF with filename [firstname lastname]_assignment3_report.pdf
-#. Your code with filename [firstname lastname]_assignment3_code.py
-#. A textfile with the console output when you ran the code with filename [firstname lastname]_assignment3_output.txt
-#. A file with a screenshot of the plots  [firstname lastname]_assignment3_screenshot.png
+#. Your report as PDF with filename ``lastname_firstname_assignment4_report.pdf``
+#. Your code with filename ``lastname_firstname_assignment4_code.py``
+#. A textfile with the console output when you ran the code with filename ``lastname_firstname_assignment4_output.txt``
+#. A screenshot of the plots ``lastname_firstname_assignment4_screenshot.png``
 
-Name your ZIP file as ``firstname_lastname_assignment3.zip`` and upload it to ILIAS before the deadline.
+Name your ZIP file as ``lastname_firstname_assignment4.zip`` and upload it to ILIAS.
 
 Grading
 -------
@@ -144,9 +159,11 @@ You can get 10 Points in this assignment:
 
 Materials
 ----------
+
 KD-Trees
 ________
-You don't neccessarily need to use them, but it will make the search for the closest point easier.
+
+You don't neccessarily need to use them, but it will make the search for the closest point faster.
 
 * https://en.wikipedia.org/wiki/K-d_tree
 * https://scikit-learn.org/stable/modules/neighbors.html
@@ -154,5 +171,6 @@ You don't neccessarily need to use them, but it will make the search for the clo
 
 Solving systems of equations
 ____________________________
+
 * https://docs.scipy.org/doc/numpy/reference/routines.linalg.html#solving-equations-and-inverting-matrices
 * https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.svd.html#numpy.linalg.svd

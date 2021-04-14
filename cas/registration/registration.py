@@ -3,7 +3,7 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(sys.argv[0]), '../..'))
 
 import numpy as np
-np.set_printoptions(suppress=True)
+np.set_printoptions(suppress=True, threshold=10)
 
 import matplotlib
 matplotlib.use("TkAgg")
@@ -17,11 +17,15 @@ from assignments.registration import registration
 
 
 def test_icp():
+    print('\n-----------------------')
+    print('ITERATIVE CLOSEST POINT')
+    print('-----------------------\n')
+
     target_points = util.read_data('data/registration/TargetPoints.csv')
-    print(target_points)
+    print('Target point cloud\n', target_points, '\n')
 
     template_points = util.read_data('data/registration/TemplatePoints.csv')
-    print(template_points)
+    print('Source point cloud\n', template_points, '\n')
 
     T_rot_x = registration.get_initial_pose(template_points, target_points)
     T, d, error = registration.icp(template_points, target_points, init_pose=T_rot_x)
@@ -29,11 +33,11 @@ def test_icp():
     template_points_T = util.make_homogenous(template_points)
     template_points_T = np.dot(T, template_points_T.T).T[:, :3]
 
-    print(template_points_T)
+    print('Transformed source point cloud\n', template_points_T, '\n')
 
-    print(T)
+    print('Transformation\n', T, '\n')
 
-    print(error)
+    print('Error\n', error, '\n')
 
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
@@ -54,18 +58,23 @@ def test_icp():
     plt.show()
 
 
-def test_paired_points_matching():
+def test_paired_point_matching():
+    print('\n---------------------')
+    print('PAIRED POINT MATCHING')
+    print('---------------------\n')
+
     N = 5
     T_random = util.get_random_transformation_matrix()
     target, source = util.get_random_point_clouds(N, T_random)
 
     print('Target point cloud\n', target, '\n')
+    print('Source point cloud\n', source, '\n')
 
-    T, R, t = registration.paired_points_matching(source, target)
+    T, R, t = registration.paired_point_matching(source, target)
 
     source_H = util.make_homogenous(source)
     source_T = np.dot(T, source_H.T).T[:, :3]
-    print('Source point cloud\n', source_T, '\n')
+    print('Transformed source point cloud\n', source_T, '\n')
     error = np.linalg.norm(source_T - target)
 
     print('Transformation\n', T, '\n')
@@ -81,5 +90,5 @@ def test_paired_points_matching():
 
 
 if __name__ == "__main__":
-    test_paired_points_matching()
+    test_paired_point_matching()
     test_icp()
