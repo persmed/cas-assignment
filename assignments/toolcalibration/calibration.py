@@ -4,7 +4,7 @@ import numpy as np
 def pivot_calibration(transforms):
     """ Pivot calibration
     Keyword arguments:
-    transforms -- A list with 4x4 transformation matrices
+    transforms -- A list with 4x4 transformation matrices, T, representing the tool pose recorded during pivoting (Fi)
     returns -- A vector p_t, which is the offset from any T to the pivot point
     """
 
@@ -15,11 +15,11 @@ def pivot_calibration(transforms):
     return p_t, T
 
 def calibration_device_calibration(camera_T_reference, camera_T_tracker, reference_P_pivot):
-    """ Calibratio device calibration
+    """ Calibration device calibration
     Keyword arguments:
-    camera_T_reference -- Transformation from the reference to the camera
-    camera_T_tracker -- Transformation from the tracker to the camera
-    reference_P_pivot -- A pivot on the reference (rigid body) where the tip of
+    camera_T_reference -- Transformation from the tool calibration device reference to the camera
+    camera_T_tracker -- Transformation from the tool tracker to the camera
+    reference_P_pivot -- A pivot on the calibration device reference (rigid body) where the tip of
                          the instrument is located for calibration
     """
     
