@@ -4,9 +4,9 @@ import numpy as np
 def pivot_calibration(transforms):
     """ Pivot calibration
     Keyword arguments:
-    transforms -- A list with 4x4 transformation matrices, T, representing the tool pose recorded during pivoting (Fi)
-    returns -- A vector p_t, which is the offset from any T to the pivot point
-    """
+    transforms -- A list with 4x4 transformation matrices,  (Fi)
+    returns -- A vector p_t, which is the offset from any transform, Fi, to the pivot point
+            -- The calibration matrix T (p_t in a 4X4 matrix form)    """
 
     ## TODO: Implement pivot calibration as discussed in the lecture
     p_t = np.zeros((3, 1))
