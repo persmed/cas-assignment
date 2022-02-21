@@ -1,7 +1,7 @@
 Registration
 ============
 In this assignment, you will implement the paired point matching (PPM) and iterative closest point (ICP) algorithms for patient to image
-registration as discussed in lecture "Registration".
+registration as discussed in lecture "registration".
 
 Theory
 -------

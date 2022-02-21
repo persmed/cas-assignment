@@ -23,5 +23,4 @@ Name the file as ``firstname_lastname_assignment0.txt``
 Grading
 -------
 
-The assignment does not count towards the grade. It is only here to make sure,
-everybody has a running environment and is good to go.
+This setup activity is not graded. It is required to ensure that your environment is ready for Assignment 1.
