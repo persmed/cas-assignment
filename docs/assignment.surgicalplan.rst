@@ -12,7 +12,7 @@ Region Growing
 --------------
 
 In this assignment you have to implement a region growing algorithm, as discussed in the lecture, in the file ``assignments/planning/segmentation.py``.
-Before you implement the code, copy the ``pelvis_ct.nii.gz`` data into ``data/planning/pelvis_ct.nii.gz``. In ``segmentation.py``, you are already provided with a rough implementation of the algorithm. You mainly have to complete the places with a TODO tag.
+Before you implement the code, copy the ``pelvis_ct.nii.gz`` data into ``data/planning/pelvis_ct.nii.gz``. In ``segmentation.py``, you are already provided with a rough implementation of the algorithm. You mainly have to complete code in lines with a TODO tag.
 
 .. code-block:: python
     :linenos:

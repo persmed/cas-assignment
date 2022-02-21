@@ -1,19 +1,19 @@
 Tool Calibration
 ################
 
-This assignment is based on the lecture "Postional Tracking", where you will implement two different ways to calibrate a tool.
+For a CAS scene, the location of the tool tip must be known in the coordinate system of the tracking camera. Tool calibration is perfromed to determine the location of the tool tip relative to its tracked location. In this assignment you will implement two different ways to calibrate a rigid straight tool.
 
 Pivot calibration
 *****************
 
-Implement the pivot calibration algorithm as discussed in the "Positional Tracking" lecture.
+Implement the pivot calibration algorithm as discussed in the "Positional Tracking" lecture. While pivoted around its tip, the optically tracked pose of athe instrument has been saved. The data can be used to solve for the location of the tool tip relative to the origin of the tracked marker. 
 
 Theory
 ======
 
 .. image:: img/pivot_calibration.png
 
-* :math:`p_t` is constant if looking from tool local COS
+* :math:`p_t` is constant if looking from tool local Coordinate system (COS)
 * Pivot point (tool tip) :math:`p_p` is constant if looking from the tracking COS
 * At any moment, :math:`F_i(R_i, p_i)` can be retrieved from the tracker API
 * :math:`F_i(R_i, p_i)` takes :math:`p_t` to :math:`p_p`
@@ -127,11 +127,11 @@ Questions
 
 Write a short document (max 1 page) where you address the following questions:
 
-#. In which coordinate system is the vector :math:`p_t`
-#. Write down the formula to get the tip of the pointer in the camera coordinate system
+#. Show how SVD can be used to solve your overdetermined equation of the form :math:`Ax = b` 
+#. Write down the equation expressing the tip of the pointer in the camera coordinate system
 #. Where does the error in your result come from (what you get is not the exact solution which is provided)?
 #. How many degrees of freedeom can you calibrate with pivoting? Which ones are missing?
-#. If your instrument is non-rigid (e.g. a needle) your :math:`p_t` is off if your instrument is bent. How can you overcome this issue?
+#. If your instrument is non-rigid (e.g. a needle) your :math:`p_t` will expereince error when the tool bends. How can you overcome this issue?
 
 Submission
 **********
