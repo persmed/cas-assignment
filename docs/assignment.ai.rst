@@ -120,11 +120,10 @@ Run the code of deep learning for hip ct image segmentation, and write a short r
 	- Do a screenshot of the training logging file, which is slurm-xxxxxxxx.out mentioned before. (1 point)
 
 #. Questions (5 points)
-	- What is semantic segmentation in a hip CT image? (1 point)
-	- How could the segmentation of the hip joint be used in clinical practice? (1 point)
-	- What is training / validation / test dataset ? (1 point)
-	- Explain the U-net architecture, like how many conv layers, pooling layers. Why is it better than a fully connected network for segmentation? (1 point)
-	- Which hyper parameters are important during the network training? Why? (1 point)
+	- How could the segmentation of the hip joint be used in clinical practice? (1.25 point)
+	- What are the training, validation and test datasets used for? (1.25 point)
+	- Explain the U-net architecture, for example, how many convolutional layers, pooling layers. Why is it better than a fully connected network for segmentation? (1.25 point)
+	- Which hyper parameters are important during the network training? Why? (1.25 point)
  
 
 

@@ -6,7 +6,7 @@ For a CAS scene, the location of the tool tip must be known in the coordinate sy
 Pivot calibration
 *****************
 
-Implement the pivot calibration algorithm as discussed in the "Positional Tracking" lecture. While pivoted around its tip, the optically tracked pose of athe instrument has been saved. The data can be used to solve for the location of the tool tip relative to the origin of the tracked marker. 
+Implement the pivot calibration algorithm as discussed in the "Positional Tracking" lecture. While pivoted around its tip, the optically tracked pose of the instrument has been saved. The data can be used to solve for the location of the tool tip relative to the origin of the tracked marker. 
 
 Theory
 ======
@@ -50,7 +50,7 @@ To solve for :math:`p_t` and :math:`p_p` we need to construct a linear equation 
 Programming assignment
 ======================
 
-Implement the pivot calibration algorithm in the file ``assignments/toolcalibration/calibration.py``. You can test your implementation by running
+Implement the pivot calibration algorithm, based on a list of saved tracked tool poses duirng pivoting (4x4 transformation matrices) in the file ``assignments/toolcalibration/calibration.py``. You can test your implementation by running
 the file directly in PyCharm or from the console using ```python cas/toolcalibration/pivotcalibration.py``.
 
 .. code-block:: python
@@ -61,7 +61,7 @@ the file directly in PyCharm or from the console using ```python cas/toolcalibra
         Keyword arguments:
         transforms -- A list with 4x4 transformation matrices
         returns -- A vector p_t, which is the offset from any transforms to the pivot point
-                -- The calibration matrix T
+                -- The calibration matrix T (p_t in a 4X4 matrix form)
         """
 
         ## TODO: Implement pivot calibration as discussed in the lecture
