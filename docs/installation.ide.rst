@@ -16,7 +16,7 @@ To open the CAS Assignment as a project and to configure the Python interpreter 
 #. Click File > Settings... to open the settings dialog
 
     #. Navigate to Project: CAS Assignment > Python Interpreter
-    #. Select the Python interpreter ``</path/to/your/anaconda/installation>/envs/cas/bin/python`` (on Linux and macOS) or ``<\path\to\your\anaconda\installation>\envs\mialab\python.exe`` (on Windows)
+    #. Select the Python interpreter ``</path/to/your/anaconda/installation>/envs/cas/bin/python`` (on Linux and macOS) or ``<\path\to\your\anaconda\installation>\envs\cas\python.exe`` (on Windows)
 
         - If the interpreter is not available in the combo box, click the gear icon and choose Add Local and navigate the the files above
 
