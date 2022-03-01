@@ -1,9 +1,9 @@
-Integrated Development Environment (IDE)
-========================================
+Integrated Development Environment
+==================================
 
-We recommend to use `JetBrains PyCharm <https://www.jetbrains.com/pycharm/>`_ as IDE to program in Python.
+We recommend to use `JetBrains PyCharm <https://www.jetbrains.com/pycharm/>`_ as Integrated Development Environment (IDE) to program in Python.
 The community edition is open-source and sufficient for our purposes.
-Follow the `instructions <https://www.jetbrains.com/help/pycharm/requirements-installation-and-launching.html>`_ to install PyCharm.
+Follow the official `instructions <https://www.jetbrains.com/help/pycharm/requirements-installation-and-launching.html>`_ to install PyCharm.
 
 To open the CAS Assignment as a project and to configure the Python interpreter do the following:
 
