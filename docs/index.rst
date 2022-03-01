@@ -24,6 +24,7 @@ Enjoy!
    pythonbasics
    installation.python
    installation.ide
+   builddocs
 
 .. toctree::
    :maxdepth: 1
