@@ -5,15 +5,15 @@ import queue
 
 def region_grow(image, seed_point):
     """
-    Performs a region growing on the image from seed_point
-    :param image: An 3D grayscale input image
+    Performs a region growing on the image starting from 'seed_point'
+    :param image: A 3D grayscale input image
     :param seed_point: The seed point for the algorithm
-    :return: A 3D binary segmentation mask with the same dimensions as image
+    :return: A 3D binary segmentation mask with the same dimensions as 'image'
     """
     segmentation_mask = np.zeros(image.shape, np.bool)
     z, y, x = seed_point
-    threshold = image[z, y, x]
-    print('segmenting at ({0}, {1}, {2}) is {3}'.format(x, y, z, threshold))
+    intensity = image[z, y, x]
+    print(f'image data at position ({x}, {y}, {z}) has value {intensity}')
 
     ## TODO: choose a lower and upper threshold
     threshold_lower = threshold
