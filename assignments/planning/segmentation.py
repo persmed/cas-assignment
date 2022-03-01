@@ -16,8 +16,8 @@ def region_grow(image, seed_point):
     print(f'image data at position ({x}, {y}, {z}) has value {intensity}')
 
     ## TODO: choose a lower and upper threshold
-    threshold_lower = threshold
-    threshold_upper = threshold
+    threshold_lower = intensity
+    threshold_upper = intensity
     _segmentation_mask = (np.greater(image, threshold_lower)
                           & np.less(image, threshold_upper)).astype(np.bool)
     structure = np.ones((2, 2, 2))
@@ -39,16 +39,18 @@ def region_grow(image, seed_point):
             for ix in range(-1, 2, 2):
                 for iy in range(-1, 2, 2):
                     for iz in range(-1, 2, 2):
-                        ## TODO: implement the code which checks whether the current
-                        ## voxel (new_check_point) belongs to the region or not
                         if not (iz == 0 and ix == 0 and iy == 0):
                             new_check_point = check_point + np.asarray([iz, iy, ix], dtype=np.uint32)
+
+                        ## TODO: implement the code which checks whether the current
+                        ## voxel (new_check_point) belongs to the region or not
 
                         ## TODO: implement a stop criteria such that the algorithm
                         ## doesn't check voxels which are too far away
 
-    # Your code goes here
     structure = np.ones((2, 2, 2))
     segmentation_mask = ndimage.binary_closing(segmentation_mask, structure=structure).astype(np.bool)
+    
     print('finished')
+
     return segmentation_mask

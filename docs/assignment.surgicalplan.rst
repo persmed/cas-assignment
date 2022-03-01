@@ -30,7 +30,7 @@ The scripts opens a window with a CT scan of a pelvis and spine model. The follo
 
 - ``0-4`` select active label. The segmented region (output of your algorithm) will then be labelled with the active label.
    0. none (default)
-   1. spinal Cord
+   1. spinal cord
    2. vertebraes
    3. pelvis
    4. discs
