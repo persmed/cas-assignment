@@ -193,7 +193,7 @@ Run the deep learning model for hip CT image segmentation, and write a short rep
 	
 #. Finetuning the Model (4 points)
 
-	- Adapt the command in ``job_run_gpu.sh`` to train the model with low learning rate (e.g. 0.00001?) and high learning rate (e.g. 0.1?) For example, `` python train.py --epoch 5 --lr 0.00001 --save_ckpt ./checkpoint_lr_low --save_log_dir ./log_lr_low``, `` python test.py --load_epoch 5 --load_ckpt ./checkpoint_lr_low --save_pred_affix_name lr_low ``, `` python evaluate.py  --save_pred_affix_name lr_low `` 
+	- Adapt the command in ``job_run_gpu.sh`` to train the model with low learning rate (e.g. 0.00001?) and high learning rate (e.g. 0.1?) For example, ``python train.py --epoch 5 --lr 0.00001 --save_ckpt ./checkpoint_lr_low --save_log_dir ./log_lr_low``, ``python test.py --load_epoch 5 --load_ckpt ./checkpoint_lr_low --save_pred_affix_name lr_low``, ``python evaluate.py  --save_pred_affix_name lr_low`` 
 	- Compare three training loss curves with normal, low and high learning rates.  What is your observation and conclusion? (1 point)
 	- Compare the evaluation result of Dice, ASD, and HD of three models with normal, low and high learning rate? Which model reports the best accuracy? (1 point)
 	- Compare the segmentation prediction results qualitatively of three models in ITK-SNAP and explain the differences? Do you think those models can be used for surgical planning, or how could we improve this model? (1 point)
