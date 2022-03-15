@@ -157,7 +157,7 @@ Training U-Net for Semantic Segmentation
 
 #. Check the segmentation results
 
-	- The training with GPU will take around 30 minutes in total
+	- The training with GPU will take around 10 minutes in total
 	- Copy the training loss figure to your local machine:
 
 		.. code-block:: bash
@@ -184,19 +184,27 @@ The assignment accounts for 25% of the grade for the assignments.
 
 Run the deep learning model for hip CT image segmentation, and write a short report where you answer the following questions.
 
-#. Experiment Running (5 points)
+#. Experiment Running (2 points)
 
-	- Show the 3D models of automatic segmentation and ground truth segmentation in individual ITK-SNAP applications, and then compare them qualitatively (2 points)
-	- Show the training loss curve (1 point)
-	- What is your evaluation result of Dice, ASD, and HD? Do a screenshot of the resulting text file (1 point)
-	- Do a screenshot of the training log file ``slurm-xxxxxxxx.out`` (as mentioned before) (1 point)
+	- Show the 3D models of automatic segmentation and ground truth segmentation in individual ITK-SNAP applications, and then compare them qualitatively (1 points)
+	- Show the training loss curve. Do a screenshot of the loss curve. (0.5 point)
+	- What is your evaluation result of Dice, ASD, and HD? Do a screenshot of the resulting text file (0.5 point)
+	
+	
+#. Finetuning the Model (4 points)
 
-#. Questions (5 points)
+	- Adapt the command in ``job_run_gpu.sh`` to train the model with low learning rate (e.g. 0.00001?) and high learning rate (e.g. 0.1?) For example, `` python train.py --epoch 5 --lr 0.00001 --save_ckpt ./checkpoint_lr_low --save_log_dir ./log_lr_low``, `` python test.py --load_epoch 5 --load_ckpt ./checkpoint_lr_low --save_pred_affix_name lr_low ``, `` python evaluate.py  --save_pred_affix_name lr_low `` 
+	- Compare three training loss curves with normal, low and high learning rates.  What is your observation and conclusion? (1 point)
+	- Compare the evaluation result of Dice, ASD, and HD of three models with normal, low and high learning rate? Which model reports the best accuracy? (1 point)
+	- Compare the segmentation prediction results qualitatively of three models in ITK-SNAP and explain the differences? Do you think those models can be used for surgical planning, or how could we improve this model? (1 point)
+	- Finetune the hyper-parameters (number of training epochs and learning rate), and report the best accuracy you get in both qualitative and quantitative. (1 point)
 
-	- How could the segmentation of the hip joint be used in clinical practice? (1.25 point)
-	- What are the training, validation and test datasets used for? (1.25 point)
-	- Explain the U-net architecture, for example, how many convolutional layers, pooling layers are used. Why is it better than a fully connected network for segmentation? (1.25 point)
-	- Which hyper parameters are important during the network training? Why? (1.25 point)
+#. Questions (4 points)
+
+	- How could the segmentation of the hip joint be used in clinical practice? (1 point)
+	- What are the training, validation and test datasets? (1 point)
+	- Describe the U-net architecture, for example, how many convolutional layers, pooling layers are used. Why is it better than a fully connected network for segmentation? (1 point)
+	- Which hyper-parameters are important during the network training? Why? (1 point)
 
 
 Submission
