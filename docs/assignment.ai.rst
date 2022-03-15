@@ -88,19 +88,18 @@ The package file ``hip_ct_unet_CAS_code.zip`` includes the code and data for hip
 	- The network consists of a contracting path and an expansive path, which gives it the U-shaped architecture. The contracting path is a typical convolutional network that consists of repeated application of convolutions, each followed by a rectified linear unit (ReLU) and a max pooling operation. During the contraction, the spatial information is reduced while feature information is increased. The expansive pathway combines the feature and spatial information through a sequence of up-convolutions and concatenations with high-resolution features from the contracting path.
 	
 #. Model Training
-
-	- The training will be conducted in ``train.py``. All models after each epoch training will be saved under the foder ``./checkpoint``.
-	- By default, the batch size is 8, so there are 2400/8=300 iterations in each epoch. The number of training epochs is set to 10, so the model will be trained by 3000 iterations by default. After the training, you can find the training loss at ``./log/training_loss.png``.
+	- By default, the batch size is 8, so there are 2400/8=300 iterations in each epoch. The number of training epochs is set to 5, so the model will be trained by 1500 iterations.
+	- The training will be conducted in ``python train.py --epoch 5 --lr 0.001 --save_ckpt ./checkpoint_normal_lr --save_log_dir ./log_normal_lr``. All models after each epoch training will be saved under the foder ``./checkpoint_normal_lr``.
+	- After the training, you can find the training loss at ``./log_normal_lr/training_loss.png``.
 	  
 #. Test on Unseen data
 
 	- A new and unseen hip CT image for testing is prepared at ``./Test/21_data.nii.gz``.
-	- To run the automatic segmentation for the test data, run ``python test.py`` and the prediction will be saved under the same foder at ``./Test/21_pred_segmentation.nii.gz``. 
-	- The segmentation file (using the Nifti format \*.nii.gz) will be post-processed by removing isolated regions and saved at ``./Test/21_post_segmentation.nii.gz``.
+	- To run the automatic segmentation for the test data, run ``python test.py --load_epoch 5 --load_ckpt ./checkpoint_normal_lr --save_pred_affix_name normal_lr`` and the prediction will be saved under the same foder at ``./Test/21_pred_segmentation_normal_lr.nii.gz``.
 	  
 #. Evaluation
 
-	- ``evaluate.py`` will compare the automatic segmentation result ``./Test/21_post_segmentation.nii.gz`` with the ground truth manual segmentation ``./Test/21_mask.nii.gz``. The results of Dice, ASD (average surface distance), and HD (Hausdorff distance) will be saved in ``./Test/results.txt``.
+	- ``python evaluate.py  --save_pred_affix_name normal_lr`` will compare the automatic segmentation result ``./Test/21_pred_segmentation_normal_lr.nii.gz`` with the ground truth manual segmentation ``./Test/21_mask.nii.gz``. The results of Dice, ASD (average surface distance), and HD (Hausdorff distance) will be saved in ``./Test/results_normal_lr.txt``.
 
 
 Training U-Net for Semantic Segmentation
@@ -163,19 +162,19 @@ Training U-Net for Semantic Segmentation
 
 		.. code-block:: bash
 
-			scp <username>@submit.unibe.ch:~/hip_ct_unet_CAS_code/log/training_loss.png /path/to/training_loss.png
+			scp <username>@submit.unibe.ch:~/hip_ct_unet_CAS_code/log_normal_lr/training_loss.png /path/to/training_loss.png
 
 	- Copy the segmentation results (nifti file) to your local machine and then display it in ITK-SNAP:
 
 		.. code-block:: bash
 
-			scp <username>@submit.unibe.ch:~/hip_ct_unet_CAS_code/Test/21_pred_segmentation.nii.gz /path/to/21_pred_segmentation.nii.gz
+			scp <username>@submit.unibe.ch:~/hip_ct_unet_CAS_code/Test/21_pred_segmentation_normal_lr.nii.gz /path/to/21_pred_segmentation_normal_lr.nii.gz
 
 	- Copy the evaluation results which inclued Dice, ASD, and HD to your local machine:
 
 		.. code-block:: bash
 
-			scp <username>@submit.unibe.ch:~/hip_ct_unet_CAS_code/Test/results.txt /path/to/Test/results.txt
+			scp <username>@submit.unibe.ch:~/hip_ct_unet_CAS_code/Test/results_normal_lr.txt /path/to/Test/results_normal_lr.txt
 
 
 Report and Grading
