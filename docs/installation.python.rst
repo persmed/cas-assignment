@@ -11,9 +11,9 @@ To start with the installation, download the `Anaconda installer <https://www.an
 
 Windows
 -------
-The installation has been tested on Windows 10.
+The installation has been tested on Windows 10 and 11.
 
-#. git installation
+#. Install git
 
    - Download `git <https://git-scm.com/downloads>`_ and install
 
@@ -29,7 +29,7 @@ The installation has been tested on Windows 10.
    - Launch the installer
    - Select an install for "Just Me" unless you’re installing for all users (which requires Windows administrator privileges)
    - Choose whether to add Anaconda to your PATH environment variable. We recommend not adding Anaconda to the PATH environment variable, since this can interfere with other software.
-   - Choose whether to register Anaconda as your default Python 3.8. Unless you plan on installing and running multiple versions of Anaconda, or multiple versions of Python, you should accept the default and leave this box checked.
+   - Choose whether to register Anaconda as your default Python. Unless you plan on installing and running multiple versions of Anaconda, or multiple versions of Python, you should accept the default and leave this box checked.
 
 #. Verify the installation
 
