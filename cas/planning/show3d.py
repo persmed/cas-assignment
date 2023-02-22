@@ -9,7 +9,7 @@ print(np.min(np.min(data_matrix)))
 print(np.max(np.max(data_matrix)))
 
 dataImporter = vtk.vtkImageImport()
-data_string = data_matrix.tostring()
+data_string = data_matrix.tobytes()
 dataImporter.CopyImportVoidPointer(data_string, len(data_string))
 dataImporter.SetDataScalarTypeToUnsignedChar()
 dataImporter.SetNumberOfScalarComponents(1)
@@ -54,9 +54,9 @@ def extract(color, isovalue):
 
 
 renderer = vtk.vtkOpenGLRenderer()
-# renderer.AddActor(extract("Vertebraes", 1))
-renderer.AddActor(extract("Pelvis", 3))
 renderer.AddActor(extract("Spinal cord", 1))
+renderer.AddActor(extract("Vertebraes", 2))
+renderer.AddActor(extract("Pelvis", 3))
 renderer.AddActor(extract("Discs", 4))
 renderer.SetBackground(0, 0, 0)
 
