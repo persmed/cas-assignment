@@ -50,7 +50,7 @@ The installation has been tested on Windows 10 and 11.
 
 #. Execute the installation test script to verify the installation
 
-   - :bash:`python cas\test_installation.py`
+   - :bash:`python cas/test_installation.py`
 
 Linux
 ------
