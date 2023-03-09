@@ -11,4 +11,4 @@ To build the documentation:
 
     - ``make html``
 
-#. The documentation is now available under ``.\docs\_build\index.html``
+#. The documentation is now available under ``.\docs\_build\html\index.html``
