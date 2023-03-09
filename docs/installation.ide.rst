@@ -42,3 +42,28 @@ To open the CAS Assignment as a project and to configure the Python interpreter 
 #. For each assignment, make sure your *working directory* is set to ``</path/to/where/you/have/the/code>/cas-assignment``
 
 You can watch the `getting started <https://www.jetbrains.com/pycharm/documentation/>`_ videos to get accustomed with the interface.
+
+
+A picture is worth a thousand words
+-----------------------------------
+
+.. image:: img/pycharm_setup_1.png
+   :scale: 50%
+   :align: center
+|
+.. image:: img/pycharm_setup_2.png
+   :scale: 50%
+   :align: center
+|
+.. image:: img/pycharm_setup_3.png
+   :scale: 50%
+   :align: center
+|
+.. image:: img/pycharm_setup_4.png
+   :scale: 50%
+   :align: center
+|
+.. image:: img/pycharm_setup_5.png
+   :scale: 50%
+   :align: center
+|
