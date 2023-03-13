@@ -33,7 +33,7 @@ Accessing the HPCs
 
 	.. code-block:: bash
 
-		ssh <username>@submit.unibe.ch
+		ssh <username>@submit03.unibe.ch
 
 - At the password prompt, enter your Campus Account password
 - After logging in successfully, you should see the welcome message similar to the following
