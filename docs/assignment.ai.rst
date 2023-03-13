@@ -191,13 +191,13 @@ Training U-Net for Semantic Segmentation
 
 		.. code-block:: bash
 
-			scp <username>@submit01.unibe.ch:~/hip_ct_unet_CAS_code/Test/21_pred_segmentation_normal_lr.nii.gz /path/to/21_pred_segmentation_normal_lr.nii.gz
+			scp <username>@submit01.unibe.ch:/hip_ct_unet_CAS_code/Test/21_pred_segmentation.nii.gz /path/to/21_pred_segmentation_normal_lr.nii.gz
 
 	- Copy the evaluation results which inclued Dice, ASD, and HD to your local machine:
 
 		.. code-block:: bash
 
-			scp <username>@submit01.unibe.ch:~/hip_ct_unet_CAS_code/Test/results_normal_lr.txt /path/to/Test/results_normal_lr.txt
+			scp <username>@submit01.unibe.ch:/hip_ct_unet_CAS_code/Test/results.txt /path/to/Test/results_normal_lr.txt
 
 
 Report and Grading
