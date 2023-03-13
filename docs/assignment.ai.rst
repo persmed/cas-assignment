@@ -81,7 +81,7 @@ To open an existing file type this:
 
     vi filename
 
-example: if you are in your home folder ``~`` and you would like to open the file job_run_gpu.sh, type: ``vi jo`` then pres tab - the name of the file should be completed autoamtically. (if it's not the file doesn't exists at this location - to check type "ls")
+example: if you are in the folder ``hip_ct_unet_CAS_code/`` and you would like to open the file job_run_gpu.sh, type: ``vi jo`` then pres tab - the name of the file should be completed autoamtically. (if it's not the file doesn't exists at this location - to check type "ls")
 
 - editing: as soon the file content is displayed in the console (the VIM editor is open) type "i", this will bring you to "INSERT"-mode (noted on the bottom of the console) - in this mode you can modify the file. press "esc" to exit the INSERT mode (and stop editing)
 
