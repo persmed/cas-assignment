@@ -94,7 +94,7 @@ for more info about the VIM editor, see:
 Code Explanation
 ----------------
 
-The package file ``hip_ct_unet_CAS_code.zip`` includes the code and data for hip joint CT segmentation based on the U-Net network. Your task is to train the deep learning model on UBELIX and report your running results.
+The package file ``hip_ct_unet_CAS_code.zip`` includes the code and data for hip joint CT segmentation based on the U-Net network. Your task is to train the deep learning model on UBELIX and report your running results. - this chapter is to explain the code. The tasks of this assignement you can find in the next chapter.
 
 #. Image Dataset
 
