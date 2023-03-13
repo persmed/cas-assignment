@@ -185,7 +185,7 @@ Training U-Net for Semantic Segmentation
 
 		.. code-block:: bash
 
-			scp <username>@submit01.unibe.ch:~/hip_ct_unet_CAS_code/log_normal_lr/training_loss.png /path/to/training_loss.png
+			scp <username>@submit01.unibe.ch:/hip_ct_unet_CAS_code/log/training_loss.png /path/to/training_loss.png
 
 	- Copy the segmentation results (nifti file) to your local machine and then display it in ITK-SNAP:
 
