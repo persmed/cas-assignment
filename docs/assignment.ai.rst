@@ -33,7 +33,7 @@ Accessing the HPCs
 
 	.. code-block:: bash
 
-		ssh <username>@submit03.unibe.ch
+		ssh <username>@submit01.unibe.ch
 
 - At the password prompt, enter your Campus Account password
 - After logging in successfully, you should see the welcome message similar to the following
@@ -42,12 +42,12 @@ Accessing the HPCs
 
 		CentOS 7.9.2009.x86_64
 
-		FQDN:      submit02.ubelix.unibe.ch (10.1.129.22)
+		FQDN:      submit01.ubelix.unibe.ch (10.1.129.22)
 		Processor: 20x Intel(R) Xeon(R) Silver 4114 CPU @ 2.20GHz
 		Kernel:    3.10.0-1160.45.1.el7.x86_64
 		Memory:    92.95 GiB
 
-		[<username>@submit02 ~]$
+		[<username>@submit01 ~]$
 
 - see the `official documentation <https://hpc-unibe-ch.github.io/getting-Started/login-ssh.html>`_ if needed
 
@@ -59,13 +59,13 @@ You will need to transfer files between your local computer and the HPC. To do s
 
 .. code-block:: bash
 
-    scp /path/to/file <username>@submit.unibe.ch:/path/to/target_dir/
+    scp /path/to/file <username>@submit01.unibe.ch:/path/to/target_dir/
 
 To copy a file from the HPC to your local computer, also use the ``scp`` command on your local machine:
 
 .. code-block:: bash
 
-	scp <username>@submit.unibe.ch:/path/to/file /path/to/target_dir/
+	scp <username>@submit01.unibe.ch:/path/to/file /path/to/target_dir/
     
 More information about file transfer can be found in the `official documentation <https://hpc-unibe-ch.github.io/file-system/file-transfer.html>`_.
 
@@ -126,13 +126,13 @@ Training U-Net for Semantic Segmentation
 
 	.. code-block:: bash
 
-		scp /path/to/hip_ct_unet_CAS_code.zip <username>@submit.unibe.ch:~/
+		scp /path/to/hip_ct_unet_CAS_code.zip <username>@submit01.unibe.ch:~/
 	
 #. Login and unzip the code
 
 	.. code-block:: bash
 
-		ssh <username>@submit.unibe.ch
+		ssh <username>@submit01.unibe.ch
 		cd ~
 		ls
 		unzip hip_ct_unet_CAS_code.zip
@@ -164,19 +164,19 @@ Training U-Net for Semantic Segmentation
 
 		.. code-block:: bash
 
-			scp <username>@submit.unibe.ch:~/hip_ct_unet_CAS_code/log_normal_lr/training_loss.png /path/to/training_loss.png
+			scp <username>@submit01.unibe.ch:~/hip_ct_unet_CAS_code/log_normal_lr/training_loss.png /path/to/training_loss.png
 
 	- Copy the segmentation results (nifti file) to your local machine and then display it in ITK-SNAP:
 
 		.. code-block:: bash
 
-			scp <username>@submit.unibe.ch:~/hip_ct_unet_CAS_code/Test/21_pred_segmentation_normal_lr.nii.gz /path/to/21_pred_segmentation_normal_lr.nii.gz
+			scp <username>@submit01.unibe.ch:~/hip_ct_unet_CAS_code/Test/21_pred_segmentation_normal_lr.nii.gz /path/to/21_pred_segmentation_normal_lr.nii.gz
 
 	- Copy the evaluation results which inclued Dice, ASD, and HD to your local machine:
 
 		.. code-block:: bash
 
-			scp <username>@submit.unibe.ch:~/hip_ct_unet_CAS_code/Test/results_normal_lr.txt /path/to/Test/results_normal_lr.txt
+			scp <username>@submit01.unibe.ch:~/hip_ct_unet_CAS_code/Test/results_normal_lr.txt /path/to/Test/results_normal_lr.txt
 
 
 Report and Grading
