@@ -16,9 +16,9 @@
 
    assignment.setup
    assignment.surgicalplan
-   assignment.ai
    assignment.toolcalibration
    assignment.registration
+   assignment.ai
 
 .. toctree::
    :maxdepth: 1
