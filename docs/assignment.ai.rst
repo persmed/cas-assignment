@@ -67,7 +67,7 @@ To copy a file from the HPC to your local computer, also use the ``scp`` command
 
 	scp <username>@submit01.unibe.ch:/path/to/file /path/to/target_dir/
     
-More information about file transfer can be found in the `official documentation <https://hpc-unibe-ch.github.io/file-system/file-transfer.html>`_.
+More information about file transfer can be found in the `official documentation <https://hpc-unibe-ch.github.io/file-system/file-transfer.html>`__.
 
 
 File editor on Ubelix
