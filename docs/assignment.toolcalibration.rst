@@ -53,22 +53,22 @@ Programming assignment
 Implement the pivot calibration algorithm, based on a list of saved tracked tool poses duirng pivoting (4x4 transformation matrices) in the file ``assignments/toolcalibration/calibration.py``. You can test your implementation by running
 the file directly in PyCharm or from the console using ```python cas/toolcalibration/pivotcalibration.py``.
 
-.. code-block:: python
-    :linenos:
+.. code:: python
+   :number-lines:
 
     def pivot_calibration(transforms):
         """ Pivot calibration
         Keyword arguments:
-        transforms -- A list with 4x4 transformation matrices
-        returns -- A vector p_t, which is the offset from any transforms to the pivot point
-                -- The calibration matrix T (p_t in a 4X4 matrix form)
+        transforms -- A list of 4x4 transformation matrices from the tracking system (Fi)
+        returns    -- The calibration matrix T (p_t in homogeneous coordinate form),
+                      where the vector p_t, is the offset from any transform, Fi, to the pivot point
         """
 
         ## TODO: Implement pivot calibration as discussed in the lecture
-        p_t = np.zeros((3, 1))
+
         T = np.eye(4)
 
-        return p_t, T
+        return T
 
 Calibration device
 ******************
@@ -78,23 +78,23 @@ Implement the code to calibrate an instrument using a calibration device.
 Theory
 ======
 
-.. image:: img/calibdevice.png
+.. image:: img/calibdevice_v1.png
 
 The following transformations are given:
 
-* :math:`^{Camera}T_{Tracker}` : transformation from the tracker to the camera (given by the tracking system)
-* :math:`^{Camera}T_{Reference}` : transformation from the reference to the camera (given by the tracking system)
-* :math:`^{Reference}T_{Pivot}` : transformation from the pivot hole to the reference (given by the CAD model)
+* :math:`^{camera}T_{tool}` : transformation from the tool to the camera (given by the tracking system)
+* :math:`^{camera}T_{reference}` : transformation from the reference to the camera (given by the tracking system)
+* :math:`^{reference}T_{pivot}` : transformation from the pivot point to the reference (given by the CAD model)
 
 The following transformation is missing:
 
-* :math:`^{Tracker}T_{Pivot}` : calibration transformation from the tool tip to the tracker
+* :math:`^{tool}T_{pivot}` : calibration transformation from the pivot point (tool tip) to the tool
 
 To implement these calculations you can use the following definition:
 
 .. math::
 
-    I = ^{Camera}T_{Tracker} \cdot ^{Tracker}T_{Pivot} \cdot ^{Pivot}T_{Reference} \cdot ^{Reference}T_{Camera}
+    I = ^{camera}T_{tool} \cdot ^{tool}T_{pivot} \cdot ^{pivot}T_{reference} \cdot ^{reference}T_{camera}
 
 Thus, if you multiply all transformations in the same direction you get an identity.
 
@@ -105,22 +105,27 @@ Programming assignment
 You have to implement this algorithm in the file ``assignments/toolcalibration/calibration.py``. You can test your implementation by running
 the file directly in PyCharm or from the console using ```python cas\toolcalibration\calibrationdevice.py``.
 
-.. code-block:: python
-    :linenos:
+.. code:: python
+   :number-lines:
 
-    def calibration_device_calibration(camera_T_reference, camera_T_tracker, reference_P_pivot):
-        """ Calibratio device calibration
+    def calibration_device_calibration(camera_T_reference, camera_T_tool, reference_P_pivot):
+        """ Tool calibration using calibration device
         Keyword arguments:
-        camera_T_reference -- Transformation from the reference to the camera
-        camera_T_tracker -- Transformation from the tracker to the camera
-        reference_P_pivot -- A pivot on the reference (rigid body) where the tip of
-                             the instrument is located for calibration
+        camera_T_reference -- Transformation from the reference (calibration device) to the camera
+        camera_T_tool      -- Transformation from the tool to the camera
+        reference_P_pivot  -- A pivot point on the calibration device reference (rigid body),
+                              where the tip of the instrument is located for calibration
+        returns            -- The tool tip location (p_t or reference_P_pivot) and the
+                              calibration matrix (T), i.e. the tool tip location
+                              (reference_P_pivot) relative to the tracked tool (camera_T_tool)
         """
-        
+
         ## TODO: Implement a calibration method which uses a calibration device
-        tracker_T_pivot = np.eye(4)
-        
-        return tracker_T_pivot
+
+        p_t = np.zeros((3, 1))
+        T = np.eye(4)
+
+        return p_t, T
 
 Questions
 *********

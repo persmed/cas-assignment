@@ -23,7 +23,8 @@ if __name__ == "__main__":
             T[:3, :4] = data
             transforms.append(T)
 
-    p_t, T = calibration.pivot_calibration(transforms)
+    T = calibration.pivot_calibration(transforms)
+    p_t = T[:3, 3].reshape(3, 1)
 
     print('Calibtration matrix T')
     print(T)
