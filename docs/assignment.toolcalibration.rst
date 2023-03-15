@@ -11,11 +11,11 @@ Implement the pivot calibration algorithm as discussed in the "Positional Tracki
 Theory
 ======
 
-.. image:: img/pivot_calibration.png
+.. image:: img/pivot_calibration_v1.png
 
-* :math:`p_t` is constant if looking from tool local Coordinate system (COS)
-* Pivot point (tool tip) :math:`p_p` is constant if looking from the tracking COS
-* At any moment, :math:`F_i(R_i, p_i)` can be retrieved from the tracker API
+* :math:`p_t` is constant if looking from the tool local coordinate system (COS)
+* Pivot point (tool tip) :math:`p_p` is constant if looking from the tracking camera COS
+* At any moment, :math:`F_i(R_i, p_i)` can be retrieved from the tracking camera API
 * :math:`F_i(R_i, p_i)` takes :math:`p_t` to :math:`p_p`
 * :math:`R_i \cdot p_t + p_i = p_p`
 * Unknowns: :math:`p_t` and :math:`p_p`
