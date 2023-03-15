@@ -78,7 +78,7 @@ Implement the code to calibrate an instrument using a calibration device.
 Theory
 ======
 
-.. image:: img/calibdevice_v1.png
+.. image:: img/calibdevice.png
 
 The following transformations are given:
 
