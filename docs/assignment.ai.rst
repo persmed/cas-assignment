@@ -81,7 +81,7 @@ To open an existing file type this:
 
     vi filename
 
-example: if you are in the folder ``hip_ct_unet_CAS_code/`` and you would like to open the file job_run_gpu.sh, type: ``vi jo`` then pres tab - the name of the file should be completed autoamtically. (if it's not the file doesn't exists at this location - to check type "ls")
+example: if you are in the folder ``hip_ct_unet_CAS_code/`` and you would like to open the file job_run_gpu.sh, type: ``vi jo`` then pres tab - the name of the file should be completed automatically. (if it's not the file doesn't exists at this location - to check type "ls")
 
 - editing: as soon the file content is displayed in the console (the VIM editor is open) type "i", this will bring you to "INSERT"-mode (noted on the bottom of the console) - in this mode you can modify the file. press "esc" to exit the INSERT mode (and stop editing)
 
@@ -94,7 +94,7 @@ for more info about the VIM editor, see:
 Code Explanation
 ----------------
 
-The package file ``hip_ct_unet_CAS_code.zip`` includes the code and data for hip joint CT segmentation based on the U-Net network. Your task is to train the deep learning model on UBELIX and report your running results. - this chapter is to explain the code. The tasks of this assignement you can find in the next chapter.
+The package file ``hip_ct_unet_CAS_code.zip`` includes the code and data for hip joint CT segmentation based on the U-Net network. Your task is to train the deep learning model on UBELIX and report your running results. - this chapter is to explain the code. The tasks of this assignment you can find in the next chapter.
 
 #. Image Dataset
 
@@ -110,13 +110,13 @@ The package file ``hip_ct_unet_CAS_code.zip`` includes the code and data for hip
 	
 #. Model Training
 	- By default, the batch size is 8, so there are 2400/8=300 iterations in each epoch. The number of training epochs is set to 5, so the model will be trained by 1500 iterations.
-	- The training will be conducted in ``python train.py --epoch 5 --lr 0.001 --save_ckpt ./checkpoint_normal_lr --save_log_dir ./log_normal_lr``. All models after each epoch training will be saved under the foder ``./checkpoint_normal_lr``.
+	- The training will be conducted in ``python train.py --epoch 5 --lr 0.001 --save_ckpt ./checkpoint_normal_lr --save_log_dir ./log_normal_lr``. All models after each epoch training will be saved under the folder ``./checkpoint_normal_lr``.
 	- After the training, you can find the training loss at ``./log_normal_lr/training_loss.png``.
 	  
 #. Test on Unseen data
 
 	- A new and unseen hip CT image for testing is prepared at ``./Test/21_data.nii.gz``.
-	- To run the automatic segmentation for the test data, run ``python test.py --load_epoch 5 --load_ckpt ./checkpoint_normal_lr --save_pred_affix_name normal_lr`` and the prediction will be saved under the same foder at ``./Test/21_pred_segmentation_normal_lr.nii.gz``.
+	- To run the automatic segmentation for the test data, run ``python test.py --load_epoch 5 --load_ckpt ./checkpoint_normal_lr --save_pred_affix_name normal_lr`` and the prediction will be saved under the same folder at ``./Test/21_pred_segmentation_normal_lr.nii.gz``.
 	  
 #. Evaluation
 
@@ -214,7 +214,7 @@ Run the deep learning model for hip CT image segmentation, and write a short rep
 	- What is your evaluation result of Dice, ASD, and HD? Do a screenshot of the resulting text file (0.5 point)
 	
 	
-#. Finetuning the Model (4 points)
+#. Fine tuning the Model (4 points)
 
 	- Adapt the command in ``job_run_gpu.sh`` to train the model with low learning rate (e.g. 0.00001?) and high learning rate (e.g. 0.1?)
 
@@ -229,7 +229,7 @@ Run the deep learning model for hip CT image segmentation, and write a short rep
 	- Compare three training loss curves with normal, low and high learning rates.  What is your observation and conclusion? (1 point)
 	- Compare the evaluation result of Dice, ASD, and HD of three models with normal, low and high learning rate? Which model reports the best accuracy? (1 point)
 	- Compare the segmentation prediction results qualitatively of three models in ITK-SNAP and explain the differences? Do you think those models can be used for surgical planning, or how could we improve this model? (1 point)
-	- Finetune the hyper-parameters (number of training epochs and learning rate), and report the best accuracy you get in both qualitative and quantitative. (1 point)
+	- Fine tune the hyper-parameters (number of training epochs and learning rate), and report the best accuracy you get in both qualitative and quantitative. (1 point)
 
 #. Questions (4 points)
 

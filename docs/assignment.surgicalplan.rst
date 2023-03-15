@@ -61,7 +61,7 @@ Upload a ZIP file containing the following files to ILIAS:
 
 #. Your report as PDF with filename ``lastname_firstname_assignment1_report.pdf``
 #. Your code with filename ``lastname_firstname_assignment1_code.py``
-#. A textfile with the console output when you ran the code with filename ``lastname_firstname_assignment1_output.txt``
+#. A text file with the console output when you ran the code with filename ``lastname_firstname_assignment1_output.txt``
 #. A file with a screenshot of the 3D rendering of your segmentation with filename ``lastname_firstname_assignment1_screenshot.png``
 
 Name your ZIP file as ``lastname_firstname_assignment1.zip``

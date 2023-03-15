@@ -1,7 +1,7 @@
 Tool Calibration
 ################
 
-For a CAS scene, the location of the tool tip must be known in the coordinate system of the tracking camera. Tool calibration is perfromed to determine the location of the tool tip relative to its tracked location. In this assignment you will implement two different ways to calibrate a rigid straight tool.
+For a CAS scene, the location of the tool tip must be known in the coordinate system of the tracking camera. Tool calibration is performed to determine the location of the tool tip relative to its tracked location. In this assignment you will implement two different ways to calibrate a rigid straight tool.
 
 Pivot calibration
 *****************
@@ -50,7 +50,7 @@ To solve for :math:`p_t` and :math:`p_p` we need to construct a linear equation 
 Programming assignment
 ======================
 
-Implement the pivot calibration algorithm, based on a list of saved tracked tool poses duirng pivoting (4x4 transformation matrices) in the file ``assignments/toolcalibration/calibration.py``. You can test your implementation by running
+Implement the pivot calibration algorithm, based on a list of saved tracked tool poses during pivoting (4x4 transformation matrices) in the file ``assignments/toolcalibration/calibration.py``. You can test your implementation by running
 the file directly in PyCharm or from the console using ```python cas/toolcalibration/pivotcalibration.py``.
 
 .. code:: python
@@ -132,15 +132,15 @@ Questions
 
 Write a short document (max 1 page) where you address the following questions:
 
-#. Show how SVD can be used to solve your overdetermined equation of the form :math:`Ax = b` 
+#. Show how SVD can be used to solve your over determined equation of the form :math:`Ax = b`
 #. Write down the equation expressing the tip of the pointer in the camera coordinate system
 #. Where does the error in your result come from (what you get is not the exact solution which is provided)?
-#. How many degrees of freedeom can you calibrate with pivoting? Which ones are missing?
-#. If your instrument is non-rigid (e.g. a needle) your :math:`p_t` will expereince error when the tool bends. How can you overcome this issue?
+#. How many degrees of freedom can you calibrate with pivoting? Which ones are missing?
+#. If your instrument is non-rigid (e.g. a needle) your :math:`p_t` will experience error when the tool bends. How can you overcome this issue?
 
 Submission
 **********
-Send a ZIP file with the follwing files:
+Send a ZIP file with the following files:
 
 #. Your document as PDF with filename ``lastname_firstname_assignment3_report.pdf``
 #. Your code with filename ``lastname_firstname_assignment3_code.py``
