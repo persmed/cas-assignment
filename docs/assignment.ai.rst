@@ -24,6 +24,8 @@ Follow the instructions on the `HPC documentation webpage <https://hpc-unibe-ch.
 
 Accessing the HPCs
 ------------------
+(note: to access ubelix you need to be in the unibe-net - use fortclient-VPN:
+https://serviceportal.unibe.ch/sp?id=kb_category&kb_id=13b050c9db63c49078ed3e48229619b0&kb_category=240b43f9db8cd05078ed3e4822961979
 
 - Once your account has been activated on UBELIX, you can log in to an HPC
 
