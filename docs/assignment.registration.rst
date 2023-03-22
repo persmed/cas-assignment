@@ -138,10 +138,10 @@ Submission
 ----------
 Send a ZIP file with the follwing files:
 
-#. Your report as PDF with filename ``lastname_firstname_assignment4_report.pdf``
-#. Your code with filename ``lastname_firstname_assignment4_code.py``
-#. A textfile with the console output when you ran the code with filename ``lastname_firstname_assignment4_output.txt``
-#. A screenshot of the plots ``lastname_firstname_assignment4_screenshot.png``
+#. Your report as PDF with filename ``lastname_firstname_assignment3_report.pdf``
+#. Your code with filename ``lastname_firstname_assignment3_code.py``
+#. A textfile with the console output when you ran the code with filename ``lastname_firstname_assignment3_output.txt``
+#. A screenshot of the plots ``lastname_firstname_assignment3_screenshot.png``
 
 Name your ZIP file as ``lastname_firstname_assignment4.zip`` and upload it to ILIAS.
 

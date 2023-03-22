@@ -244,7 +244,7 @@ Run the deep learning model for hip CT image segmentation, and write a short rep
 Submission
 ----------
 
-Upload your report as PDF with filename ``lastname_firstname_assignment2_AI_report.pdf``
+Upload your report as PDF with filename ``lastname_firstname_assignment4_AI_report.pdf``
 
 
 Materials

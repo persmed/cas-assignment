@@ -142,11 +142,11 @@ Submission
 **********
 Send a ZIP file with the following files:
 
-#. Your document as PDF with filename ``lastname_firstname_assignment3_report.pdf``
-#. Your code with filename ``lastname_firstname_assignment3_code.py``
-#. A text file with the console output when you ran the code with filename ``lastname_firstname_assignment3_output.txt``
+#. Your document as PDF with filename ``lastname_firstname_assignment2_report.pdf``
+#. Your code with filename ``lastname_firstname_assignment2_code.py``
+#. A text file with the console output when you ran the code with filename ``lastname_firstname_assignment2_output.txt``
 
-Name your ZIP file as ``lastname_firstname_assignment3.zip``
+Name your ZIP file as ``lastname_firstname_assignment2.zip``
 
 Grading
 *******
