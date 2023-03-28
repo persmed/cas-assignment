@@ -167,7 +167,7 @@ You don't neccessarily need to use them, but it will make the search for the clo
 
 * https://en.wikipedia.org/wiki/K-d_tree
 * https://scikit-learn.org/stable/modules/neighbors.html
-* https://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.spatial.KDTree.query.html#scipy.spatial.KDTree.query
+* https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.KDTree.query.html
 
 Solving systems of equations
 ____________________________
