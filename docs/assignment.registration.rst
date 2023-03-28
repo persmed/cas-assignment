@@ -143,7 +143,7 @@ Send a ZIP file with the follwing files:
 #. A textfile with the console output when you ran the code with filename ``lastname_firstname_assignment3_output.txt``
 #. A screenshot of the plots ``lastname_firstname_assignment3_screenshot.png``
 
-Name your ZIP file as ``lastname_firstname_assignment4.zip`` and upload it to ILIAS.
+Name your ZIP file as ``lastname_firstname_assignment3.zip`` and upload it to ILIAS.
 
 Grading
 -------
