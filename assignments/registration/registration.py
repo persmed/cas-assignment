@@ -25,7 +25,7 @@ def find_nearest_neighbor(src, dst):
     Finds the nearest neighbor of every point in src in dst
     :param src: A N x 3 point cloud
     :param dst: A N x 3 point cloud
-    :return: the
+    :return: the index and distance of the closest point
     """
 
     ## TODO: replace this by your code

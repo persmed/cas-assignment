@@ -89,7 +89,7 @@ use a KD-tree for that, as it is easier to implement (you can use a library, see
         Finds the nearest neighbor of every point in src in dst
         :param src: A N x 3 point cloud
         :param dst: A N x 3 point cloud
-        :return: the
+        :return: the index and distance of the closest point
         """
 
         ## TODO: replace this by your code
