@@ -50,20 +50,29 @@ A picture is worth a thousand words
 .. image:: img/pycharm_setup_1.png
    :scale: 50%
    :align: center
+
 |
+
 .. image:: img/pycharm_setup_2.png
    :scale: 50%
    :align: center
+
 |
+
 .. image:: img/pycharm_setup_3.png
    :scale: 50%
    :align: center
+
 |
+
 .. image:: img/pycharm_setup_4.png
    :scale: 50%
    :align: center
+
 |
+
 .. image:: img/pycharm_setup_5.png
    :scale: 50%
    :align: center
+
 |
