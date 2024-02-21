@@ -19,14 +19,14 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'CAS Assignments'
+project = 'CAS Assignment'
 copyright = '2018-2024, University of Bern'
 author = 'University of Bern'
 
 # The short X.Y version
 version = ''
 # The full version, including alpha/beta/rc tags
-release = '0.3'
+release = '0.2'
 
 
 # -- General configuration ---------------------------------------------------
