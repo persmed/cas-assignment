@@ -2,29 +2,29 @@ import sys
 print(f'Python version:\t\t\t{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}')
 
 import numpy as np
-print('Numpy version:\t\t\t', np.__version__)
+print(f'Numpy version:\t\t\t{np.__version__}')
 
 import vtk
-print('VTK version:\t\t\t', '{0}.{1}'.format(vtk.VTK_MAJOR_VERSION, vtk.VTK_MINOR_VERSION))
+print(f'VTK version:\t\t\t{vtk.VTK_MAJOR_VERSION}.{vtk.VTK_MINOR_VERSION}')
 
 import SimpleITK as sitk
-print('SimpleITK version:\t\t', '{0}.{1}'.format(sitk.SITK_ITK_VERSION_MAJOR, sitk.SITK_ITK_VERSION_MINOR))
+print(f'SimpleITK version:\t\t{sitk.SITK_ITK_VERSION_MAJOR}.{sitk.SITK_ITK_VERSION_MINOR}')
 
 import matplotlib
-print('Matplotlib version:\t\t', matplotlib.__version__)
+print(f'Matplotlib version:\t\t{matplotlib.__version__}')
 
 import transformations
-print('Transformations version:\t', transformations.__version__)
+print(f'Transformations version:\t{transformations.__version__}')
 
 import scipy
-print('SciPy version:\t\t\t', scipy.__version__)
+print(f'SciPy version:\t\t\t{scipy.__version__}')
 
 
 import matplotlib
 matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
 
-print("Testing matplotlib...")
+print("Testing matplotlib...", end='', flush=True)
 image = sitk.ReadImage("data/planning/pelvis_ct.nii.gz")
 size = image.GetSize()
 spacing = image.GetSpacing()
@@ -42,6 +42,6 @@ nda = sitk.GetArrayFromImage(image)
 image_slice = nda[120, :, :]
 plt.imshow(image_slice, cmap='gray', interpolation=None)
 plt.pause(1)
-print("Testing matplotlib... [OK]")
+print("\rTesting matplotlib... [OK]", flush=True)
 
-print('Your environment is ready...')
+print('Your environment is ready.')
