@@ -1,3 +1,6 @@
+import sys
+print(f'Python version:\t\t\t{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}')
+
 import numpy as np
 print('Numpy version:\t\t\t', np.__version__)
 
