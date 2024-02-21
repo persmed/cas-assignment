@@ -3,7 +3,6 @@ channels:
   - anaconda
   - conda-forge
   - defaults
-  - SimpleITK
 dependencies:
   - python
   - numpy
@@ -12,7 +11,7 @@ dependencies:
   - scikit-learn
   - scipy
   - SimpleITK
-  - vtk
+  - conda-forge::vtk
   - pip
   - pip:
       - transformations
