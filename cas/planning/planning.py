@@ -1,5 +1,6 @@
 import os
 import sys
+from show3d import display_surface_models
 
 sys.path.insert(0, os.path.join(os.path.dirname(sys.argv[0]), '../..'))
 
@@ -92,6 +93,8 @@ class ImageViewer:
             elif (event.key == 'down') and (self.image_slice_number > 0):
                 self.image_slice_number -= 1
                 self.__update_slice()
+            elif event.key == 'v':
+                display_surface_models(self.segmentation)
             elif event.key == 'q':
                 exit()
             else:
