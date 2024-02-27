@@ -1,6 +1,7 @@
 import numpy as np
 from scipy import ndimage
 import queue
+from collections import deque
 
 
 def region_grow(image, seed_point):
@@ -13,7 +14,8 @@ def region_grow(image, seed_point):
     segmentation_mask = np.zeros(image.shape, np.bool_)
     z, y, x = seed_point
     intensity = image[z, y, x]
-    print(f'image data at position ({x}, {y}, {z}) has value {intensity}')
+    print(f'Image data at position ({x}, {y}, {z}) has value {intensity}')
+    print('Computing region growing...', end='', flush=True)
 
     ## TODO: choose a lower and upper threshold
     threshold_lower = intensity
@@ -21,36 +23,38 @@ def region_grow(image, seed_point):
     _segmentation_mask = (np.greater(image, threshold_lower)
                           & np.less(image, threshold_upper)).astype(np.bool_)
 
-    ## TODO: post-process the image with a morphological filter
+    ## TODO: pre-process the segmented image with a morphological filter
 
-    to_check = queue.Queue()
-    check_point = np.asarray([z, y, x], dtype=np.uint32)
-    to_check.put(check_point)
+    to_check = deque()
+    to_check.append((z, y, x))
 
-    while not to_check.empty():
-        check_point = to_check.get()
-        if _segmentation_mask[check_point[0], check_point[1], check_point[2]]:
-            _segmentation_mask[check_point[0], check_point[1], check_point[2]] = False
-            segmentation_mask[check_point[0], check_point[1], check_point[2]] = 1
+    while to_check:
+        z, y, x = to_check.popleft()
+
+        if _segmentation_mask[z, y, x]:
+            # Mark the current point as visited
+            _segmentation_mask[z, y, x] = False
+            segmentation_mask[z, y, x] = True
 
             # These for loops will visit all the neighbors of a voxel and see if
             # they belong to the region
-            for ix in range(-1, 2, 2):
-                for iy in range(-1, 2, 2):
-                    for iz in range(-1, 2, 2):
-                        if not (iz == 0 and ix == 0 and iy == 0):
-                            new_check_point = check_point + np.asarray([iz, iy, ix], dtype=np.uint32)
+            for dz in range(-1, 2):
+                for dy in range(-1, 2):
+                    for dx in range(-1, 2):
+                        if dz == 0 and dy == 0 and dx == 0:
+                            continue    # Skip the center point
+                        nz, ny, nx = z + dz, y + dy, x + dx
 
                         ## TODO: implement the code which checks whether the current
-                        ## voxel (new_check_point) belongs to the region or not
+                        ## voxel (nz, ny, nx) belongs to the region or not
 
-                        ## TODO: implement a stop criteria such that the algorithm
+                        ## OPTIONAL TODO: implement a stop criteria such that the algorithm
                         ## doesn't check voxels which are too far away
 
     # Post-process the image with a morphological filter
     structure = np.ones((3, 3, 3))
     segmentation_mask = ndimage.binary_closing(segmentation_mask, structure=structure).astype(np.bool_)
     
-    print('finished')
+    print('\rComputing region growing... [DONE]', flush=True)
 
     return segmentation_mask
