@@ -10,7 +10,7 @@ def region_grow(image, seed_point):
     :param seed_point: The seed point for the algorithm
     :return: A 3D binary segmentation mask with the same dimensions as 'image'
     """
-    segmentation_mask = np.zeros(image.shape, np.bool)
+    segmentation_mask = np.zeros(image.shape, np.bool_)
     z, y, x = seed_point
     intensity = image[z, y, x]
     print(f'image data at position ({x}, {y}, {z}) has value {intensity}')
@@ -19,8 +19,7 @@ def region_grow(image, seed_point):
     threshold_lower = intensity
     threshold_upper = intensity
     _segmentation_mask = (np.greater(image, threshold_lower)
-                          & np.less(image, threshold_upper)).astype(np.bool)
-    structure = np.ones((2, 2, 2))
+                          & np.less(image, threshold_upper)).astype(np.bool_)
 
     ## TODO: post-process the image with a morphological filter
 
@@ -48,8 +47,9 @@ def region_grow(image, seed_point):
                         ## TODO: implement a stop criteria such that the algorithm
                         ## doesn't check voxels which are too far away
 
-    structure = np.ones((2, 2, 2))
-    segmentation_mask = ndimage.binary_closing(segmentation_mask, structure=structure).astype(np.bool)
+    # Post-process the image with a morphological filter
+    structure = np.ones((3, 3, 3))
+    segmentation_mask = ndimage.binary_closing(segmentation_mask, structure=structure).astype(np.bool_)
     
     print('finished')
 
