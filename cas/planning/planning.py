@@ -38,6 +38,7 @@ class ImageViewer:
         self.t = None
         self.t2 = None
         self.overlay_alpha = 0
+        self.fig = None
 
     def set_segmenter(self, segmenter):
         self.segmenter = segmenter
@@ -45,7 +46,7 @@ class ImageViewer:
     def set_image(self, image):
         self.image = sitk.GetArrayFromImage(image)
 
-        self.segmentation = np.zeros(self.image.shape)
+        self.segmentation = np.zeros(self.image.shape, dtype=np.uint8)
         self.image_spacing = image.GetSpacing()
         self.image_zsize = self.image.shape[0]
         self.image_ysize = self.image.shape[1]
@@ -56,14 +57,13 @@ class ImageViewer:
         self.segmentation_slice[0, 0] = 4.0
 
     def onscroll(self, event):
-        if event.button == 'up' and self.image_slice_number < self.image_zsize - 1:
-            self.image_slice_number += 1
-        elif event.button == 'down' and self.image_slice_number > 0:
-            self.image_slice_number -= 1
+        if event.button == 'up':
+            self.image_slice_number = min(self.image_slice_number + 1, self.image_zsize - 1)
+        elif event.button == 'down':
+            self.image_slice_number = max(self.image_slice_number - 1, 0)
         self.__update_slice()
 
     def onclick(self, event):
-        # print(event)
         if event.button == 1:
             x = int(round(event.xdata, 0))
             y = int(round(event.ydata, 0))
@@ -80,18 +80,19 @@ class ImageViewer:
                 segmentation_hist = scipy.ndimage.histogram(self.segmentation, 0, 4, 5)
                 print(segmentation_hist)
             elif event.key == 's':
-                print('Saving')
+                print('Saving segmentation to disk...', end='', flush=True)
                 np.save('segmentation.npy', self.segmentation)
+                print('\rSaving segmentation to disk... [DONE]', flush=True)
             elif event.key == 'r':
                 print('Resetting segmentation')
                 os.remove('segmentation.npy')
                 self.segmenter.clear_segmentation_mask()
                 self.segmentation = self.segmenter.get_segmentation_mask()
-            elif (event.key == 'up') and (self.image_slice_number < (self.image_zsize - 1)):
-                self.image_slice_number += 1
+            elif event.key == 'up':
+                self.image_slice_number = min(self.image_slice_number + 1, self.image_zsize - 1)
                 self.__update_slice()
-            elif (event.key == 'down') and (self.image_slice_number > 0):
-                self.image_slice_number -= 1
+            elif event.key == 'down':
+                self.image_slice_number = max(self.image_slice_number - 1, 0)
                 self.__update_slice()
             elif event.key == 'v':
                 display_surface_models(self.segmentation)
@@ -101,7 +102,7 @@ class ImageViewer:
                 if represents_int(event.key):
                     key_pressed = int(event.key)
                     self.segmenter.activate_label(key_pressed)
-                    print('current active label is ', self.segmenter.get_active_label_name())
+                    print(f'Current active label is {self.segmenter.get_active_label_name()}')
         except TypeError:
             print('was not a number between 0 and 4')
         self.__update()
@@ -122,22 +123,21 @@ class ImageViewer:
         self.t2.set_alpha(self.overlay_alpha)
         self.t2.set_cmap('jet')
         plt.title(f"Image slice {self.image_slice_number}")
-        plt.draw()
+        self.fig.canvas.draw_idle()
+
 
     def show(self):
         margin = 0.05
-        dpi = 80
-        figsize = (1 + margin) * self.image_ysize / dpi, (1 + margin) * self.image_xsize / dpi
+        # dpi = 80
+        # figsize = (1 + margin) * self.image_ysize / dpi, (1 + margin) * self.image_xsize / dpi
         # fig = plt.figure(figsize=figsize, dpi=dpi)
-        fig = plt.figure()
-        cid = fig.canvas.mpl_connect('scroll_event', self.onscroll)
-        cid2 = fig.canvas.mpl_connect('button_press_event', self.onclick)
-        cid3 = fig.canvas.mpl_connect('key_press_event', self.keypress)
-        ax = fig.add_axes([margin, margin, 1 - 2 * margin, 1 - 2 * margin])
-        # extent = (0, self.image_xsize * self.image_spacing[1], self.image_ysize * self.image_spacing[0], 0)
-        # plt.subplot(121)
-        self.t = plt.imshow(self.image_slice, cmap='gray', interpolation=None)
-        # plt.subplot(122)
+        self.fig = plt.figure()
+        self.fig.canvas.mpl_connect('scroll_event', self.onscroll)
+        self.fig.canvas.mpl_connect('button_press_event', self.onclick)
+        self.fig.canvas.mpl_connect('key_press_event', self.keypress)
+        self.fig.canvas.mpl_disconnect(self.fig.canvas.manager.key_press_handler_id)
+        ax = self.fig.add_axes([margin, margin, 1 - 2 * margin, 1 - 2 * margin])
+        self.t = plt.imshow(self.image_slice, cmap='gray', interpolation=None, vmin=-1500, vmax=3000)
         self.t2 = plt.imshow(self.segmentation_slice, cmap='jet', alpha=self.overlay_alpha, interpolation=None)
         plt.title(f"Image slice {self.image_slice_number}")
         plt.show()
@@ -154,7 +154,7 @@ class Segmenter:
         self.labels = {
             0: 'None',
             1: 'Spinal Cord',
-            2: 'Vertebraes',
+            2: 'Vertebrae',
             3: 'Pelvis',
             4: 'Discs'
         }
@@ -164,15 +164,15 @@ class Segmenter:
 
     def set_data(self, data):
         self.data = data
-        self.segmentation_mask = np.zeros(self.data.shape)
+        self.segmentation_mask = np.zeros(self.data.shape, dtype=np.uint8)
 
     def segment(self, x, y, z):
-        # print(f'data at ({x}, {y}, {z}) is {self.data[z, y, x]}')
-        # print(f'segmentation mask shape: {self.segmentation_mask.shape}')
-        # print(f'data shape: {self.data.shape}')
-        current_mask = segmentation.region_grow(self.data, (z, y, x))
-        self.segmentation_mask[current_mask] = self.__active_label
-        self.segmentation_mask = self.segmentation_mask.astype(np.uint8)
+        if self.__active_label:
+            current_mask = segmentation.region_grow(self.data, (z, y, x))
+            self.segmentation_mask[current_mask] = self.__active_label
+            self.segmentation_mask = self.segmentation_mask.astype(np.uint8)
+        else:
+            print("Select a label before segmenting")
 
     def activate_label(self, label):
         if 0 <= label <= 4:
