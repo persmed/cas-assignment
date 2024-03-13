@@ -2,11 +2,17 @@ import numpy as np
 
 
 def pivot_calibration(transforms):
-    """ Pivot calibration
+    """
+    Pivot calibration
+
     Keyword arguments:
     transforms -- A list of 4x4 transformation matrices from the tracking system (Fi)
-    returns    -- The calibration matrix T (p_t in homogeneous coordinate form),
-                  where the vector p_t, is the offset from any transform, Fi, to the pivot point
+                  representing the tracked tool's position and orientation at
+                  different instances.
+
+    Returns:
+    T          -- The calibration matrix T (in homogeneous coordinates) that defines
+                  the offset (p_t) from the tracked part to the pivot point (tool tip).
     """
 
     ## TODO: Implement pivot calibration as discussed in the lecture
@@ -16,20 +22,21 @@ def pivot_calibration(transforms):
     return T
 
 
-def calibration_device_calibration(camera_T_reference, camera_T_tool, reference_P_pivot):
-    """ Tool calibration using calibration device
-    Keyword arguments:
-    camera_T_reference -- Transformation from the reference (calibration device) to the camera
-    camera_T_tool      -- Transformation from the tool to the camera
-    reference_P_pivot  -- A pivot point on the calibration device reference (rigid body),
-                          where the tip of the instrument is located for calibration
-    returns            -- The tool tip location (p_t or reference_P_pivot) and the
-                          calibration matrix (T), i.e. the tool tip location
-                          (reference_P_pivot) relative to the tracked tool (camera_T_tool)
+def calibration_device_calibration(camera_T_reference, camera_T_tool, reference_T_tip):
     """
-    
+    Tool calibration using calibration device
+
+    Keyword arguments:
+    camera_T_reference -- Transformation matrix from reference (calibration device) to camera.
+    camera_T_tool      -- Transformation matrix from tool to camera.
+    reference_T_tip    -- Transformation matrix from tip to reference (calibration device).
+
+    Returns:
+    T                  -- Calibration matrix from tool to tip.
+    """
+
     ## TODO: Implement a calibration method which uses a calibration device
-    
+
     T = np.eye(4)
     
     return T

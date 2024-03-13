@@ -42,4 +42,4 @@ if __name__ == "__main__":
     if error < 0.1:
         print("Successful")
     else:
-        print("Check again")
+        print("Error >= 0.1: Check again")
