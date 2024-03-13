@@ -57,11 +57,17 @@ the file directly in PyCharm or from the console using ```python cas/toolcalibra
    :number-lines:
 
     def pivot_calibration(transforms):
-        """ Pivot calibration
+        """
+        Pivot calibration
+
         Keyword arguments:
         transforms -- A list of 4x4 transformation matrices from the tracking system (Fi)
-        returns    -- The calibration matrix T (p_t in homogeneous coordinate form),
-                      where the vector p_t, is the offset from any transform, Fi, to the pivot point
+                      representing the tracked tool's position and orientation at
+                      different instances.
+
+        Returns:
+        T          -- The calibration matrix T (in homogeneous coordinates) that defines
+                      the offset (p_t) from the tracked part to the pivot point (tool tip).
         """
 
         ## TODO: Implement pivot calibration as discussed in the lecture
@@ -78,23 +84,23 @@ Implement the code to calibrate an instrument using a calibration device.
 Theory
 ======
 
-.. image:: img/calibdevice.png
+.. image:: img/calibration_device.png
 
 The following transformations are given:
 
 * :math:`^{camera}T_{tool}` : transformation from the tool to the camera (given by the tracking system)
 * :math:`^{camera}T_{reference}` : transformation from the reference to the camera (given by the tracking system)
-* :math:`^{reference}T_{pivot}` : transformation from the pivot point to the reference (given by the CAD model)
+* :math:`^{reference}T_{tip}` : transformation from the tip point to the reference (given by the CAD model)
 
 The following transformation is missing:
 
-* :math:`^{tool}T_{pivot}` : calibration transformation from the pivot point (tool tip) to the tool
+* :math:`^{tool}T_{tip}` : calibration transformation from the tool tip to the tracked marker
 
 To implement these calculations you can use the following definition:
 
 .. math::
 
-    I = ^{camera}T_{tool} \cdot ^{tool}T_{pivot} \cdot ^{pivot}T_{reference} \cdot ^{reference}T_{camera}
+    I = ^{camera}T_{tool} \cdot ^{tool}T_{tip} \cdot ^{tip}T_{reference} \cdot ^{reference}T_{camera}
 
 Thus, if you multiply all transformations in the same direction you get an identity.
 
@@ -108,62 +114,63 @@ the file directly in PyCharm or from the console using ```python cas\toolcalibra
 .. code:: python
    :number-lines:
 
-    def calibration_device_calibration(camera_T_reference, camera_T_tool, reference_P_pivot):
-        """ Tool calibration using calibration device
+    def calibration_device_calibration(camera_T_reference, camera_T_tool, reference_T_tip):
+        """
+        Tool calibration using calibration device
+
         Keyword arguments:
-        camera_T_reference -- Transformation from the reference (calibration device) to the camera
-        camera_T_tool      -- Transformation from the tool to the camera
-        reference_P_pivot  -- A pivot point on the calibration device reference (rigid body),
-                              where the tip of the instrument is located for calibration
-        returns            -- The tool tip location (p_t or reference_P_pivot) and the
-                              calibration matrix (T), i.e. the tool tip location
-                              (reference_P_pivot) relative to the tracked tool (camera_T_tool)
+        camera_T_reference -- Transformation matrix from reference (calibration device) to camera.
+        camera_T_tool      -- Transformation matrix from tool to camera.
+        reference_T_tip    -- Transformation matrix from tip to reference (calibration device).
+
+        Returns:
+        T                  -- Calibration matrix from tool to tip.
         """
 
         ## TODO: Implement a calibration method which uses a calibration device
 
-        p_t = np.zeros((3, 1))
         T = np.eye(4)
 
-        return p_t, T
-
-Questions
-*********
-
-Write a short document (max 1 page) where you address the following questions:
-
-#. Show how SVD can be used to solve your over determined equation of the form :math:`Ax = b`
-#. Write down the equation expressing the tip of the pointer in the camera coordinate system
-#. Where does the error in your result come from (what you get is not the exact solution which is provided)?
-#. How many degrees of freedom can you calibrate with pivoting? Which ones are missing?
-#. If your instrument is non-rigid (e.g. a needle) your :math:`p_t` will experience error when the tool bends. How can you overcome this issue?
-
-Submission
-**********
-Send a ZIP file with the following files:
-
-#. Your document as PDF with filename ``lastname_firstname_assignment2_report.pdf``
-#. Your code with filename ``lastname_firstname_assignment2_code.py``
-#. A text file with the console output when you ran the code with filename ``lastname_firstname_assignment2_output.txt``
-
-Name your ZIP file as ``lastname_firstname_assignment2.zip``
-
-Grading
-*******
-
-The assignment accounts for 25% of the grade for the assignments.
-
-You can get 10 Points in this assignment:
+        return T
 
 
-- Working code and a correct result gives you 5 pts
+Code Submission
+***************
 
-  * Important: We don't grade the code quality, but it would be nice if we don't have to spend hours to understand it
-- If the code does not work, but you gave it at least a decent try you get 2.5 pts
-- For each correctly answered question you get 1 pt
+Submit a ZIP file named ``lastname_firstname_assignment2.zip`` on ILIAS containing:
+
+#. The modified ``calibration.py`` as ``lastname_firstname_assignment2_code.py``.
+#. Console output in a text file named ``lastname_firstname_assignment2_output.txt``.
 
 
-Materials
+Online Questions
+****************
+
+Complete the "Assignment 2 - Questions" on ILIAS:
+
+- Answer all questions.
+- Each question has only one correct answer.
+- All questions are equally weighted. Incorrect answers will not result in point deductions.
+- You are allowed only one attempt to complete the test.
+
+
+Assignment Evaluation
+*********************
+
+This assignment constitutes 25% of your total assignment grade, split equally between:
+
+- **Code Evaluation (50%)**: points are awarded as follows:
+
+   - **4 points** for a working solution.
+   - **3 points** for only small errors.
+   - **2 points** for a substantial effort.
+   - **1 point** for substantial errors or minimal effort.
+   - **0 points** for no attempt or plagiarism.
+
+- **Online questions (50%)**
+
+
+Resources
 *********
 
 - https://docs.scipy.org/doc/numpy/reference/routines.linalg.html#solving-equations-and-inverting-matrices
