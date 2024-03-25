@@ -1,7 +1,7 @@
 Registration
 ============
-In this assignment, you will implement the paired point matching (PPM) and iterative closest point (ICP) algorithms for patient to image
-registration as discussed in lecture "registration".
+In this assignment, you will implement the paired point matching (PPM) and iterative closest point (ICP) algorithms for patient-to-image
+registration as discussed in the "Registration" lecture.
 
 Theory
 -------
@@ -9,65 +9,61 @@ Theory
    :scale: 50%
    :align: center
 
-.. _Wikipedia: https://en.wikipedia.org/wiki/Iterative_closest_point
-
-From Wikipedia_ the four steps in ICP are:
+From `Wikipedia <https://en.wikipedia.org/wiki/Iterative_closest_point>`_, the four steps in ICP are:
 
 #. For each point in the source point cloud, match the closest point in the reference point cloud (or a selected set).
 #. Estimate the combination of rotation and translation using a root mean square point to point distance metric minimization technique which will best align each source point to its match found in the previous step. This step may also involve weighting points and rejecting outliers prior to alignment.
 #. Transform the source points using the obtained transformation.
 #. Iterate (re-associate the points, and so on).
 
-Paired point matching
+Paired Point Matching
 ---------------------
-As discussed in the lecture, ICP is basically an iteratively applied paired point matching algorithm in the file ``assignments/registration/registration.py``. Therefore, you
-will first implement the paired point matching algorithm. The inputs are point clouds of corresponding points. Your
-task is to calculate the transformation matrix that maps the source to the target point clouds.
+As discussed in the lecture, ICP is essentially an iterative application of the paired point matching algorithm. Your first task is to implement this algorithm in the file ``assignments/registration/registration.py``. You are given point clouds of corresponding points and must calculate the transformation matrix that maps the source to the target point clouds.
 
 .. code-block:: python
     :linenos:
 
     def paired_point_matching(source, target):
         """
-        Calculates the transformation T that maps the source to the target point clouds
-        :param source: A N x 3 matrix with N 3D points
-        :param target: A N x 3 matrix with N 3D points
+        Calculates the transformation T that maps the source to the target point clouds.
+        :param source: A N x 3 matrix with N 3D points.
+        :param target: A N x 3 matrix with N 3D points.
         :return:
-            T: 4x4 transformation matrix mapping source to target
-            R: 3x3 rotation matrix part of T
-            t: 1x3 translation vector part of T
+            T: 4x4 transformation matrix mapping source to target.
+            R: 3x3 rotation matrix part of T.
+            t: 1x3 translation vector part of T.
         """
         assert source.shape == target.shape
         T = np.eye(4)
         R = np.eye(3)
         t = np.zeros((1, 3))
 
+        ## TODO: your code goes here
+
         return T, R, t
 
-You can test your implementation by running the file directly in PyCharm or from the console using ``python cas/registration/registration.py``.
+Test your implementation by running the script in PyCharm or from the console using ``python cas/registration/registration.py``.
 
-Iterative closest point
+Iterative Closest Point
 -----------------------
 
-You now have the basic building block of ICP, so it is time to implement the iteration part in the file ``assignments/registration/registration.py``. 
-Remember that initialisation is crucial for ICP to work. You can test your implementation by running the file directly in PyCharm or from the console using ``python cas/registration/registration.py``.
+With the basic building block of ICP in place, implement the iterative part of the algorithm in the same Python file. This script will open a Matplotlib figure to help visualise the results. You can interactively navigate the plot using the `commands provided by Matplotlib <https://matplotlib.org/stable/users/explain/figure/interactive.html#interactive-navigation>`_.
 
 Initial pose
 ____________
 
-First, you have to give an initial pose. For that it is easiest to just look at the data and give a rough estimate.
 
+Provide an initial pose by estimating it from the data or selecting it manually.
 
 .. code-block:: python
     :linenos:
 
     def get_initial_pose(source, target):
         """
-        Calculates an initial rough registration
-        (Optionally you can also return a hand picked initial pose)
-        :param source: A N x 3 point cloud
-        :param target: A N x 3 point cloud
-        :return: An initial 4 x 4 rigid transformation matrix mapping source to target
+        Calculates an initial rough registration or optionally returns a hand-picked initial pose.
+        :param source: A N x 3 point cloud.
+        :param target: A N x 3 point cloud.
+        :return: An initial 4 x 4 rigid transformation matrix.
         """
         T = np.eye(4)
 
@@ -75,90 +71,96 @@ First, you have to give an initial pose. For that it is easiest to just look at 
 
         return T
 
-Find the closest point
+Find the Closest Point
 ______________________
 
-Second, you need to fine the closest point of each point in the source data to the target data. It is recommended to
-use a KD-tree for that, as it is easier to implement (you can use a library, see links below) and faster.
+Implement a function to find the closest point in the target data for each point in the source data. It is recommended to use a KD-tree for efficiency (see `Resources`_).
+
+Your function should return a tuple of two arrays: the first containing the distances to the nearest neighbor in the target for each point in the source, and the second containing the indices of these nearest neighbors in the target.
 
 .. code-block:: python
     :linenos:
 
-    def find_nearest_neighbor(src, dst):
+    def find_nearest_neighbor(source, target):
         """
-        Finds the nearest neighbor of every point in src in dst
-        :param src: A N x 3 point cloud
-        :param dst: A N x 3 point cloud
-        :return: the index and distance of the closest point
+        Finds the nearest neighbor in 'target' for every point in 'source'.
+        :param source: A N x 3 point cloud.
+        :param target: A N x 3 point cloud.
+        :return: A tuple containing two arrays: the first array contains the
+                 distances to the nearest neighbor in 'target' for each point
+                 in 'source', and the second array contains the indices of
+                 these nearest neighbors in 'target'.
         """
 
         ## TODO: replace this by your code
         pass
 
-Iterative matching
+Iterative Matching
 __________________
 
-Lastly, you actually have to implement the iteration itself. Do the last two steps and apply paired point matching
-until your error function converges.
+Implement the iterative matching process that applies the paired point matching until your error function converges.
 
 .. code-block:: python
     :linenos:
 
     def icp(source, target, init_pose=None, max_iterations=10, tolerance=0.0001):
         """
-        Iteratively finds the best transformation that mapps the source points onto the target
-        :param source: A N x 3 point cloud
-        :param target: A N x 3 point cloud
-        :param init_pose: A 4 x 4 transformation matrix for the initial pose
-        :param max_iterations: maximum number of iterations to perform, default is 10
-        :param tolerance: maximum allowed error, default is 0.0001
-        :return: A 4 x 4 rigid transformation matrix mapping source to target,
-                the distances between each paired point, and the registration error
+        Iteratively finds the best transformation mapping the source points onto the target.
+        :param source: A N x 3 point cloud.
+        :param target: A N x 3 point cloud.
+        :param init_pose: Initial pose as a 4 x 4 transformation matrix.
+        :param max_iterations: Maximum iterations.
+        :param tolerance: Error tolerance.
+        :return: The optimal 4 x 4 rigid transformation matrix, distances, and registration error.
         """
+        # Initialisation
         T = np.eye(4)
         distances = 0
-        error = 0
+        error = np.finfo(float).max
 
         ## TODO: Your code goes here
 
         return T, distances, error
 
-Questions
+
+Code Submission
+---------------
+
+Submit a ZIP file named ``lastname_firstname_assignment3.zip`` on ILIAS containing:
+
+#. The modified ``registration.py`` as ``lastname_firstname_assignment3_code.py``.
+#. Console output in a text file named ``lastname_firstname_assignment3_output.txt``.
+#. A screenshot of the plots as ``lastname_firstname_assignment3_screenshot.png``.
+
+Online Questions
+----------------
+
+Complete the "Assignment 3 - Questions" on ILIAS:
+
+- Answer all questions.
+- Each question has only one correct answer.
+- All questions are equally weighted. Incorrect answers will not result in point deductions.
+- You are allowed only one attempt to complete the test.
+
+Assignment Evaluation
+---------------------
+
+This assignment constitutes 25% of your total assignment grade, split equally between:
+
+- **Code Evaluation (50%)**: points are awarded as follows:
+
+   - **4 points** for a working solution.
+   - **3 points** for only small errors.
+   - **2 points** for a substantial effort.
+   - **1 point** for substantial errors or minimal effort.
+   - **0 points** for no attempt or plagiarism.
+
+- **Online questions (50%)**
+
+.. _resources:
+
+Resources
 ---------
-
-Write a short document (max 1 page) where you address the following questions:
-
-#. What happens if you use an identity as initial pose?
-#. Name two methods you could use to initialise ICP?
-#. Describe two methods allowing you to acquire the target point cloud (on the therapeutic object) in the OR.
-#. What is the minimum number of points you need for paired point matching?
-#. If the patient moves, the calculated transformation is not accurate anymore. How can you prevent this from happenning?
-
-Submission
-----------
-Send a ZIP file with the follwing files:
-
-#. Your report as PDF with filename ``lastname_firstname_assignment3_report.pdf``
-#. Your code with filename ``lastname_firstname_assignment3_code.py``
-#. A textfile with the console output when you ran the code with filename ``lastname_firstname_assignment3_output.txt``
-#. A screenshot of the plots ``lastname_firstname_assignment3_screenshot.png``
-
-Name your ZIP file as ``lastname_firstname_assignment3.zip`` and upload it to ILIAS.
-
-Grading
--------
-
-The assignment accounts for 25% of the grade for the assignments.
-
-You can get 10 Points in this assignment:
-
-* Working code and a correct result gives you 5 pts
-   * Important: We don't grade the code quality, but it would be nice if we don't have to spend hours to understand it
-* If the code does not work, but you gave it at least a decent try you get 2.5 pts
-* For each correctly answered question you get 1 pt
-
-Materials
-----------
 
 KD-Trees
 ________
