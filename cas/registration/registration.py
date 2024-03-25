@@ -10,52 +10,57 @@ matplotlib.use("TkAgg")
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 
-
-
 import cas.registration.util as util
 from assignments.registration import registration
 
 
-def test_icp():
-    print('\n-----------------------')
-    print('ITERATIVE CLOSEST POINT')
-    print('-----------------------\n')
+def on_pick(event):
+    ind = event.ind[0]
+    x_picked, y_picked, z_picked = event.artist._offsets3d
+    x_center, y_center, z_center = x_picked[ind], y_picked[ind], z_picked[ind]
+    picked_point = (x_center, y_center, z_center)
 
-    target_points = util.read_data('data/registration/TargetPoints.csv')
-    print('Target point cloud\n', target_points, '\n')
+    ax = plt.gca()
+    ax.set_title(f"Picked point coordinates: {picked_point}")
 
-    template_points = util.read_data('data/registration/TemplatePoints.csv')
-    print('Source point cloud\n', template_points, '\n')
+    xlim = ax.get_xlim()
+    ylim = ax.get_ylim()
+    zlim = ax.get_zlim()
 
-    T_rot_x = registration.get_initial_pose(template_points, target_points)
-    T, d, error = registration.icp(template_points, target_points, init_pose=T_rot_x)
+    x_range = xlim[1] - xlim[0]
+    y_range = ylim[1] - ylim[0]
+    z_range = zlim[1] - zlim[0]
 
-    template_points_T = util.make_homogenous(template_points)
-    template_points_T = np.dot(T, template_points_T.T).T[:, :3]
+    ax.set_xlim(x_center - x_range / 2, x_center + x_range / 2)
+    ax.set_ylim(y_center - y_range / 2, y_center + y_range / 2)
+    ax.set_zlim(z_center - z_range / 2, z_center + z_range / 2)
 
-    print('Transformed source point cloud\n', template_points_T, '\n')
+    plt.draw()
 
-    print('Transformation\n', T, '\n')
 
-    print('Error\n', error, '\n')
+def on_key(event):
+    if event.key == 'q':
+        return
 
-    fig = plt.figure()
-    ax = fig.add_subplot(111, projection='3d')
+    ax = plt.gca()
+    xlim = ax.get_xlim()
+    ylim = ax.get_ylim()
+    zlim = ax.get_zlim()
 
-    sample_choice = np.random.choice(target_points.shape[0], 1000)
-    # print(sample_choice)
-    samples = target_points[sample_choice, :]
-    ax.scatter(samples[:, 0], samples[:, 1], samples[:, 2], c='b', marker='.')
-    # ax.scatter(template_points[:, 0], template_points[:, 1], template_points[:, 2], c='g', marker='x')
-    ax.scatter(template_points_T[:, 0], template_points_T[:, 1], template_points_T[:, 2], c='r', marker='x')
+    zoom_in_factor = 0.9
+    zoom_out_factor = 1.1
 
-    ax.set_xlabel('X Label')
-    ax.set_ylabel('Y Label')
-    ax.set_zlabel('Z Label')
+    # Determine zoom direction: 'in' with the up arrow, 'out' with the down arrow
+    if event.key == 'up':
+        ax.set_xlim([xlim[0]*zoom_in_factor, xlim[1]*zoom_in_factor])
+        ax.set_ylim([ylim[0]*zoom_in_factor, ylim[1]*zoom_in_factor])
+        ax.set_zlim([zlim[0]*zoom_in_factor, zlim[1]*zoom_in_factor])
+    elif event.key == 'down':
+        ax.set_xlim([xlim[0]*zoom_out_factor, xlim[1]*zoom_out_factor])
+        ax.set_ylim([ylim[0]*zoom_out_factor, ylim[1]*zoom_out_factor])
+        ax.set_zlim([zlim[0]*zoom_out_factor, zlim[1]*zoom_out_factor])
 
-    # plt.axis([-3, 3, -3, 3])
-    plt.axis('equal')
-    plt.show()
+    plt.draw()
 
 
 def test_paired_point_matching():
@@ -67,26 +72,66 @@ def test_paired_point_matching():
     T_random = util.get_random_transformation_matrix()
     target, source = util.get_random_point_clouds(N, T_random)
 
-    print('Target point cloud\n', target, '\n')
-    print('Source point cloud\n', source, '\n')
+    print(f'Target point cloud\n{target}\n')
+    print(f'Source point cloud\n{source}\n')
 
     T, R, t = registration.paired_point_matching(source, target)
 
     source_H = util.make_homogenous(source)
     source_T = np.dot(T, source_H.T).T[:, :3]
-    print('Transformed source point cloud\n', source_T, '\n')
     error = np.linalg.norm(source_T - target)
 
-    print('Transformation\n', T, '\n')
-
-    print('Error\n', error, '\n')
+    print(f'Transformed source point cloud\n{source_T}\n')
+    print(f'Transformation\n{T}\n')
+    print(f'Error\n{error}\n')
 
     if error < 0.1:
-        print("Successful")
+        print("Success: error < 0.1")
     else:
-        print("Check again")
+        print("Failure: error >= 0.1. Please review your code.")
 
-    return
+
+def test_icp():
+    print('\n-----------------------')
+    print('ITERATIVE CLOSEST POINT')
+    print('-----------------------\n')
+
+    target_points = util.read_data('data/registration/TargetPoints.csv')
+    print(f'Target point cloud\n{target_points}\n')
+
+    template_points = util.read_data('data/registration/TemplatePoints.csv')
+    print(f'Source point cloud\n{template_points}\n')
+
+    T_rot_x = registration.get_initial_pose(template_points, target_points)
+    T, d, error = registration.icp(template_points, target_points, init_pose=T_rot_x)
+
+    template_points_T = util.make_homogenous(template_points)
+    template_points_T = np.dot(T, template_points_T.T).T[:, :3]
+
+    print(f'Transformed source point cloud\n{template_points_T}\n')
+    print(f'Transformation\n{T}\n')
+    print(f'Error\n{error}\n')
+
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+
+    sample_choice = np.random.choice(target_points.shape[0], 1000)
+    samples = target_points[sample_choice, :]
+
+    ax.scatter(samples[:, 0], samples[:, 1], samples[:, 2], c='b', marker='.', picker=5)
+    ax.scatter(template_points_T[:, 0], template_points_T[:, 1], template_points_T[:, 2], c='r', marker='x', picker=5)
+
+    fig.canvas.mpl_connect('pick_event', on_pick)
+    fig.canvas.mpl_connect('key_press_event', on_key)
+
+    ax.set_title(f"Click on a point to display its coordinates!")
+    ax.set_xlabel('X Label')
+    ax.set_ylabel('Y Label')
+    ax.set_zlabel('Z Label')
+
+    # plt.axis([-3, 3, -3, 3])
+    plt.axis('equal')
+    plt.show()
 
 
 if __name__ == "__main__":
