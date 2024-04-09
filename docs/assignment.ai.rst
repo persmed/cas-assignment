@@ -73,7 +73,7 @@ More information about file transfer can be found in the `official documentation
 
 
 File editor on Ubelix
-----------------------------
+---------------------
 
 You will need to edit files on the HPC. To do so, you could use the VIM-editor which is introduced here:
 
@@ -233,21 +233,46 @@ Run the deep learning model for hip CT image segmentation, and write a short rep
 	- Compare the segmentation prediction results qualitatively of three models in ITK-SNAP and explain the differences? Do you think those models can be used for surgical planning, or how could we improve this model? (1 point)
 	- Fine tune the hyper-parameters (number of training epochs and learning rate), and report the best accuracy you get in both qualitative and quantitative. (1 point)
 
-#. Questions (4 points)
+.. #. Questions (4 points)
 
-	- How could the segmentation of the hip joint be used in clinical practice? (1 point)
-	- What are the training, validation and test datasets? (1 point)
-	- Describe the U-net architecture, for example, how many convolutional layers, pooling layers are used. Why is it better than a fully connected network for segmentation? (1 point)
-	- Which hyper-parameters are important during the network training? Why? (1 point)
+.. 	- How could the segmentation of the hip joint be used in clinical practice? (1 point)
+.. 	- What are the training, validation and test datasets? (1 point)
+.. 	- Describe the U-net architecture, for example, how many convolutional layers, pooling layers are used. Why is it better than a fully connected network for segmentation? (1 point)
+.. 	- Which hyper-parameters are important during the network training? Why? (1 point)
 
-
-Submission
-----------
+Code Submission
+---------------
 
 Upload your report as PDF with filename ``lastname_firstname_assignment4_AI_report.pdf``
 
 
-Materials
+Online Questions
+----------------
+
+Complete the "Assignment 4 - Questions" on ILIAS:
+
+- Answer all questions.
+- Each question has only one correct answer.
+- All questions are equally weighted. Incorrect answers will not result in point deductions.
+- You are allowed only one attempt to complete the test.
+
+Assignment Evaluation
+---------------------
+
+This assignment constitutes 25% of your total assignment grade, split equally between:
+
+- **Code Evaluation (50%)**: points are awarded as follows:
+
+   - **4 points** for a working solution.
+   - **3 points** for only small errors.
+   - **2 points** for a substantial effort.
+   - **1 point** for substantial errors or minimal effort.
+   - **0 points** for no attempt or plagiarism.
+
+- **Online questions (50%)**
+
+
+Resources
 ---------
 
 * https://ubelix.unibe.ch
