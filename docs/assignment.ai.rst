@@ -240,36 +240,10 @@ Run the deep learning model for hip CT image segmentation, and write a short rep
 .. 	- Describe the U-net architecture, for example, how many convolutional layers, pooling layers are used. Why is it better than a fully connected network for segmentation? (1 point)
 .. 	- Which hyper-parameters are important during the network training? Why? (1 point)
 
-Code Submission
----------------
+Submission
+----------
 
 Upload your report as PDF with filename ``lastname_firstname_assignment4_AI_report.pdf``
-
-
-Online Questions
-----------------
-
-Complete the "Assignment 4 - Questions" on ILIAS:
-
-- Answer all questions.
-- Each question has only one correct answer.
-- All questions are equally weighted. Incorrect answers will not result in point deductions.
-- You are allowed only one attempt to complete the test.
-
-Assignment Evaluation
----------------------
-
-This assignment constitutes 25% of your total assignment grade, split equally between:
-
-- **Code Evaluation (50%)**: points are awarded as follows:
-
-   - **4 points** for a working solution.
-   - **3 points** for only small errors.
-   - **2 points** for a substantial effort.
-   - **1 point** for substantial errors or minimal effort.
-   - **0 points** for no attempt or plagiarism.
-
-- **Online questions (50%)**
 
 
 Resources
