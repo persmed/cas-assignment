@@ -15,3 +15,5 @@ The assignments will help you understand the theory of computer assisted surgery
 - Artificial intelligence (AI)
 
 Enjoy!
+
+Copyright © 2018-2025 University of Bern. All rights reserved.
