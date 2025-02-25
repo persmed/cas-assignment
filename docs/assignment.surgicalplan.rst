@@ -14,6 +14,7 @@ Setup
 -----
 
 - **Data Preparation:** Transfer the ``pelvis_ct.nii.gz`` file from ILIAS to ``data/planning/pelvis_ct.nii.gz``.
+- **Update Repository:** Update your repository by running ``git pull --autostash``.
 - **Implementation File:** The ``segmentation.py`` file within ``assignments/planning/`` directory contains a rough implementation. Complete the sections marked with ``## TODO:``.
 
   .. include:: ../assignments/planning/segmentation.py
