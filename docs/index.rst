@@ -16,7 +16,7 @@
 
    assignment.setup
    assignment.surgicalplan
-   .. assignment.toolcalibration
+   assignment.toolcalibration
    .. assignment.registration
    .. assignment.ai
 
