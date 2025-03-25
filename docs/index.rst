@@ -17,7 +17,7 @@
    assignment.setup
    assignment.surgicalplan
    assignment.toolcalibration
-   .. assignment.registration
+   assignment.registration
    .. assignment.ai
 
 .. toctree::

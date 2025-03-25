@@ -1,3 +1,4 @@
+# Copyright (c) 2025 University of Bern. All rights reserved.
 import numpy as np
 
 def paired_point_matching(source, target):
