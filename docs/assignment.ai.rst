@@ -16,7 +16,7 @@ GPU by UBELIX
 
 `UBELIX <https://ubelix.unibe.ch>`_ is an acronym and stands for University of Bern Linux Cluster, which is aimed for High Performance Computing (HPC). UBELIX is available to anybody with a valid Campus Account (CA) of the University of Bern. Before you can use this service, you must request the activation of your Campus Account on UBELIX.
 
-Follow the instructions on the `HPC documentation webpage <https://hpc-unibe-ch.github.io/getting-Started/account.html>`_ to request activation of your account:
+Follow the instructions on the `HPC documentation webpage <https://hpc-unibe-ch.github.io/firststeps/>`_ to request activation of your account:
 
 - mention that you will use deep learning for medical image analysis within the course "Computer Assisted Surgery" of the Master in Biomedical Engineering
 - mention that you need access to a GPU
@@ -51,7 +51,7 @@ https://serviceportal.unibe.ch/sp?id=kb_category&kb_id=13b050c9db63c49078ed3e482
 
 		[<username>@submit01 ~]$
 
-- see the `official documentation <https://hpc-unibe-ch.github.io/getting-Started/login-ssh.html>`_ if needed
+- see the `official documentation <https://hpc-unibe-ch.github.io/firststeps/>`_ if needed
 
 
 File Transfer to/from UBELIX
@@ -69,7 +69,7 @@ To copy a file from the HPC to your local computer, also use the ``scp`` command
 
 	scp <username>@submit01.unibe.ch:/path/to/file /path/to/target_dir/
     
-More information about file transfer can be found in the `official documentation <https://hpc-unibe-ch.github.io/file-system/file-transfer.html>`__.
+More information about file transfer can be found in the `official documentation <https://hpc-unibe-ch.github.io/firststeps/movingdata/>`__.
 
 
 File editor on Ubelix
