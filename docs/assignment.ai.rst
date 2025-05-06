@@ -254,5 +254,5 @@ Upload your report as PDF with filename ``lastname_firstname_assignment4_AI_repo
 Resources
 ---------
 
-* https://ubelix.unibe.ch
-* https://hpc-unibe-ch.github.io/quick-start.html
+* https://hpc-unibe-ch.github.io/
+* https://hpc-unibe-ch.github.io/firststeps/
