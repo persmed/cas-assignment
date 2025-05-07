@@ -159,6 +159,7 @@ Training U-Net for Semantic Segmentation
 		cd ~
 		ls
 		unzip hip_ct_unet_CAS_code.zip
+		chmod -R 777 hip_ct_unet_CAS_code
 	
 #. Submit the job running application
 
