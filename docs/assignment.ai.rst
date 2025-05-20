@@ -171,15 +171,19 @@ Training U-Net for Semantic Segmentation
 	
 #. Check the logs
 
-	- All loggings will be stored at ``slurm-xxxxxxxx.out`` in the current folder
-	- The file ``slurm-xxxxxxxx.out`` can be found by running the command ``ls``
+	- All loggings will be stored in the folder /logs/ at ``some_filename.out`` and ``some_filename.err``
+	- The file ``some_filename.out`` and ``some_filename.err`` can be found by running the command ``ls`` in the logs folder
 	- Check the logs by running
 
 		.. code-block:: bash
 
-	 		cat slurm-<xxxxxxxx>.out
+	 		cat some_filename.out
+	or
+		.. code-block:: bash
 
- 	- The job is finished when the last line of the ``slurm-xxxxxxxx.out`` file reads ``DONE!``
+	 		cat some_filename.err
+
+ 	- The job is finished when the last line reads ``DONE!``
 
 #. Check the segmentation results
 
