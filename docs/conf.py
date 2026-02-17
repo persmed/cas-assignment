@@ -20,7 +20,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'CAS Assignment'
-copyright = '2018-2025, University of Bern. All rights reserved.'
+copyright = '2018-2026, University of Bern. All rights reserved.'
 author = 'University of Bern'
 
 # The short X.Y version

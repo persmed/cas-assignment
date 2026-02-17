@@ -16,4 +16,4 @@ The assignments will help you understand the theory of computer assisted surgery
 
 Enjoy!
 
-Copyright © 2018-2025 University of Bern. All rights reserved.
+Copyright © 2018-2026 University of Bern. All rights reserved.
