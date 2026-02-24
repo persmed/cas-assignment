@@ -1,34 +1,78 @@
 import sys
-print(f'Python version:\t\t\t{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}')
+from pathlib import Path
+
+print(
+    "Python version:\t\t\t"
+    f"{sys.version_info.major}."
+    f"{sys.version_info.minor}."
+    f"{sys.version_info.micro}"
+)
 
 import numpy as np
-print(f'Numpy version:\t\t\t{np.__version__}')
+
+print(f"Numpy version:\t\t\t{np.__version__}")
 
 import vtk
-print(f'VTK version:\t\t\t{vtk.VTK_MAJOR_VERSION}.{vtk.VTK_MINOR_VERSION}')
+
+print(f"VTK version:\t\t\t{vtk.VTK_MAJOR_VERSION}.{vtk.VTK_MINOR_VERSION}")
 
 import SimpleITK as sitk
-print(f'SimpleITK version:\t\t{sitk.SITK_ITK_VERSION_MAJOR}.{sitk.SITK_ITK_VERSION_MINOR}')
+
+print(
+    "SimpleITK version:\t\t"
+    f"{sitk.SITK_ITK_VERSION_MAJOR}.{sitk.SITK_ITK_VERSION_MINOR}"
+)
 
 import matplotlib
-print(f'Matplotlib version:\t\t{matplotlib.__version__}')
+
+print(f"Matplotlib version:\t\t{matplotlib.__version__}")
 
 import transformations
-print(f'Transformations version:\t{transformations.__version__}')
+
+print(f"Transformations version:\t{transformations.__version__}")
 
 import scipy
-print(f'SciPy version:\t\t\t{scipy.__version__}')
+
+print(f"SciPy version:\t\t\t{scipy.__version__}")
 
 
-import matplotlib
-matplotlib.use("TkAgg")
+repo_root = Path(__file__).resolve().parents[1]
+image_path = repo_root / "data" / "planning" / "pelvis_ct.nii.gz"
+
+if not image_path.exists():
+    print("\nERROR: Required file not found:")
+    print(f"  {image_path}")
+    print("\nFix:")
+    print("  Download pelvis_ct.nii.gz from ILIAS and copy it to:")
+    print("  data/planning/pelvis_ct.nii.gz (relative to the repository root)")
+    print("\nDebug info:")
+    print(f"  Repository root: {repo_root}")
+    print(f"  Current working directory: {Path.cwd()}")
+    sys.exit(1)
+
+
+matplotlib.use("TkAgg", force=True)
 import matplotlib.pyplot as plt
 
-print("Testing matplotlib...", end='', flush=True)
-image = sitk.ReadImage("data/planning/pelvis_ct.nii.gz")
+print("Testing matplotlib...", end="", flush=True)
+
+try:
+    image = sitk.ReadImage(str(image_path))
+except Exception as e:
+    print("\rTesting matplotlib... [FAILED]", flush=True)
+    print("\nERROR: Could not read the test image:")
+    print(f"  {image_path}")
+    print(f"\nException: {e}")
+    sys.exit(1)
+
 size = image.GetSize()
 spacing = image.GetSpacing()
-reference_image = sitk.Image(int(size[0] / 2), int(size[1] / 2), int(size[2] / 2), sitk.sitkUInt32)
+reference_image = sitk.Image(
+    int(size[0] / 2),
+    int(size[1] / 2),
+    int(size[2] / 2),
+    sitk.sitkUInt32,
+)
 
 resampler = sitk.ResampleImageFilter()
 resampler.SetReferenceImage(reference_image)
@@ -40,8 +84,9 @@ image = resampled
 
 nda = sitk.GetArrayFromImage(image)
 image_slice = nda[120, :, :]
-plt.imshow(image_slice, cmap='gray', interpolation=None)
+plt.imshow(image_slice, cmap="gray", interpolation=None)
 plt.pause(1)
+plt.close()
 print("\rTesting matplotlib... [OK]", flush=True)
 
-print('Your environment is ready.')
+print("Your environment is ready.")
