@@ -1,78 +1,162 @@
-Integrated Development Environment
-==================================
+Integrated Development Environment (PyCharm)
+============================================
 
-`JetBrains PyCharm <https://www.jetbrains.com/pycharm/>`_ can be used as your Integrated Development Environment (IDE) to program in Python.
-The community edition is open-source and sufficient for the purposes of this course.
-Follow the official `instructions <https://www.jetbrains.com/help/pycharm/requirements-installation-and-launching.html>`_ to install PyCharm.
+`JetBrains PyCharm <https://www.jetbrains.com/pycharm/>`_ is a suitable IDE for the Python assignments.
+The **Community Edition** is free and sufficient for this course.
 
-To open the CAS Assignment as a project and to configure the Python interpreter do the following:
+Install PyCharm by following the official guide:
+`PyCharm Installation Instructions <https://www.jetbrains.com/help/pycharm/requirements-installation-and-launching.html>`_
 
-#. Launch PyCharm
-#. Click *Open* (or *File > Open*)
+.. note::
 
-    #. In the dialog navigate to ``</path/to/where/you/have/the/code>/cas-assignment``
-    #. Click OK
+   The screenshots below are from Windows. On macOS the menu path is typically
+   *PyCharm > Settings* instead of *File > Settings*.
 
-#. Click *File > Settings...* to open the settings dialog
+Prerequisites
+-------------
 
-    #. Navigate to *Project: CAS Assignment > Python Interpreter*
-    #. Select the Python interpreter
+Before you start in PyCharm, make sure you have:
 
-        - on Windows: ``<\path\to\your\anaconda\installation>\envs\cas\python.exe``
-        - on Linux or macOS: ``</path/to/your/anaconda/installation>/envs/cas/bin/python``
-        - If the interpreter is not available in the combo box
+- downloaded or cloned the repository ``cas-assignment``
+- created the conda environment called ``cas`` (as described in :doc:`installation.python`)
 
-            - click the gear icon and choose *Add...*
-            - select the *Conda Environment > Existing environment*
-            - the interpreter path should match the path above
+Open the assignment as a PyCharm project
+----------------------------------------
 
-    #. Confirm by clicking OK
+#. Start PyCharm.
+#. Click *Open* (or *File > Open*).
+#. Select the folder ``cas-assignment`` (the repository root), then confirm.
 
-#. CAS Assignment is now open as PyCharm project (PyCharm created the ``.idea`` directory)
+   .. image:: img/pycharm_setup_1.png
+      :width: 690px
+      :align: center
 
-#. Open the ``test_installation.py`` from the ``cas`` directory in the navigator
+Configure the Python interpreter (conda environment ``cas``)
+------------------------------------------------------------
 
-    #. In the editor, *right click > Modify Run Configuration*
-    #. In the dialog, change the *Working directory:* to ``</path/to/where/you/have/the/code>/cas-assignment`` (remove the ``/cas``)
-    #. Confirm by clicking OK
-    #. PyCharm will add a ``test_installation`` configuration (see top right corner) to the project
-    #. Now you can run the file by clicking on the *play* button, or by *right click > Run 'test_installation'*
-    #. Note that you can add configurations manually under *Run > Edit Configurations...*
+PyCharm must use the conda environment ``cas`` to find the required libraries.
 
-#. For each assignment, make sure your *working directory* is set to ``</path/to/where/you/have/the/code>/cas-assignment``
+#. Open the settings:
 
-You can watch the `getting started <https://www.jetbrains.com/pycharm/documentation/>`_ videos to get accustomed with the interface.
+   - Windows/Linux: *File > Settings...*
+   - macOS: *PyCharm > Settings...*
 
+   .. image:: img/pycharm_setup_2.png
+      :width: 690px
+      :align: center
 
-A picture is worth a thousand words
------------------------------------
+#. In the left sidebar, go to *Python > Interpreter*.
 
-.. image:: img/pycharm_setup_1.png
-   :scale: 50%
-   :align: center
+   .. image:: img/pycharm_setup_3.png
+      :width: 690px
+      :align: center
 
-|
+#. If ``cas`` is already available in the interpreter dropdown, select it.
+   Otherwise add it:
 
-.. image:: img/pycharm_setup_2.png
-   :scale: 50%
-   :align: center
+   - click *Add Interpreter*
+   - choose *Add Local Interpreter...*
 
-|
+   .. image:: img/pycharm_setup_3.png
+      :width: 690px
+      :align: center
 
-.. image:: img/pycharm_setup_3.png
-   :scale: 50%
-   :align: center
+#. In *Add Python Interpreter*:
 
-|
+   - select *Select existing*
+   - set *Type* to *Conda*
+   - set *Environment* to your ``cas`` environment folder, for example:
 
-.. image:: img/pycharm_setup_4.png
-   :scale: 50%
-   :align: center
+     - Windows: ``C:\Users\<username>\miniconda3\envs\cas``
+     - Linux/macOS: ``/home/<username>/miniconda3/envs/cas``
 
-|
+   - click *OK*
 
-.. image:: img/pycharm_setup_5.png
-   :scale: 50%
-   :align: center
+   .. image:: img/pycharm_setup_4.png
+      :width: 690px
+      :align: center
 
-|
+#. Back in *Python > Interpreter*, confirm that:
+
+   - the selected interpreter points to ``.../envs/cas/...``
+   - you see many installed packages in the list
+
+   Then click *OK* to close the settings.
+
+   .. image:: img/pycharm_setup_5.png
+      :width: 690px
+      :align: center
+
+Create a run configuration (recommended)
+----------------------------------------
+
+Create one run configuration that always uses the ``cas`` interpreter and runs
+the currently opened file. This avoids accidentally running code with the wrong
+Python environment.
+
+#. Open ``cas/test_installation.py`` (Project view on the left).
+#. Open the run configuration dialog:
+
+   - In the top bar, open the configuration dropdown (often shows *Current File*)
+   - Click *Edit Configurations...*
+
+   .. image:: img/pycharm_setup_6.png
+      :width: 690px
+      :align: center
+
+#. Create a new configuration:
+
+   - Click *Add new run configuration...*
+   - Select *Python*
+
+   .. image:: img/pycharm_setup_7.png
+      :width: 690px
+      :align: center
+
+#. Define the configuration:
+
+   - **Name**: ``cas``
+   - **Interpreter**: select your conda environment ``cas``
+   - **script**: ``$FilePathRelativeToProjectRoot$`` (this runs whichever file is currently open)
+   - **Working directory**: ``</path/to/cas-assignment>``
+
+   Click *OK*.
+
+   .. image:: img/pycharm_setup_8.png
+      :width: 690px
+      :align: center
+
+Verify your setup in PyCharm
+----------------------------
+
+#. Make sure the run configuration ``cas`` is selected in the top bar.
+#. With ``cas/test_installation.py`` open, click the green *Run* button.
+
+   .. image:: img/pycharm_setup_9.png
+      :width: 690px
+      :align: center
+
+.. note::
+
+   The installation test requires the file ``data/planning/pelvis_ct.nii.gz``.
+   If it is missing, ``cas/test_installation.py`` will stop and print
+   instructions on where to place the file.
+
+   Download and copy the file by following :doc:`assignment.setup`.
+
+Important
+---------
+
+Before running any assignment code, make sure the ``cas`` run configuration
+is selected. Otherwise PyCharm may run using a different interpreter.
+
+Troubleshooting (most common issues)
+------------------------------------
+
+- **ImportError / ModuleNotFoundError**
+  Verify that *Python > Interpreter* points to ``envs/cas`` and that the run
+  configuration uses the same interpreter.
+
+- **File not found (relative paths to data)**
+  Verify that the run configuration *Working directory* is set to the repository
+  root ``cas-assignment``.
