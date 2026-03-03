@@ -1,0 +1,7 @@
+[project]
+name = "cas"
+version = "0.1.0"
+description = "CAS environment"
+readme = "README.rst"
+requires-python = "==3.14.*"
+dependencies = ["numpy", "matplotlib", "nibabel", "scikit-learn", "scipy", "SimpleITK", "vtk", "transformations"]
