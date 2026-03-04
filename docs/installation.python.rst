@@ -43,6 +43,22 @@ The installation has been tested on Windows 10 and 11.
 
    - Run ``.\.venv\Scripts\activate``
 
+   .. note::
+
+      PowerShell Execution Policy blocks script execution by default on many Windows systems.
+      In that case you may see an error such as:
+
+      ::
+
+         ❯ .\.venv\Scripts\activate
+         .\.venv\Scripts\activate: File path\to\cas-assignment\.venv\Scripts\activate.ps1 cannot be
+         loaded because running scripts is disabled on this system. For more information,
+         see about_Execution_Policies at https://go.microsoft.com/fwlink/?LinkID=135170.
+
+      To allow running local scripts, execute:
+
+      ``Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned``
+
 #. Execute the installation test script to verify the installation
 
    - Run ``python cas\test_installation.py``
