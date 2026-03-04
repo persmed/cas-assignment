@@ -15,7 +15,7 @@
    :caption: Assignments
 
    assignment.setup
-   .. assignment.surgicalplan
+   assignment.surgicalplan
    .. assignment.toolcalibration
    .. assignment.registration
    .. assignment.ai
