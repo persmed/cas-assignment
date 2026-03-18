@@ -1,4 +1,4 @@
-# Copyright (c) 2025 University of Bern. All rights reserved.
+# Copyright (c) 2026 University of Bern. All rights reserved.
 import numpy as np
 
 
