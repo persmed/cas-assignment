@@ -50,6 +50,11 @@ To solve for :math:`p_t` and :math:`p_p` we need to construct a linear equation 
 Programming assignment
 ======================
 
+.. note::
+
+    Do not forget to update your repository by running ``git pull --rebase --autostash``.
+
+
 Implement the pivot calibration algorithm, based on a list of saved tracked tool poses during pivoting (4x4 transformation matrices) in the file ``assignments/toolcalibration/calibration.py``. You can test your implementation by running
 the file directly in PyCharm or from the console using ```python cas/toolcalibration/pivotcalibration.py``.
 
@@ -108,6 +113,11 @@ Note: If you use the * operator Python will perform a element-wise matrix multip
 
 Programming assignment
 ======================
+
+.. note::
+
+    Do not forget to update your repository by running ``git pull --rebase --autostash``.
+
 You have to implement this algorithm in the file ``assignments/toolcalibration/calibration.py``. You can test your implementation by running
 the file directly in PyCharm or from the console using ```python cas\toolcalibration\calibrationdevice.py``.
 
